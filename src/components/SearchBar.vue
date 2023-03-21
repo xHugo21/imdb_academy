@@ -3,7 +3,8 @@
     <input
       class="search_bar"
       type="search"
-      placeholder="Search film"
+      placeholder="Search"
+      autofocus
     />
   </template>
   
@@ -35,12 +36,24 @@
   .search_bar {
     display: flex;
     justify-content: center;
-    background-color: white;
-    border-radius: 15px;
-    border-color: black;
-    width: 40%;
-    height: 100%;
-    padding: 0.8%;
+    background-color: #99aabb5a;
+    border-radius: 25px;
+    border: none;
+    width: 30%;
+    padding: 1%;
+    outline: 0;
+    border: 2px solid rgba(0, 0, 0, 0);
+    color: rgba(255, 255, 255, 0.717);
+    font-weight: 700;
+
+  }
+
+  .search_bar::placeholder{
+    color: rgba(255, 255, 255, 0.717);
+  }
+
+  .search_bar:focus{
+    border: 2px solid purple;
   }
   </style>
   

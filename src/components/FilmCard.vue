@@ -1,25 +1,27 @@
 <!--Component that defines each character card extracted from the Rick and Morty API-->
 <template>
       <img
-          class="film"
-          v-bind:alt="'pelicula'"
-          src='src/assets/default_poster.png'
+        v-on:mouseenter="toggleHover"
+        v-on:mouseleave="toggleHover"
+        :class="['film', 'film__'+hovering]"
+        v-bind:alt="'pelicula'"
+        src='src/assets/godfather.jpeg'
       />
   </template>
   
   <script lang="ts">
   export default {
       props: ["film"],
-      /*data(){
+      data(){
           return {
-              hovering: false,
+              hovering: false as boolean,
           }
       },
       methods: {
           toggleHover(){
               this.hovering = !this.hovering;
           }
-      }*/
+      }
   };
   </script>
   
@@ -27,6 +29,14 @@
     .film {
         width: 200px;
         height: 300px;
+    }
+    .film__false {
+        border: 4px solid #99aabb5a;
+        border-radius: 10px;
+    }
+    .film__true {
+        border: 4px solid purple;
+        border-radius: 10px;
     }
   </style>
   

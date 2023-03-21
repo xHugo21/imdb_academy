@@ -16,7 +16,7 @@
         flex-direction: row;
         justify-content: flex-start;
         flex-wrap: wrap;
-        margin: 5% 3% 0 3%;
+        margin: 0 3% 0 3%;
         gap: 15px;
 
     }

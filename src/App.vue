@@ -3,6 +3,7 @@
 		<SearchBar />
 	</header>
   	<main>
+		<h1 class="main__title">Trending Now</h1>
 		<FilmsGrid>
 			<FilmCard
 				v-for="film in getFilms"
@@ -54,11 +55,25 @@
 
 <style scoped lang="scss">
 	header{
-		padding: 2% 0 2% 0;
+		padding: 4% 0 4% 0;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		border-bottom: 2px solid black;
+		align-items: center;
+	}
+
+	main {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 6fr;
+	}
+
+	.main__title{
+		align-self: center;
+		margin: 0 0 2% 3.5%;
+		color: #99aabb5a;
+		font-size: 2.5rem;
+		font-weight: 700;
 	}
 
 </style>
