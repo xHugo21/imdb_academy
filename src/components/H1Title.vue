@@ -12,7 +12,7 @@ export default {
 <style scoped lang="scss">
     .main__title{
 		align-self: center;
-		margin: 0 0 2% 3.5%;
+		margin: 0 0 2% 10%;
 		color: #99aabb5a;
 		font-size: 2.5rem;
 		font-weight: 700;

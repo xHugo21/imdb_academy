@@ -16,8 +16,9 @@
         flex-direction: row;
         justify-content: flex-start;
         flex-wrap: wrap;
-        margin: 0 3% 0 3%;
-        gap: 15px;
+        margin: 0 3% 3% 3%;
+        gap: 25px;
+        justify-content: center;
 
     }
   </style>
