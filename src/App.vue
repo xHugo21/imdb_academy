@@ -1,85 +1,64 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  	<header>
+		<SearchBar />
+	</header>
+  	<main>
+		<FilmsGrid>
+			<FilmCard
+				v-for="film in getFilms"
+				v-bind:key="film.id"
+				v-bind:character="film.name"
+			></FilmCard>
+		</FilmsGrid>
+	</main>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+<script lang="ts">
+	import SearchBar from './components/SearchBar.vue'
+	import FilmsGrid from './components/FilmsGrid.vue'
+	import FilmCard from './components/FilmCard.vue'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+	export default {
+		components: {
+			SearchBar,
+			FilmsGrid,
+			FilmCard,
+		},
+		data() {
+			return {
+				films: [
+					{id: 1, name: 'A New Hope', image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'},
+					{id: 2, name: 'The Empire Strikes Back', image: 'https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg'},
+					{id: 3, name: 'Return of the Jedi', image: 'https://upload.wikimedia.org/wikipedia/en/b/b2/ReturnOfTheJediPoster1983.jpg'},
+					{id: 4, name: 'The Phantom Menace', image: 'https://upload.wikimedia.org/wikipedia/en/4/40/Star_Wars_Phantom_Menace_poster.jpg'},
+					{id: 5, name: 'Attack of the Clones', image: 'https://upload.wikimedia.org/wikipedia/en/4/4f/Star_Wars_Episode_II_Attack_of_the_Clones.jpg'},
+					{id: 6, name: 'Revenge of the Sith', image: 'https://upload.wikimedia.org/wikipedia/en/9/93/Star_Wars_Episode_III_Revenge_of_the_Sith_poster.jpg'},
+					{id: 7, name: 'The Force Awakens', image: 'https://upload.wikimedia.org/wikipedia/en/a/a2/Star_Wars_The_Force_Awakens_Theatrical_Poster.jpg'},
+					{id: 8, name: 'The Last Jedi', image: 'https://upload.wikimedia.org/wikipedia/en/7/7f/Star_Wars_The_Last_Jedi.jpg'},
+					{id: 9, name: 'The Rise of Skywalker', image: 'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker.jpg'},
+				] as any,
+			}
+		},
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
+		computed: {
+			getFilms(){
+				return this.films;
+			}
+		}
+		
+		
+	}
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
+</script>
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
+<style scoped lang="scss">
+	header{
+		padding: 2% 0 2% 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		border-bottom: 2px solid black;
+	}
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
