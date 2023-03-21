@@ -3,7 +3,7 @@
 		<SearchBar />
 	</header>
   	<main>
-		<h1 class="main__title">Trending Now</h1>
+		<H1Title title="Trending Now"></H1Title>
 		<FilmsGrid>
 			<FilmCard
 				v-for="film in getFilms"
@@ -19,12 +19,14 @@
 	import SearchBar from './components/SearchBar.vue'
 	import FilmsGrid from './components/FilmsGrid.vue'
 	import FilmCard from './components/FilmCard.vue'
+	import H1Title from './components/H1Title.vue'
 
 	export default {
 		components: {
 			SearchBar,
 			FilmsGrid,
 			FilmCard,
+			H1Title
 		},
 		data() {
 			return {
@@ -68,12 +70,6 @@
 		grid-template-rows: 1fr 6fr;
 	}
 
-	.main__title{
-		align-self: center;
-		margin: 0 0 2% 3.5%;
-		color: #99aabb5a;
-		font-size: 2.5rem;
-		font-weight: 700;
-	}
+	
 
 </style>
