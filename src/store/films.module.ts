@@ -1,9 +1,10 @@
-import { Store, Commit, Dispatch, Module } from 'vuex'
-import { State } from 'vue' 
+import type { Store, Commit, Dispatch, Module } from 'vuex'
+import type { State } from 'vue' 
 
 declare module '@vue/runtime-core' {
     interface State {
-      films: Array<any>,
+      films: Array<any>, // Substitute for Film interface
+      saved_films: Array<any>, // Substitute for Film interface
     }
   
     interface ComponentCustomProperties {

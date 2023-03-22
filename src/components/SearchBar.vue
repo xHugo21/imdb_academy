@@ -52,6 +52,12 @@
     color: rgba(255, 255, 255, 0.717);
   }
 
+  // Change color of the delete icon of the search bar
+  .search_bar::-ms-clear {
+    color: purple;
+  }
+
+
   .search_bar:focus{
     border: 2px solid purple;
   }

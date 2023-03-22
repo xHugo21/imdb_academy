@@ -1,5 +1,6 @@
 <!--Component that defines each character card extracted from the Rick and Morty API-->
 <template>
+    <RouterLink :to="'/filminfo'"> <!--Add specific route with id of the film-->
       <img
         v-on:mouseenter="toggleHover"
         v-on:mouseleave="toggleHover"
@@ -7,6 +8,7 @@
         v-bind:alt="'pelicula'"
         src='src/assets/godfather.jpeg'
       />
+    </RouterLink>
   </template>
   
   <script lang="ts">
