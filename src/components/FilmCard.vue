@@ -31,6 +31,13 @@
     .film {
         width: 200px;
         height: 300px;
+        transition: transform .2s;
+    }
+
+    .film:hover{
+        -ms-transform: scale(1.1); /* IE 9 */
+        -webkit-transform: scale(1.1); /* Safari 3-8 */
+        transform: scale(1.1); 
     }
     .film__false {
         border: 4px solid #99aabb5a;

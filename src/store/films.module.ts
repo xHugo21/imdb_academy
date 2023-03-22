@@ -4,7 +4,7 @@ import type { State } from 'vue'
 declare module '@vue/runtime-core' {
     interface State {
       films: Array<any>, // Substitute for Film interface
-      saved_films: Array<any>, // Substitute for Film interface
+      //saved_films: Array<any>, // Substitute for Film interface
     }
   
     interface ComponentCustomProperties {
@@ -15,19 +15,27 @@ declare module '@vue/runtime-core' {
   export const films_module:Module<any, any> = {
     namespaced: true,
     state: {
-      films: []
+      films: [],
+      //saved_films: []
     },
     mutations: {
       setFilms(state:State, films:Array<any>) {
-        state.films = films
-      }
+        state.films = films;
+      },
+      /*setSavedFilms(state:State, films:Array<any>) {
+        state.saved_films = films;
+      }*/
+
     },
     actions: {
       
     },
     getters: {
       getFilms(state:State) {
-        return state.films
-      }
+        return state.films;
+      },
+      /*getSavedFilms(state:State) {
+        return state.saved_films;
+      }*/
     }
   }
