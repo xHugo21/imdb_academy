@@ -1,6 +1,8 @@
 <template>
     <header>
-      <SearchBar />
+        <img class="saved_icon" src="@/assets/bookmark.svg" alt="">
+        <SearchBar />
+        <Filters></Filters>
     </header>
     <main>
       <H1Title title="Trending Now"></H1Title>
@@ -16,17 +18,21 @@
 </template>
 
 <script lang="ts">
+    import { defineComponent } from 'vue'
+
   import SearchBar from '@/components/SearchBar.vue'
   import FilmsGrid from '@/components/FilmsGrid.vue'
   import FilmCard from '@/components/FilmCard.vue'
   import H1Title from '@/components/H1Title.vue'
+  import Filters from '@/components/Filters.vue'
 
-  export default {
+  export default defineComponent({
       components: {
           SearchBar,
           FilmsGrid,
           FilmCard,
-          H1Title
+          H1Title,
+          Filters
       },
       data() {
           return {
@@ -52,6 +58,7 @@
                   {id: 1, name: 'A New Hope', image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'},
                   {id: 2, name: 'The Empire Strikes Back', image: 'https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg'},
               ] as any,
+
           }
       },
 
@@ -60,17 +67,20 @@
               return this.films;
           }
       }
-  }
+  });
 
 </script>
 
 <style scoped lang="scss">
   header{
-      padding: 4% 0 4% 0;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+      .saved_icon{
+            width: 5%;
+      }
   }
 
   /*main {

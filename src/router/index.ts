@@ -2,23 +2,25 @@ import {createRouter, createWebHistory} from 'vue-router'
 
 import Home from '@/views/Home.vue'
 import FilmInfo from '@/views/FilmInfo.vue'
+import Saved from '@/views/Saved.vue'
 
 const routes = [
     {
         path: '/',
-        name: 'Home',
         component: Home
     },
     {
         path: '/filminfo',
-        name: 'FilmInfo',
         component: FilmInfo
     },
+    {
+        path: '/saved',
+        component: Saved
+    }
 ]
 
-const router = createRouter({
+export const router = createRouter({
     history: createWebHistory(),
     routes
 })
 
-export default router

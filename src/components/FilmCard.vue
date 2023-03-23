@@ -1,6 +1,6 @@
 <!--Component that defines each character card extracted from the Rick and Morty API-->
 <template>
-    <RouterLink :to="'/filminfo'"> <!--Add specific route with id of the film-->
+    <router-link :to="'/filminfo'"> <!--Add specific route with id of the film-->
       <img
         v-on:mouseenter="toggleHover"
         v-on:mouseleave="toggleHover"
@@ -8,11 +8,13 @@
         v-bind:alt="'pelicula'"
         src='src/assets/godfather.jpeg'
       />
-    </RouterLink>
+    </router-link>
   </template>
   
   <script lang="ts">
-  export default {
+    import {defineComponent} from "vue";
+
+  export default defineComponent({
       props: ["film"],
       data(){
           return {
@@ -24,14 +26,14 @@
               this.hovering = !this.hovering;
           }
       }
-  };
+  });
   </script>
   
   <style scoped lang="scss">
     .film {
         width: 200px;
         height: 300px;
-        transition: transform .2s;
+        transition: transform .3s;
     }
 
     .film:hover{

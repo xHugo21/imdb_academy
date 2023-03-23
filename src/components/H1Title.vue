@@ -4,9 +4,12 @@
 </template>
 
 <script lang="ts">
-export default {
-    props: ["title"],
-};
+import { defineComponent } from "vue";
+export default defineComponent({
+    props: {
+		title:String,
+	},
+});
 </script>
 
 <style scoped lang="scss">

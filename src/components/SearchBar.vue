@@ -39,12 +39,16 @@
     background-color: #99aabb5a;
     border-radius: 25px;
     border: none;
-    width: 30%;
+    height: 30%;
+    width: 45%;
+    margin: 5%;
     padding: 1%;
+    grid-area: 1 / 2 / 2 / 3;
     outline: 0;
     border: 2px solid rgba(0, 0, 0, 0);
     color: rgba(255, 255, 255, 0.717);
     font-weight: 700;
+    transition: .5s;
 
   }
 

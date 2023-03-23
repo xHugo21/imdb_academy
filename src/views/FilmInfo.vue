@@ -1,8 +1,8 @@
 <template>
     <header>
-      <RouterLink to="/"> 
+      <router-link to="/"> 
         <img src="src/assets/logo.png" alt="logo" />
-      </RouterLink>
+      </router-link>
     </header>
     <main>
       <H1Title title="Film Info"></H1Title>

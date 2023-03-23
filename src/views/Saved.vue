@@ -12,14 +12,16 @@
 </template>
 
 <script lang="ts">
+    import { defineComponent } from "vue";
     import SearchBar from "@/components/SearchBar.vue";
     import H1Title from "@/components/H1Title.vue";
-    export default {
+    
+    export default defineComponent({
         components: {
             SearchBar,
             H1Title,
         },
-    };
+    });
 
 
 </script>
