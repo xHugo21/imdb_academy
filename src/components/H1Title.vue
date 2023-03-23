@@ -4,20 +4,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 export default defineComponent({
     props: {
-		title:String,
-	},
-});
+        title: String
+    }
+})
 </script>
 
 <style scoped lang="scss">
-    .main__title{
-		align-self: center;
-		margin: 0 0 2% 10%;
-		color: #99aabb5a;
-		font-size: 2.5rem;
-		font-weight: 700;
-    }
+.main__title {
+    align-self: center;
+    margin: 0 0 2% 10%;
+    color: #99aabb5a;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
 </style>

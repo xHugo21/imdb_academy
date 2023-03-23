@@ -3,30 +3,28 @@ import type { State } from 'vue'
 
 declare module '@vue/runtime-core' {
     interface State {
-      query: string,
+        query: string
     }
-  
+
     interface ComponentCustomProperties {
-      $store:Store<State>|Store<Commit>|Store<Dispatch>
+        $store: Store<State> | Store<Commit> | Store<Dispatch>
     }
-  }
-  
-  export const search_module:Module<any, any> = {
+}
+
+export const search_module: Module<any, any> = {
     namespaced: true,
     state: {
-      query: ''
+        query: ''
     },
     mutations: {
-      setQuery(state:State, query:string) {
-        state.query = query
-      }
+        setQuery(state: State, query: string) {
+            state.query = query
+        }
     },
-    actions: {
-      
-    },
+    actions: {},
     getters: {
-      getQuery(state:State) {
-        return state.query
-      }
+        getQuery(state: State) {
+            return state.query
+        }
     }
-  }
+}

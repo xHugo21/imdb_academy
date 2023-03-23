@@ -7,9 +7,9 @@
 }
 
 body {
-    background: #14181C;
+    background: #14181c;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
     display: none;
 }
