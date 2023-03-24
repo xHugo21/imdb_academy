@@ -20,14 +20,14 @@ export default defineComponent({
     },
     data() {
         return {
-            hovering: false as boolean
+            hovering: false as boolean,
         }
     },
     methods: {
-        toggleHover() {
+        toggleHover():void {
             this.hovering = !this.hovering
         }
-    }
+    },
 })
 </script>
 

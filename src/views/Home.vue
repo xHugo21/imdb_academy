@@ -140,6 +140,8 @@ export default defineComponent({
         }
     },
 
+    
+
     computed: {
         getFilms(): any {
             return this.films

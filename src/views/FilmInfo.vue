@@ -7,6 +7,7 @@
     <main>
         <H1Title title="Film Info"></H1Title>
     </main>
+
 </template>
 
 <script lang="ts">
