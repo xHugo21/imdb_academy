@@ -1,6 +1,6 @@
 <template>
     <header>
-        <img class="saved_icon" src="@/assets/bookmark.svg" alt="" />
+       <router-link class="router_link" to="/saved"><img class="saved_icon" src="@/assets/bookmark.svg" alt="" /></router-link>
         <SearchBar />
         <Filters></Filters>
     </header>
@@ -157,8 +157,13 @@ header {
     flex-wrap: wrap;
     justify-content: space-evenly;
 
+    .router_link{
+        width:20%;
+        display: flex;
+        justify-content: center;
+    }
     .saved_icon {
-        width: 5%;
+        width: 10%;
         cursor: pointer;
     }
 }
