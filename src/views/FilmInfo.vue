@@ -1,13 +1,12 @@
 <template>
     <header>
         <router-link to="/">
-            <img src="src/assets/logo.png" alt="logo" />
+            <img src="/src/assets/logo.png" alt="logo" />
         </router-link>
     </header>
     <main>
         <H1Title title="Film Info"></H1Title>
     </main>
-
 </template>
 
 <script lang="ts">

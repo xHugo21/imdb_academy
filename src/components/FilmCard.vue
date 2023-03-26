@@ -6,7 +6,7 @@
             v-on:mouseleave="toggleHover"
             :class="['film', 'film__' + hovering]"
             v-bind:alt="'pelicula'"
-            src="src/assets/godfather.jpeg"
+            src="/src/assets/godfather.jpeg"
         />
     </router-link>
 </template>
@@ -16,18 +16,18 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
-        film:Object,
+        film: Object
     },
     data() {
         return {
-            hovering: false as boolean,
+            hovering: false as boolean
         }
     },
     methods: {
-        toggleHover():void {
+        toggleHover(): void {
             this.hovering = !this.hovering
         }
-    },
+    }
 })
 </script>
 

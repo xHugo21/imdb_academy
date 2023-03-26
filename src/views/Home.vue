@@ -1,6 +1,8 @@
 <template>
     <header>
-       <router-link class="router_link" to="/saved"><img class="saved_icon" src="@/assets/bookmark.svg" alt="" /></router-link>
+        <router-link class="router_link" to="/saved"
+            ><img class="saved_icon" src="@/assets/bookmark.svg" alt=""
+        /></router-link>
         <SearchBar />
         <Filters></Filters>
     </header>
@@ -140,8 +142,6 @@ export default defineComponent({
         }
     },
 
-    
-
     computed: {
         getFilms(): any {
             return this.films
@@ -157,8 +157,8 @@ header {
     flex-wrap: wrap;
     justify-content: space-evenly;
 
-    .router_link{
-        width:20%;
+    .router_link {
+        width: 20%;
         display: flex;
         justify-content: center;
     }
