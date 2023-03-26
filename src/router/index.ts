@@ -6,15 +6,16 @@ import Saved from '@/views/Saved.vue'
 
 const routes = [
     {
-        path: '/',
+        path: '/imdb_academy/',
         component: Home
     },
+    
     {
-        path: '/filminfo',
+        path: '/imdb_academy/filminfo',
         component: FilmInfo
     },
     {
-        path: '/saved',
+        path: '/imdb_academy/saved',
         component: Saved
     }
 ]
