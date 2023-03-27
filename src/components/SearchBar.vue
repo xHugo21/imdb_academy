@@ -27,14 +27,12 @@ export default {
 
 <style scoped lang="scss">
 .search_bar {
-    display: flex;
-    justify-content: center;
+    grid-area: search;
     background-color: #99aabb5a;
     border-radius: 25px;
     border: none;
-    height: 30%;
-    width: 45%;
-    margin: 5%;
+    height: 60%;
+    align-self: center;
     padding: 1%;
     grid-area: 1 / 2 / 2 / 3;
     outline: 0;

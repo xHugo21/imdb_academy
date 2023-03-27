@@ -152,20 +152,33 @@ export default defineComponent({
 
 <style scoped lang="scss">
 header {
-    display: flex;
+    /*display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-evenly;*/
+
+    margin: 3% 0 3% 0;
+    display: grid;
+    grid-template-areas: "saved_icon search filter_icon"
+                            "filters filters filters";
+    grid-template-columns: 1fr 3fr 1fr;
+    
+
+    
 
     .router_link {
-        width: 20%;
+        grid-area: saved_icon;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
+        /*width: 20%;
+        display: flex;
+        justify-content: center;*/
+        .saved_icon {
+            width: 30%;
+            cursor: pointer;
+        }
     }
-    .saved_icon {
-        width: 10%;
-        cursor: pointer;
-    }
+    
 }
 
 main{

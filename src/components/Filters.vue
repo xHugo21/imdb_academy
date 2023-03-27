@@ -40,15 +40,17 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .filter_icon {
-    width: 5%;
+    grid-area: filter_icon;
+    width: 30%;
     cursor: pointer;
 }
 
 .filters {
-    padding: 10% 0 10% 0;
-    margin-bottom: 5%;
+    grid-area: filters;
+    padding: 5% 0 10% 0;
+    margin: 3% 0 0 0;
     width: 100%;
-    border: 3px solid black;
+    border-bottom: 3px solid #99aabb5a;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -57,10 +59,12 @@ export default defineComponent({
     .filters__div {
         .filters__div__label {
             font-weight: 700;
-            color: white;
+            color: #99aabb5a;
+            margin-right: 5px;
         }
 
         .filters__div__input {
+            background-color: #99aabb5a;
             border-radius: 15px;
             outline: 0;
         }
