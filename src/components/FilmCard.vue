@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="'/filminfo'">
+    <router-link :to="'/imdb_academy/filminfo'">
         <!--Add specific route with id of the film-->
         <img
             v-on:mouseenter="toggleHover"

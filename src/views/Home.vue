@@ -1,6 +1,6 @@
 <template>
     <header>
-        <router-link class="router_link" to="/saved"
+        <router-link class="router_link" to="/imdb_academy/saved"
             ><img class="saved_icon" src="@/assets/bookmark.svg" alt=""
         /></router-link>
         <SearchBar />

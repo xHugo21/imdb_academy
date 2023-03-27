@@ -9,7 +9,6 @@ const routes = [
         path: '/imdb_academy/',
         component: Home
     },
-    
     {
         path: '/imdb_academy/filminfo',
         component: FilmInfo

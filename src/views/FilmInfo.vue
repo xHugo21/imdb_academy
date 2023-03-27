@@ -1,6 +1,6 @@
 <template>
     <header>
-        <router-link to="/">
+        <router-link to="/imdb_academy/">
             <img src="/src/assets/logo.png" alt="logo" />
         </router-link>
     </header>
