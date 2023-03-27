@@ -4,8 +4,6 @@
 
 Webpage designed to search and save films. Films are fetched from an IMDb database.
 
----
-
 ## Features
 
 -   See trending films
@@ -14,7 +12,8 @@ Webpage designed to search and save films. Films are fetched from an IMDb databa
 -   Save films
 -   See descriptions, reviews, ratings, actors and trailers about a film
 
----
+## GitHub Pages
+You can see a preview of the page here: https://xhugo21.github.io/imdb_academy/
 
 ## Execution
 
