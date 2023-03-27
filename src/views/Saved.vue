@@ -1,23 +1,24 @@
 <template>
     <header>
-        <RouterLink to="/">
+        <RouterLink to="/imdb_academy/">
             <img src="/src/assets/return.svg" alt="logo" />
         </RouterLink>
     </header>
     <main>
-        <H1Title title="Saved"></H1Title>
+        <H1Title class="title__saved" title="Saved"></H1Title>
+        <FilmsGrid></FilmsGrid>
     </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import SearchBar from '@/components/SearchBar.vue'
 import H1Title from '@/components/H1Title.vue'
+import FilmsGrid from '@/components/FilmsGrid.vue'
 
 export default defineComponent({
     components: {
-        SearchBar,
-        H1Title
+        H1Title,
+        FilmsGrid
     }
 })
 </script>
@@ -29,5 +30,11 @@ header {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+main{
+    .title__saved{
+        margin-left: 10%;
+    }
 }
 </style>

@@ -7,7 +7,7 @@
         <Filters></Filters>
     </header>
     <main>
-        <H1Title title="Trending Now"></H1Title>
+        <H1Title class="title__trending" title="Trending Now"></H1Title>
         <FilmsGrid>
             <FilmCard
                 v-for="film in getFilms"
@@ -165,6 +165,12 @@ header {
     .saved_icon {
         width: 10%;
         cursor: pointer;
+    }
+}
+
+main{
+    .title__trending{
+        margin-left: 10%;
     }
 }
 </style>

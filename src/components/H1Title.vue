@@ -15,7 +15,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .main__title {
     align-self: center;
-    margin: 0 0 2% 10%;
+    margin: 0 0 2% 0;
     color: #99aabb5a;
     font-size: 2.5rem;
     font-weight: 700;
