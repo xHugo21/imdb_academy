@@ -69,7 +69,7 @@ export default defineComponent({
     grid-area: filter_icon;
     justify-self: left;
     align-self: center;
-    width: 20%;
+    width: 15%;
     cursor: pointer;
 }
 
@@ -112,16 +112,16 @@ export default defineComponent({
             font-weight: 700;
         }
 
-        .filters__div__select{
+        .filters__div__select {
             background-color: #99aabb5a;
             outline: 0;
             border: 3px solid #99aabb5a;
             height: 10em;
 
-            option{
+            option {
                 font-weight: 600;
                 color: #99aabb5a;
-            }            
+            }
         }
     }
 }

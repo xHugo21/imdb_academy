@@ -2,3 +2,5 @@
 - Where to watch text -> icons 
 - Style poster full size modal
 - Year range input two sliders
+- Home film name label blinks when hovering
+- Add transition to film name label from home

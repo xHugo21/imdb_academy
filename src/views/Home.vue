@@ -158,11 +158,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 header {
-    /*display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;*/
-
     margin: 3% 0 3% 0;
     display: grid;
     grid-template-areas:
@@ -175,7 +170,7 @@ header {
         display: flex;
         justify-content: right;
         .saved_icon {
-            width: 20%;
+            width: 15%;
             cursor: pointer;
         }
     }

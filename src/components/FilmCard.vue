@@ -1,6 +1,9 @@
 <template>
     <router-link :to="'/imdb_academy/filminfo'">
         <!--Add specific route with id of the film-->
+        <div class="div__hovering" v-if="hovering">
+            <p>The Godfather</p>
+        </div>
         <img
             v-on:mouseenter="toggleHover"
             v-on:mouseleave="toggleHover"
@@ -51,5 +54,26 @@ export default defineComponent({
 .film__true {
     border: 4px solid purple;
     border-radius: 10px;
+}
+
+.div__hovering {
+    z-index: 100;
+    position: absolute;
+    background-color: #99aabb;
+    border: 4px solid #99aabb;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    p {
+        color: purple;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+    p:link {
+        text-decoration: none;
+    }
 }
 </style>

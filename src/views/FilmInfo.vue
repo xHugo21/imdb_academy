@@ -12,7 +12,10 @@
             <div class="left__div">
                 <H1Title class="left__title" title="The Godfather - 1972"></H1Title>
                 <p class="left__text">
-                    Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.
+                    Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American
+                    Corleone crime family. When organized crime family patriarch, Vito Corleone
+                    barely survives an attempt on his life, his youngest son, Michael steps in to
+                    take care of the would-be killers, launching a campaign of bloody revenge.
                 </p>
             </div>
             <div class="left__div">
@@ -44,22 +47,21 @@
                 <H1Title class="right__title" title="Where to watch"></H1Title>
                 <div class="right__wheretowatch">
                     <div class="right__wheretowatch__div">
-                        <img src="../assets/netflix.png" alt="netflix">
+                        <img src="../assets/netflix.png" alt="netflix" />
                     </div>
                     <div class="right__wheretowatch__div">
-                    <img src="../assets/primevideo.png" alt="primevideo">
+                        <img src="../assets/primevideo.png" alt="primevideo" />
                     </div>
                     <div class="right__wheretowatch__div">
-                    <img src="../assets/hbo.png" alt="hbo">
+                        <img src="../assets/hbo.png" alt="hbo" />
                     </div>
                 </div>
             </div>
             <div class="right__div">
                 <H1Title class="right__title" title="Ratings"></H1Title>
                 <div class="right__ratings">
-                    <p class="right__ratings__number">8/10</p>
-                    <p class="right__ratings__number">7.5/10</p>
-                    <p class="right__ratings__number">4/5</p>
+                    <p class="right__ratings__number">Critics: 8/10</p>
+                    <p class="right__ratings__number">Public: 4/5</p>
                 </div>
             </div>
         </div>
@@ -183,7 +185,8 @@ main {
                 border-radius: 15px;
                 padding: 1%;
                 width: 80%;
-                img{
+                img {
+                    border-radius: 15px;
                     width: 100%;
                     height: 100%;
                 }
