@@ -1,6 +1,6 @@
 <!--Component that defines the search bar-->
 <template>
-    <input class="search_bar" type="search" placeholder="Search" autofocus />
+    <input v-on:input="search($event.target)"  class="search_bar" type="search" placeholder="Search" autofocus />
 </template>
 
 <script lang="ts">
@@ -9,8 +9,9 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     methods: {
         search(target: any): void {
-            let query = target.value
+            let query = target.value;
 
+            this.$store.commit('search/setQuery', query);
             /*this.$store.commit('filters/setCheckedStatus', '');
         this.$store.commit('filters/setCheckedSpecies', '');
         this.$store.commit('filters/setCheckedGender', '');

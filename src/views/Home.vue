@@ -3,19 +3,30 @@
         <router-link class="router_link" to="/imdb_academy/saved"
             ><img class="saved_icon" src="@/assets/bookmark.svg" alt=""
         /></router-link>
-        <SearchBar />
+        <SearchBar v-on:input="setViewMode()"/>
         <Filters></Filters>
     </header>
     <main>
-        <H1Title class="title__trending" title="Trending Now"></H1Title>
-
-        <FilmsGrid>
-            <FilmCard
-                v-for="film in films"
-                v-bind:key="film.id"
-                v-bind:character="film.name"
-            ></FilmCard>
-        </FilmsGrid>
+        <div v-if="view_trending" class="trending">
+            <H1Title class="title__component" title="Trending Now"></H1Title>
+            <FilmsGrid>
+                <FilmCard
+                    v-for="film in films"
+                    v-bind:key="film.id"
+                    v-bind:character="film.name"
+                ></FilmCard>
+            </FilmsGrid>
+        </div>
+        <div v-else class="searchresults">
+            <H1Title class="title__component" title="Found X search results"></H1Title>
+            <FilmsGrid>
+                <FilmCard
+                    v-for="film in films"
+                    v-bind:key="film.id"
+                    v-bind:character="film.name"
+                ></FilmCard>
+            </FilmsGrid>
+        </div>
     </main>
 </template>
 
@@ -38,6 +49,7 @@ export default defineComponent({
     },
     data() {
         return {
+            view_trending: true as boolean,
             films: [
                 {
                     id: 1,
@@ -143,6 +155,18 @@ export default defineComponent({
         }
     },
 
+    methods: {
+        // Changes view mode depending on the query. If query is empty it shows trending films, otherwise it shows search results
+        setViewMode(){
+            if (this.$store.getters['search/getQuery'] === ''){
+                this.view_trending = true;
+            }
+            else{
+                this.view_trending = false;
+            }
+        }
+    },
+
     mounted() {
         // Add infinite scroll using observer API
         const observer = new IntersectionObserver((entries) => {
@@ -177,7 +201,7 @@ header {
 }
 
 main {
-    .title__trending {
+    .title__component {
         margin-left: 10%;
     }
 }

@@ -1,12 +1,12 @@
 <template>
-    <router-link :to="'/imdb_academy/filminfo'">
+    <router-link v-on:mouseenter="toggleHover"
+            v-on:mouseleave="toggleHover" :to="'/imdb_academy/filminfo'">
         <!--Add specific route with id of the film-->
         <div class="div__hovering" v-if="hovering">
             <p>The Godfather</p>
         </div>
         <img
-            v-on:mouseenter="toggleHover"
-            v-on:mouseleave="toggleHover"
+            
             :class="['film', 'film__' + hovering]"
             v-bind:alt="'pelicula'"
             src="/src/assets/godfather.jpeg"
