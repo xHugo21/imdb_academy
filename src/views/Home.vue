@@ -18,7 +18,7 @@
             </FilmsGrid>
         </div>
         <div v-else class="searchresults">
-            <H1Title class="title__component" title="Found X search results"></H1Title>
+            <H1Title class="title__component" :title="'Found '+results_count+' search results'"></H1Title>
             <FilmsGrid>
                 <FilmCard
                     v-for="film in films"
@@ -50,6 +50,7 @@ export default defineComponent({
     data() {
         return {
             view_trending: true as boolean,
+            results_count: 0 as number,
             films: [
                 {
                     id: 1,
@@ -163,8 +164,19 @@ export default defineComponent({
             }
             else{
                 this.view_trending = false;
+                this.countResults();
             }
-        }
+
+        },
+
+        countResults(){
+            this.results_count = 0;
+            for (let i = 0; i < this.films.length; i++){
+                this.results_count++;
+            }
+
+            
+        },
     },
 
     mounted() {
