@@ -8,9 +8,10 @@
     </header>
     <main>
         <H1Title class="title__trending" title="Trending Now"></H1Title>
+
         <FilmsGrid>
             <FilmCard
-                v-for="film in getFilms"
+                v-for="film in films"
                 v-bind:key="film.id"
                 v-bind:character="film.name"
             ></FilmCard>
@@ -84,57 +85,57 @@ export default defineComponent({
                     image: 'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker.jpg'
                 },
                 {
-                    id: 1,
+                    id: 10,
                     name: 'A New Hope',
                     image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
                 },
                 {
-                    id: 2,
+                    id: 11,
                     name: 'The Empire Strikes Back',
                     image: 'https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg'
                 },
                 {
-                    id: 3,
+                    id: 12,
                     name: 'Return of the Jedi',
                     image: 'https://upload.wikimedia.org/wikipedia/en/b/b2/ReturnOfTheJediPoster1983.jpg'
                 },
                 {
-                    id: 4,
+                    id: 13,
                     name: 'The Phantom Menace',
                     image: 'https://upload.wikimedia.org/wikipedia/en/4/40/Star_Wars_Phantom_Menace_poster.jpg'
                 },
                 {
-                    id: 5,
+                    id: 14,
                     name: 'Attack of the Clones',
                     image: 'https://upload.wikimedia.org/wikipedia/en/4/4f/Star_Wars_Episode_II_Attack_of_the_Clones.jpg'
                 },
                 {
-                    id: 6,
+                    id: 15,
                     name: 'Revenge of the Sith',
                     image: 'https://upload.wikimedia.org/wikipedia/en/9/93/Star_Wars_Episode_III_Revenge_of_the_Sith_poster.jpg'
                 },
                 {
-                    id: 7,
+                    id: 16,
                     name: 'The Force Awakens',
                     image: 'https://upload.wikimedia.org/wikipedia/en/a/a2/Star_Wars_The_Force_Awakens_Theatrical_Poster.jpg'
                 },
                 {
-                    id: 8,
+                    id: 17,
                     name: 'The Last Jedi',
                     image: 'https://upload.wikimedia.org/wikipedia/en/7/7f/Star_Wars_The_Last_Jedi.jpg'
                 },
                 {
-                    id: 9,
+                    id: 18,
                     name: 'The Rise of Skywalker',
                     image: 'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker.jpg'
                 },
                 {
-                    id: 1,
+                    id: 19,
                     name: 'A New Hope',
                     image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
                 },
                 {
-                    id: 2,
+                    id: 20,
                     name: 'The Empire Strikes Back',
                     image: 'https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg'
                 }
@@ -142,10 +143,15 @@ export default defineComponent({
         }
     },
 
-    computed: {
-        getFilms(): any {
-            return this.films
-        }
+    mounted() {
+        // Add infinite scroll using observer API
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                //this.loadMoreResults();
+            }
+        })
+        // Call observer through footer element. Each time the footer is in the viewport, the loadMoreResults() function is called
+        //observer.observe(document.querySelector('footer'));
     }
 })
 </script>
@@ -159,30 +165,24 @@ header {
 
     margin: 3% 0 3% 0;
     display: grid;
-    grid-template-areas: "saved_icon search filter_icon"
-                            "filters filters filters";
-    grid-template-columns: 1fr 3fr 1fr;
-    
-
-    
+    grid-template-areas:
+        'saved_icon search filter_icon'
+        'filters filters filters';
+    grid-template-columns: 2fr 3fr 2fr;
 
     .router_link {
         grid-area: saved_icon;
         display: flex;
-        justify-content: flex-end;
-        /*width: 20%;
-        display: flex;
-        justify-content: center;*/
+        justify-content: right;
         .saved_icon {
-            width: 30%;
+            width: 20%;
             cursor: pointer;
         }
     }
-    
 }
 
-main{
-    .title__trending{
+main {
+    .title__trending {
         margin-left: 10%;
     }
 }

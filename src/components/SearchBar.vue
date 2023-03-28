@@ -4,12 +4,14 @@
 </template>
 
 <script lang="ts">
-export default {
-    /*methods: {
-          search(target:any):void{
-        let query = target.value;
-  
-        this.$store.commit('filters/setCheckedStatus', '');
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+    methods: {
+        search(target: any): void {
+            let query = target.value
+
+            /*this.$store.commit('filters/setCheckedStatus', '');
         this.$store.commit('filters/setCheckedSpecies', '');
         this.$store.commit('filters/setCheckedGender', '');
   
@@ -19,10 +21,10 @@ export default {
   
               this.$store.commit('filters/setQuery', query);
               this.$store.dispatch('characters/fetchCharacters');
-        this.$store.dispatch('filters/setFiltersFromResults');
-          },
-      },*/
-}
+        this.$store.dispatch('filters/setFiltersFromResults');*/
+        }
+    }
+})
 </script>
 
 <style scoped lang="scss">
@@ -31,9 +33,11 @@ export default {
     background-color: #99aabb5a;
     border-radius: 25px;
     border: none;
+    width: 50%;
     height: 60%;
+    justify-self: center;
     align-self: center;
-    padding: 1%;
+    padding: 1% 1% 1% 3%;
     grid-area: 1 / 2 / 2 / 3;
     outline: 0;
     border: 2px solid rgba(0, 0, 0, 0);

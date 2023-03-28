@@ -1,3 +1,4 @@
 - Routing to specific film by id
 - Where to watch text -> icons 
 - Style poster full size modal
+- Year range input two sliders

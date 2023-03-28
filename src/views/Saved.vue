@@ -32,8 +32,8 @@ header {
     align-items: center;
 }
 
-main{
-    .title__saved{
+main {
+    .title__saved {
         margin-left: 10%;
     }
 }
