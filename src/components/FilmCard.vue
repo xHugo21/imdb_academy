@@ -1,6 +1,6 @@
 <template>
     <router-link v-on:mouseenter="toggleHover"
-            v-on:mouseleave="toggleHover" :to="'/imdb_academy/filminfo'">
+            v-on:mouseleave="toggleHover" :to="'/imdb_academy/filminfo/'">
         <!--Add specific route with id of the film-->
         <div class="div__hovering" v-if="hovering">
             <p>The Godfather</p>
@@ -17,10 +17,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+
 export default defineComponent({
-    props: {
-        film: Object
-    },
+    props: ['film'],
     data() {
         return {
             hovering: false as boolean

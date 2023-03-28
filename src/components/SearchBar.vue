@@ -12,17 +12,7 @@ export default defineComponent({
             let query = target.value;
 
             this.$store.commit('search/setQuery', query);
-            /*this.$store.commit('filters/setCheckedStatus', '');
-        this.$store.commit('filters/setCheckedSpecies', '');
-        this.$store.commit('filters/setCheckedGender', '');
-  
-        document.querySelectorAll('.checkboxfilter').forEach((el:any) => {
-          el.checked = false;
-        });
-  
-              this.$store.commit('filters/setQuery', query);
-              this.$store.dispatch('characters/fetchCharacters');
-        this.$store.dispatch('filters/setFiltersFromResults');*/
+            
         }
     }
 })
