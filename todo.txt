@@ -1,10 +1,6 @@
-- Routing to specific film by id
-- Where to watch text -> icons 
-- Style poster full size modal
+- Color grey without opacity: #434C54
+
 - Year range input two sliders
-- Home film name label blinks when hovering
 - Add transition to film name label from home
 - Pass film as prop through route link instead of searching for the corresponding one
-- Add duration filter
 - Add bookmark icon when hovering on homepage?
-- Dont allow duplicated saved films

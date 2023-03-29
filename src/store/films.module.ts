@@ -129,9 +129,16 @@ export const films_module: Module<any, any> = {
         }
     },
     actions: {
+        // Saves film into saved_films
         saveFilm({commit, state}, film:Film) {
             let films = state.saved_films;
             films.push(film);
+            commit('setSavedFilms', films);
+        },
+        // Removes film from saved_films
+        removeFilm({commit, state}, film:Film) {
+            let films = state.saved_films;
+            films = films.filter((f: { id: number }) => f.id !== film.id);
             commit('setSavedFilms', films);
         }
     },

@@ -1,9 +1,9 @@
-<!--Home page of the web. It displays trending results when opened. If the user searchs anything the view mode is changed automatically-->
+<!--Home page of the web. It displays trending results when opened. If the user searchs anything the view mode is changed -->
 
 <template>
     <header>
         <router-link class="router_link" to="/imdb_academy/saved"
-            ><img class="saved_icon" src="@/assets/bookmark.svg" alt=""
+            ><img class="saved_icon" src="/src/assets/bookmark.svg" alt=""
         /></router-link>
         <SearchBar v-on:input="setViewMode()" />
         <Filters></Filters>

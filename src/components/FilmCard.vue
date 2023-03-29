@@ -1,4 +1,4 @@
-<!--Component that displays the film card with its name and poster-->
+<!--Component that displays the film card with its name and-->
 
 <template>
     <router-link

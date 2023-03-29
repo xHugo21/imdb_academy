@@ -47,7 +47,8 @@
             </div>
 
             <div class="right__div">
-                <img v-on:click="saveFilm()" class="right__div__bookmark" src="../assets/bookmark.svg" alt="bookmark">
+                <img v-if="!is_saved" v-on:click="saveRemoveFilm()" class="right__div__bookmark" src="../assets/bookmark.svg" alt="bookmark">
+                <img v-else v-on:click="saveRemoveFilm()" class="right__div__bookmark" src="../assets/bookmark_filled.svg" alt="bookmark">
             </div>
 
             <div class="right__div">
@@ -97,7 +98,8 @@ export default defineComponent({
     },
     data() {
         return {
-            full_size_poster: false as boolean
+            full_size_poster: false as boolean,
+            is_saved: false as boolean,
         }
     },
     methods: {
@@ -106,16 +108,21 @@ export default defineComponent({
             this.full_size_poster = !this.full_size_poster
         },
 
-        // Saves film to the store only if it hasn't been saved already
-        saveFilm():void {
-            let already_saved:boolean = false;
-            for (let i = 0; i < this.$store.getters['films/getSavedFilms'].length; i++) {
-                if (this.$store.getters['films/getSavedFilms'][i].id === this.getFilm.id) {
-                    already_saved = true;
-                }
+        // Saves or removes the film from the saved films
+        saveRemoveFilm():void {
+            if (!this.is_saved){    
+                this.$store.dispatch('films/saveFilm', this.getFilm);
+            } else {
+                this.$store.dispatch('films/removeFilm', this.getFilm);
             }
-            if (!already_saved) {
-                this.$store.dispatch('films/saveFilm', this.getFilm)
+            this.is_saved = !this.is_saved;
+        }
+    },
+    mounted() {
+        // Checks if film is saved on load
+        for (let i = 0; i < this.$store.getters['films/getSavedFilms'].length; i++) {
+            if (this.$store.getters['films/getSavedFilms'][i].id === this.getFilm.id) {
+                this.is_saved = true;
             }
         }
     },

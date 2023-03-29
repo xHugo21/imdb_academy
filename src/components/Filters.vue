@@ -1,7 +1,9 @@
 <!--Component that includes all the filters that can be used-->
 
 <template>
-    <img v-on:click="toggleFilters" class="filter_icon" src="@/assets/filter.svg" alt="" />
+    <img v-if="!show_filters" v-on:click="toggleFilters" class="filter_icon" src="/src/assets/filter.svg" alt="filter_icon" />
+    <img v-else v-on:click="toggleFilters" class="filter_icon" src="/src/assets/filter_filled.svg" alt="filter_icon_filled" />
+
 
     <div class="filters" v-if="show_filters">
         <div class="filters__div">
@@ -15,7 +17,20 @@
                 min="1900"
                 max="2023"
             />
-            <output class="filters__div__output" id="value"></output>
+            <output class="filters__div__output" id="valueyear"></output>
+        </div>
+        <div class="filters__div">
+            <label class="filters__div__label" for="duration">Duration</label>
+            <input
+                v-on:change="updateDurationFilter"
+                class="filters__div__input"
+                type="range"
+                id="duration"
+                name="duration"
+                min="0"
+                max="300"
+            />
+            <output class="filters__div__output" id="valueduration"></output>
         </div>
         <div class="filters__div">
             <label class="filters__div__label" for="genre">Genre</label>
@@ -57,12 +72,18 @@ export default defineComponent({
         },
         updateYearFilter(): void {
             const input = document.getElementById('year') as any
-            const value = document.getElementById('value') as any
+            const value = document.getElementById('valueyear') as any
+
+            value.textContent = input.value
+        },
+        updateDurationFilter(): void {
+            const input = document.getElementById('duration') as any
+            const value = document.getElementById('valueduration') as any
 
             value.textContent = input.value
         }
     },
-    mounted() {}
+    
 })
 </script>
 
