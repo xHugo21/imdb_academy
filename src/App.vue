@@ -1,3 +1,5 @@
+<!--Main page of the web. It displays the current view depending on the route and the footer.-->
+
 <template>
     <RouterView></RouterView>
     <footer>

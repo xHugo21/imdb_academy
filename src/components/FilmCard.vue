@@ -1,25 +1,32 @@
+<!--Component that displays the film card with its name and poster-->
+
 <template>
-    <router-link v-on:mouseenter="toggleHover"
-            v-on:mouseleave="toggleHover" :to="'/imdb_academy/filminfo/'">
-        <!--Add specific route with id of the film-->
+    <router-link
+        v-on:mouseenter="toggleHover"
+        v-on:mouseleave="toggleHover"
+        :to="'/imdb_academy/filminfo/' + film.id + '?film=' + film"
+    >
+
         <div class="div__hovering" v-if="hovering">
-            <p>The Godfather</p>
+            <p>{{ film.name }}</p>
         </div>
-        <img
-            
-            :class="['film', 'film__' + hovering]"
-            v-bind:alt="'pelicula'"
-            src="/src/assets/godfather.jpeg"
-        />
+
+        <img :class="['film', 'film__' + hovering]" v-bind:alt="'pelicula'" :src="film.image" />
+        
     </router-link>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
+import type { Film } from '@/types'
 
 export default defineComponent({
-    props: ['film'],
+    props: {
+        film: {
+            type: Object as () => Film,
+            required: true
+        }
+    },
     data() {
         return {
             hovering: false as boolean
@@ -42,8 +49,8 @@ export default defineComponent({
 
 .film:hover {
     cursor: pointer;
-    -ms-transform: scale(1.1); /* IE 9 */
-    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
 .film__false {
@@ -75,4 +82,6 @@ export default defineComponent({
         text-decoration: none;
     }
 }
+
+
 </style>

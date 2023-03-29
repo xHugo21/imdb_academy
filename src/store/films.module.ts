@@ -1,16 +1,11 @@
 import type { Store, Commit, Dispatch, Module } from 'vuex'
 import type { State } from 'vue'
-
-interface Film{
-    id: number,
-    name: string,
-    image: string
-}
+import type { Film } from '@/types'
 
 declare module '@vue/runtime-core' {
     interface State {
-        films: Array<Film> // Substitute for Film interface
-        //saved_films: Array<any>, // Substitute for Film interface
+        films: Array<Film>
+        saved_films: Array<Film>,
     }
 
     interface ComponentCustomProperties {
@@ -30,7 +25,7 @@ export const films_module: Module<any, any> = {
             {
                 id: 2,
                 name: 'The Empire Strikes Back',
-                image: 'https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg'
+                image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
             },
             {
                 id: 3,
@@ -45,7 +40,7 @@ export const films_module: Module<any, any> = {
             {
                 id: 5,
                 name: 'Attack of the Clones',
-                image: 'https://upload.wikimedia.org/wikipedia/en/4/4f/Star_Wars_Episode_II_Attack_of_the_Clones.jpg'
+                image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
             },
             {
                 id: 6,
@@ -65,7 +60,7 @@ export const films_module: Module<any, any> = {
             {
                 id: 9,
                 name: 'The Rise of Skywalker',
-                image: 'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker.jpg'
+                image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
             },
             {
                 id: 10,
@@ -75,7 +70,7 @@ export const films_module: Module<any, any> = {
             {
                 id: 11,
                 name: 'The Empire Strikes Back',
-                image: 'https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg'
+                image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
             },
             {
                 id: 12,
@@ -90,7 +85,7 @@ export const films_module: Module<any, any> = {
             {
                 id: 14,
                 name: 'Attack of the Clones',
-                image: 'https://upload.wikimedia.org/wikipedia/en/4/4f/Star_Wars_Episode_II_Attack_of_the_Clones.jpg'
+                image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
             },
             {
                 id: 15,
@@ -110,7 +105,7 @@ export const films_module: Module<any, any> = {
             {
                 id: 18,
                 name: 'The Rise of Skywalker',
-                image: 'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker.jpg'
+                image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
             },
             {
                 id: 19,
@@ -120,26 +115,32 @@ export const films_module: Module<any, any> = {
             {
                 id: 20,
                 name: 'The Empire Strikes Back',
-                image: 'https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg'
+                image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
             }
-        ]
-        //saved_films: []
+        ],
+        saved_films: []
     },
     mutations: {
         setFilms(state: State, films: Array<Film>) {
             state.films = films
+        },
+        setSavedFilms(state:State, films:Array<Film>) {
+            state.saved_films = films;
         }
-        /*setSavedFilms(state:State, films:Array<any>) {
-        state.saved_films = films;
-      }*/
     },
-    actions: {},
-    getters: {
-        getFilms(state: State):Array<Film> {
-            return state.films
+    actions: {
+        saveFilm({commit, state}, film:Film) {
+            let films = state.saved_films;
+            films.push(film);
+            commit('setSavedFilms', films);
         }
-        /*getSavedFilms(state:State) {
-        return state.saved_films;
-      }*/
+    },
+    getters: {
+        getFilms(state: State): Array<Film> {
+            return state.films
+        },
+        getSavedFilms(state:State):Array<Film> {
+            return state.saved_films;
+        }
     }
 }

@@ -1,3 +1,5 @@
+<!--Component that includes all the filters that can be used-->
+
 <template>
     <img v-on:click="toggleFilters" class="filter_icon" src="@/assets/filter.svg" alt="" />
 

@@ -4,3 +4,7 @@
 - Year range input two sliders
 - Home film name label blinks when hovering
 - Add transition to film name label from home
+- Pass film as prop through route link instead of searching for the corresponding one
+- Add duration filter
+- Add bookmark icon when hovering on homepage?
+- Dont allow duplicated saved films

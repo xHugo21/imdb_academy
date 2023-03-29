@@ -1,4 +1,4 @@
-<!--Component that defines each character card extracted from the Rick and Morty API-->
+<!--Component that defines a default H1 title tag with a custom style-->
 <template>
     <h1 class="main__title">{{ title }}</h1>
 </template>

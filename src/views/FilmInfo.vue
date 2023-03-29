@@ -1,6 +1,8 @@
+<!--View that displays all the info related to the film selected-->
+
 <template>
-    <div v-if="fullSizePoster" v-on:click="toggleFullSizePoster($event)" class="fullSizePoster">
-        <img class="fullSizePoster__image" src="/src/assets/godfather.jpeg" alt="poster" />
+    <div v-if="full_size_poster" v-on:click="toggleFullSizePoster($event)" class="fullSizePoster">
+        <img class="fullSizePoster__image" :src="getFilm.image" alt="poster" />
     </div>
     <header>
         <RouterLink to="/imdb_academy/">
@@ -10,7 +12,7 @@
     <main>
         <div class="left">
             <div class="left__div">
-                <H1Title class="left__title" title="The Godfather - 1972"></H1Title>
+                <H1Title class="left__title" :title="getFilm.name + '- 1972'"></H1Title>
                 <p class="left__text">
                     Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American
                     Corleone crime family. When organized crime family patriarch, Vito Corleone
@@ -39,10 +41,15 @@
                 <img
                     class="right__image"
                     v-on:click="toggleFullSizePoster($event)"
-                    src="/src/assets/godfather.jpeg"
+                    :src="getFilm.image"
                     alt="poster"
                 />
             </div>
+
+            <div class="right__div">
+                <img v-on:click="saveFilm()" class="right__div__bookmark" src="../assets/bookmark.svg" alt="bookmark">
+            </div>
+
             <div class="right__div">
                 <H1Title class="right__title" title="Where to watch"></H1Title>
                 <div class="right__wheretowatch">
@@ -57,6 +64,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="right__div">
                 <H1Title class="right__title" title="Ratings"></H1Title>
                 <div class="right__ratings">
@@ -74,19 +82,56 @@ import { defineComponent } from 'vue'
 import SearchBar from '@/components/SearchBar.vue'
 import H1Title from '@/components/H1Title.vue'
 
+import type { Film } from '@/types'
+
 export default defineComponent({
+    props: {
+        id: {
+            type: String,
+            required: true
+        }
+    },
     components: {
         SearchBar,
         H1Title
     },
     data() {
         return {
-            fullSizePoster: false as boolean
+            full_size_poster: false as boolean
         }
     },
     methods: {
+        // Toggles the full size poster
         toggleFullSizePoster(event: any): void {
-            this.fullSizePoster = !this.fullSizePoster
+            this.full_size_poster = !this.full_size_poster
+        },
+
+        // Saves film to the store only if it hasn't been saved already
+        saveFilm():void {
+            let already_saved:boolean = false;
+            for (let i = 0; i < this.$store.getters['films/getSavedFilms'].length; i++) {
+                if (this.$store.getters['films/getSavedFilms'][i].id === this.getFilm.id) {
+                    already_saved = true;
+                }
+            }
+            if (!already_saved) {
+                this.$store.dispatch('films/saveFilm', this.getFilm)
+            }
+        }
+    },
+    computed: {
+        getFilm(): Film {
+            // Loop through all films in the store and return the one that matches the id
+            for (let i = 0; i < this.$store.getters['films/getFilms'].length; i++) {
+                if (this.$store.getters['films/getFilms'][i].id === parseInt(this.id)) {
+                    return this.$store.getters['films/getFilms'][i]
+                }
+            }
+            return {
+                id: 0,
+                name: 'Error',
+                image: 'Error'
+            }
         }
     }
 })
@@ -153,6 +198,12 @@ main {
     .right {
         .right__div {
             margin-bottom: 10%;
+
+            .right__div__bookmark {
+                width: 50px;
+                height: 50px;
+                cursor: pointer
+            }
         }
 
         .right__title {

@@ -1,3 +1,4 @@
+<!--Component that makes a simple grid using flex to display the film cards-->
 <template>
     <section class="filmsgrid">
         <slot></slot>
@@ -5,7 +6,9 @@
 </template>
 
 <script lang="ts">
-export default {}
+import { defineComponent } from 'vue'
+
+export default defineComponent({})
 </script>
 
 <style scoped lang="scss">

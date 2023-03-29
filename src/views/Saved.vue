@@ -1,3 +1,5 @@
+<!--Saved view that displays all the films that the user has bookmarked-->
+
 <template>
     <header>
         <RouterLink to="/imdb_academy/">
@@ -6,7 +8,9 @@
     </header>
     <main>
         <H1Title class="title__saved" title="Saved"></H1Title>
-        <FilmsGrid></FilmsGrid>
+        <FilmsGrid>
+            <FilmCard v-for="film in savedFilms" v-bind:film="film" v-bind:key="film.id"></FilmCard>
+        </FilmsGrid>
     </main>
 </template>
 
@@ -14,11 +18,19 @@
 import { defineComponent } from 'vue'
 import H1Title from '@/components/H1Title.vue'
 import FilmsGrid from '@/components/FilmsGrid.vue'
+import FilmCard from '@/components/FilmCard.vue'
+import type { Film } from '@/types'
 
 export default defineComponent({
     components: {
         H1Title,
-        FilmsGrid
+        FilmsGrid,
+        FilmCard
+    },
+    computed: {
+        savedFilms(): Array<Film> {
+            return this.$store.getters['films/getSavedFilms'];
+        }
     }
 })
 </script>
