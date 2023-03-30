@@ -16,7 +16,7 @@ export default defineComponent({
 .main__title {
     align-self: center;
     margin: 0 0 2% 0;
-    color: #99aabb5a;
+    color: #99aabb;
     font-size: 2.5rem;
     font-weight: 700;
 }

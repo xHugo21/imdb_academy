@@ -5,7 +5,7 @@ import type { Film } from '@/types'
 declare module '@vue/runtime-core' {
     interface State {
         films: Array<Film>
-        saved_films: Array<Film>,
+        saved_films: Array<Film>
     }
 
     interface ComponentCustomProperties {
@@ -124,30 +124,30 @@ export const films_module: Module<any, any> = {
         setFilms(state: State, films: Array<Film>) {
             state.films = films
         },
-        setSavedFilms(state:State, films:Array<Film>) {
-            state.saved_films = films;
+        setSavedFilms(state: State, films: Array<Film>) {
+            state.saved_films = films
         }
     },
     actions: {
         // Saves film into saved_films
-        saveFilm({commit, state}, film:Film) {
-            let films = state.saved_films;
-            films.push(film);
-            commit('setSavedFilms', films);
+        saveFilm({ commit, state }, film: Film) {
+            let films = state.saved_films
+            films.push(film)
+            commit('setSavedFilms', films)
         },
         // Removes film from saved_films
-        removeFilm({commit, state}, film:Film) {
-            let films = state.saved_films;
-            films = films.filter((f: { id: number }) => f.id !== film.id);
-            commit('setSavedFilms', films);
+        removeFilm({ commit, state }, film: Film) {
+            let films = state.saved_films
+            films = films.filter((f: { id: number }) => f.id !== film.id)
+            commit('setSavedFilms', films)
         }
     },
     getters: {
         getFilms(state: State): Array<Film> {
             return state.films
         },
-        getSavedFilms(state:State):Array<Film> {
-            return state.saved_films;
+        getSavedFilms(state: State): Array<Film> {
+            return state.saved_films
         }
     }
 }

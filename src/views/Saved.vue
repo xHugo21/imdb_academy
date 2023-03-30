@@ -29,8 +29,17 @@ export default defineComponent({
     },
     computed: {
         savedFilms(): Array<Film> {
-            return this.$store.getters['films/getSavedFilms'];
+            return this.$store.getters['films/getSavedFilms']
         }
+    },
+    mounted(){
+        const observer: any = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting){
+                //this.loadMoreResults();
+            }
+        })
+        // Call observer through footer element. Each time the footer is in the viewport, the loadMoreResults() function is called
+        //observer.observe(document.querySelector('footer'));
     }
 })
 </script>

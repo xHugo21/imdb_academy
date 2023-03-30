@@ -8,6 +8,7 @@
         <SearchBar v-on:input="setViewMode()" />
         <Filters></Filters>
     </header>
+
     <main>
         <div v-if="view_trending" class="trending">
             <H1Title class="title__component" title="Trending Now"></H1Title>
@@ -75,13 +76,13 @@ export default defineComponent({
     computed: {
         films(): Array<Film> {
             return this.$store.getters['films/getFilms']
-        }  
+        }
     },
 
     mounted() {
         // Add infinite scroll using observer API
         const observer: any = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
+            if (entries[0].isIntersecting && !this.view_trending){
                 //this.loadMoreResults();
             }
         })

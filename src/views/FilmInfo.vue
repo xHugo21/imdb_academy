@@ -5,14 +5,14 @@
         <img class="fullSizePoster__image" :src="getFilm.image" alt="poster" />
     </div>
     <header>
-        <RouterLink to="/imdb_academy/">
+        <router-link to="/imdb_academy/">
             <img src="/src/assets/return.svg" alt="logo" />
-        </RouterLink>
+        </router-link>
     </header>
     <main>
         <div class="left">
             <div class="left__div">
-                <H1Title class="left__title" :title="getFilm.name + '- 1972'"></H1Title>
+                <H1Title class="left__title" :title="getFilm.name + ' - 1972'"></H1Title>
                 <p class="left__text">
                     Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American
                     Corleone crime family. When organized crime family patriarch, Vito Corleone
@@ -47,21 +47,33 @@
             </div>
 
             <div class="right__div">
-                <img v-if="!is_saved" v-on:click="saveRemoveFilm()" class="right__div__bookmark" src="../assets/bookmark.svg" alt="bookmark">
-                <img v-else v-on:click="saveRemoveFilm()" class="right__div__bookmark" src="../assets/bookmark_filled.svg" alt="bookmark">
+                <img
+                    v-if="!is_saved"
+                    v-on:click="saveRemoveFilm()"
+                    class="right__div__bookmark"
+                    src="../assets/bookmark.svg"
+                    alt="bookmark"
+                />
+                <img
+                    v-else
+                    v-on:click="saveRemoveFilm()"
+                    class="right__div__bookmark"
+                    src="../assets/bookmark_filled.svg"
+                    alt="bookmark"
+                />
             </div>
 
             <div class="right__div">
                 <H1Title class="right__title" title="Where to watch"></H1Title>
                 <div class="right__wheretowatch">
                     <div class="right__wheretowatch__div">
-                        <img src="../assets/netflix.png" alt="netflix" />
+                        <a href="https://www.google.com/"><img src="../assets/netflix.png" alt="netflix" /></a>
                     </div>
                     <div class="right__wheretowatch__div">
-                        <img src="../assets/primevideo.png" alt="primevideo" />
+                        <a href="https://www.google.com/"><img src="../assets/primevideo.png" alt="primevideo" /></a>
                     </div>
                     <div class="right__wheretowatch__div">
-                        <img src="../assets/hbo.png" alt="hbo" />
+                        <a href="https://www.google.com/"><img src="../assets/hbo.png" alt="hbo" /></a>
                     </div>
                 </div>
             </div>
@@ -99,7 +111,7 @@ export default defineComponent({
     data() {
         return {
             full_size_poster: false as boolean,
-            is_saved: false as boolean,
+            is_saved: false as boolean
         }
     },
     methods: {
@@ -109,20 +121,20 @@ export default defineComponent({
         },
 
         // Saves or removes the film from the saved films
-        saveRemoveFilm():void {
-            if (!this.is_saved){    
-                this.$store.dispatch('films/saveFilm', this.getFilm);
+        saveRemoveFilm(): void {
+            if (!this.is_saved) {
+                this.$store.dispatch('films/saveFilm', this.getFilm)
             } else {
-                this.$store.dispatch('films/removeFilm', this.getFilm);
+                this.$store.dispatch('films/removeFilm', this.getFilm)
             }
-            this.is_saved = !this.is_saved;
+            this.is_saved = !this.is_saved
         }
     },
     mounted() {
         // Checks if film is saved on load
         for (let i = 0; i < this.$store.getters['films/getSavedFilms'].length; i++) {
             if (this.$store.getters['films/getSavedFilms'][i].id === this.getFilm.id) {
-                this.is_saved = true;
+                this.is_saved = true
             }
         }
     },
@@ -164,7 +176,7 @@ export default defineComponent({
     }
 }
 header {
-    padding: 4% 0 4% 0;
+    padding: 2% 0 2% 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -198,18 +210,29 @@ main {
                 border-radius: 15px;
                 padding: 1%;
                 font-weight: 600;
+                transition: 1s;
+            }
+
+            .left__tags__text:hover{
+                -ms-transform: scale(1.1); /* IE 9 */
+                -webkit-transform: scale(1.1); /* Safari 3-8 */
+                transform: scale(1.1); /* Standard syntax */
             }
         }
     }
 
     .right {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
         .right__div {
-            margin-bottom: 10%;
+            margin-bottom: 5%;
 
             .right__div__bookmark {
                 width: 50px;
                 height: 50px;
-                cursor: pointer
+                cursor: pointer;
             }
         }
 
@@ -235,13 +258,16 @@ main {
         .right__wheretowatch {
             display: flex;
             flex-direction: row;
-            justify-content: space-evenly;
-            gap: 10px;
+            justify-content: center;
+            gap: 5%;
+            width: 60%;
+            // Center the content of the div
+            margin: 0 auto;
+
+
             .right__wheretowatch__div {
                 color: #99aabb5a;
-                border: 2px solid purple;
                 border-radius: 15px;
-                padding: 1%;
                 width: 80%;
                 img {
                     border-radius: 15px;
