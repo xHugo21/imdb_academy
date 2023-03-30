@@ -67,13 +67,13 @@
                 <H1Title class="right__title" title="Where to watch"></H1Title>
                 <div class="right__wheretowatch">
                     <div class="right__wheretowatch__div">
-                        <a href="https://www.google.com/"><img src="../assets/netflix.png" alt="netflix" /></a>
+                        <a href="https://www.netflix.com/es-en/"><img src="../assets/netflix.png" alt="netflix" /></a>
                     </div>
                     <div class="right__wheretowatch__div">
-                        <a href="https://www.google.com/"><img src="../assets/primevideo.png" alt="primevideo" /></a>
+                        <a href="https://www.primevideo.com/"><img src="../assets/primevideo.png" alt="primevideo" /></a>
                     </div>
                     <div class="right__wheretowatch__div">
-                        <a href="https://www.google.com/"><img src="../assets/hbo.png" alt="hbo" /></a>
+                        <a href="https://www.hbomax.com/es/es"><img src="../assets/hbo.png" alt="hbo" /></a>
                     </div>
                 </div>
             </div>
@@ -210,6 +210,7 @@ main {
                 border-radius: 15px;
                 padding: 1%;
                 font-weight: 600;
+                cursor: pointer;
                 transition: 1s;
             }
 
@@ -261,7 +262,6 @@ main {
             justify-content: center;
             gap: 5%;
             width: 60%;
-            // Center the content of the div
             margin: 0 auto;
 
 
@@ -280,9 +280,9 @@ main {
         .right__ratings {
             display: flex;
             flex-direction: row;
-            justify-content: space-evenly;
             gap: 10px;
             .right__ratings__number {
+                width: 100px;
                 color: black;
                 font-size: 1.2rem;
                 border: 2px solid purple;

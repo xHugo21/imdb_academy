@@ -3,7 +3,7 @@
 <template>
     <router-link
         class="film__card"
-        :to="'/imdb_academy/filminfo/' + film.id + '?film=' + film"
+        :to="'/imdb_academy/filminfo/' + film.id"
     >
 
         <div class="div__hovering__name" v-if="hovering">
