@@ -3,7 +3,7 @@
 <template>
     <header>
         <router-link class="router_link" to="/imdb_academy/saved"
-            ><img class="saved_icon" src="/src/assets/bookmark.svg" alt=""
+            ><img class="saved_icon" src="/src/assets/bookmark.svg" alt="bookmark"
         /></router-link>
         <SearchBar v-on:input="setViewMode()" />
         <Filters></Filters>
@@ -102,19 +102,30 @@ header {
     grid-template-areas:
         'saved_icon search filter_icon'
         'filters filters filters';
-    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-columns: 1fr 5fr 1fr;
 
     .router_link {
         grid-area: saved_icon;
         display: flex;
         justify-content: flex-end;
-        
-
         height: 30px;
         .saved_icon {
             cursor: pointer;
         }
     }
+
+    /*.right_icons {
+        grid-area: right_icons;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        .wand_icon {
+            cursor: pointer;
+            width: 35px;
+        }
+        
+    }*/
 }
 
 @media screen and (max-width: 465px) {

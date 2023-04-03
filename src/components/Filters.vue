@@ -126,6 +126,7 @@ export default defineComponent({
     width: 100%;
     border-bottom: 3px solid #99aabb5a;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     gap: 10%;

@@ -1,12 +1,7 @@
 <!--Component that displays the film card with its name and-->
 
 <template>
-    <div
-    v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover"
-        class="film__card"
-        
-    >
-
+    <div v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover" class="film__card">
         <div class="div__hovering__name" v-if="hovering">
             <p>{{ film.name }}</p>
         </div>
