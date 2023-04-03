@@ -13,3 +13,4 @@
 - Change select filter and style it
 - Include search for director and actor inside main search bar 
 - Change rest of filminfo when we have the api
+- Make responsive rest of the page

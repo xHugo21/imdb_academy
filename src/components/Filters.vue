@@ -115,7 +115,7 @@ export default defineComponent({
     grid-area: filter_icon;
     justify-self: left;
     align-self: center;
-    width: 15%;
+    height: 35px;
     cursor: pointer;
 }
 

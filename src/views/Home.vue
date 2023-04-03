@@ -11,7 +11,7 @@
 
     <main>
         <div v-if="view_trending" class="trending">
-            <H1Title class="title__component" title="Trending Now"></H1Title>
+            <H1Title class="title__component" title="Trending"></H1Title>
             <FilmsGrid>
                 <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
             </FilmsGrid>
@@ -93,20 +93,33 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@media screen and (max-width: 465px) {
+    header {
+        grid-template-areas:
+            'saved_icon filter_icon'
+            'search search'
+            'filters filters';
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 header {
     margin: 3% 0 3% 0;
+    height: 20%;
     display: grid;
     grid-template-areas:
         'saved_icon search filter_icon'
         'filters filters filters';
-    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-columns: 1fr 6fr 1fr;
 
     .router_link {
         grid-area: saved_icon;
         display: flex;
-        justify-content: right;
+        justify-content: flex-end;
+        
+
+        height: 30px;
         .saved_icon {
-            width: 15%;
             cursor: pointer;
         }
     }

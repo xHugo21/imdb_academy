@@ -30,7 +30,7 @@ export default defineComponent({
     border-radius: 25px;
     border: none;
     width: 50%;
-    height: 60%;
+    height: 40px;
     justify-self: center;
     align-self: center;
     padding: 1% 1% 1% 3%;
