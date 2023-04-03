@@ -1,23 +1,24 @@
 <!--Component that displays the film card with its name and-->
 
 <template>
-    <router-link
+    <div
+    v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover"
         class="film__card"
-        :to="'/imdb_academy/filminfo/' + film.id"
+        
     >
 
         <div class="div__hovering__name" v-if="hovering">
             <p>{{ film.name }}</p>
         </div>
 
-        <img v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover" :class="['film', 'film__' + hovering]" v-bind:alt="'Poster from ' + film.name" :src="film.image" />
+        <router-link :to="'/imdb_academy/filminfo/' + film.id"><img  :class="['film', 'film__' + hovering]" v-bind:alt="'Poster from ' + film.name" :src="film.image" /></router-link>
 
         <div v-on:click="saveRemoveFilm()" class="div__hovering__bookmark" v-if="hovering">
-            <img src="../assets/bookmark.svg" alt="Bookmark Icon" class="bookmark">
-            <!--<img src="../assets/bookmark_filled.svg" class="bookmark">-->
+            <img v-if="!is_saved" src="../assets/bookmark.svg" alt="Bookmark Icon" class="bookmark">
+            <img v-else src="../assets/bookmark_filled.svg" class="bookmark">
         </div>
         
-    </router-link>
+    </div>
 </template>
 
 <script lang="ts">
@@ -69,14 +70,15 @@ export default defineComponent({
     position: relative;
     display: flex;
     justify-content: center;
+    transition: transform 0.3s;
+
 }
 .film {
     width: 200px;
     height: 300px;
-    transition: transform 0.3s;
 }
 
-.film:hover {
+.film__card:hover {
     cursor: pointer;
     -ms-transform: scale(1.1);
     -webkit-transform: scale(1.1);
@@ -95,13 +97,13 @@ export default defineComponent({
     z-index: 100;
     position: absolute;
     background-color: #99aabb;
-    //border: 4px solid #99aabb;
+    top: 10px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 208px;
-    height: 50px;
+    width: 190px;
+    height: 45px;
     p {
         color: purple;
         font-size: 1.2rem;
@@ -115,7 +117,7 @@ export default defineComponent({
 .div__hovering__bookmark {
     z-index: 100;
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     background-color: #99aabb;
     //border: 4px solid #99aabb;
     border-radius: 10px;
