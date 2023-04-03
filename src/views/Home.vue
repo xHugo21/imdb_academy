@@ -93,15 +93,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@media screen and (max-width: 465px) {
-    header {
-        grid-template-areas:
-            'saved_icon filter_icon'
-            'search search'
-            'filters filters';
-        grid-template-columns: 1fr 1fr;
-    }
-}
+
 
 header {
     margin: 3% 0 3% 0;
@@ -122,6 +114,16 @@ header {
         .saved_icon {
             cursor: pointer;
         }
+    }
+}
+
+@media screen and (max-width: 465px) {
+    header {
+        grid-template-areas:
+            'saved_icon filter_icon'
+            'search search'
+            'filters filters';
+        grid-template-columns: 1fr 1fr;
     }
 }
 

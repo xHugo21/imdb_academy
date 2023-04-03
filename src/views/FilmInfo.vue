@@ -186,7 +186,7 @@ main {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 150px;
+    gap: 5%;
     margin: 0 10% 0 10%;
     .left {
         .left__div {
@@ -219,6 +219,13 @@ main {
                 -webkit-transform: scale(1.1); /* Safari 3-8 */
                 transform: scale(1.1); /* Standard syntax */
             }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        .left {
+            margin-bottom: 5%;
         }
     }
 

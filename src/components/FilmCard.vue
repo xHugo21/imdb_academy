@@ -10,7 +10,7 @@
             <p>{{ film.name }}</p>
         </div>
 
-        <img  v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover" :class="['film', 'film__' + hovering]" v-bind:alt="'Poster from ' + film.name" :src="film.image" />
+        <img v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover" :class="['film', 'film__' + hovering]" v-bind:alt="'Poster from ' + film.name" :src="film.image" />
 
         <div v-on:click="saveRemoveFilm()" class="div__hovering__bookmark" v-if="hovering">
             <img src="../assets/bookmark.svg" alt="Bookmark Icon" class="bookmark">
