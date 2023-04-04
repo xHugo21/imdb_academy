@@ -32,9 +32,9 @@ export default defineComponent({
             return this.$store.getters['films/getSavedFilms']
         }
     },
-    mounted(){
+    mounted() {
         const observer: any = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting){
+            if (entries[0].isIntersecting) {
                 //this.loadMoreResults();
             }
         })

@@ -82,7 +82,7 @@ export default defineComponent({
     mounted() {
         // Add infinite scroll using observer API
         const observer: any = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && !this.view_trending){
+            if (entries[0].isIntersecting && !this.view_trending) {
                 //this.loadMoreResults();
             }
         })
@@ -93,8 +93,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-
-
 header {
     margin: 3% 0 3% 0;
     height: 20%;

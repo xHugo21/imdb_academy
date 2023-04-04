@@ -10,3 +10,4 @@
 - Change rest of filminfo when we have the api
 - Responsive header and filters
 - Add magic wand basic functionality
+- Filters sliderMin and slider Max needed?

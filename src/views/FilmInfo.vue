@@ -67,13 +67,19 @@
                 <H1Title class="right__title" title="Where to watch"></H1Title>
                 <div class="right__wheretowatch">
                     <div class="right__wheretowatch__div">
-                        <a href="https://www.netflix.com/es-en/"><img src="../assets/netflix.png" alt="netflix" /></a>
+                        <a href="https://www.netflix.com/es-en/"
+                            ><img src="../assets/netflix.png" alt="netflix"
+                        /></a>
                     </div>
                     <div class="right__wheretowatch__div">
-                        <a href="https://www.primevideo.com/"><img src="../assets/primevideo.png" alt="primevideo" /></a>
+                        <a href="https://www.primevideo.com/"
+                            ><img src="../assets/primevideo.png" alt="primevideo"
+                        /></a>
                     </div>
                     <div class="right__wheretowatch__div">
-                        <a href="https://www.hbomax.com/es/es"><img src="../assets/hbo.png" alt="hbo" /></a>
+                        <a href="https://www.hbomax.com/es/es"
+                            ><img src="../assets/hbo.png" alt="hbo"
+                        /></a>
                     </div>
                 </div>
             </div>
@@ -214,7 +220,7 @@ main {
                 transition: 1s;
             }
 
-            .left__tags__text:hover{
+            .left__tags__text:hover {
                 -ms-transform: scale(1.1); /* IE 9 */
                 -webkit-transform: scale(1.1); /* Safari 3-8 */
                 transform: scale(1.1); /* Standard syntax */
@@ -270,7 +276,6 @@ main {
             gap: 5%;
             width: 60%;
             margin: 0 auto;
-
 
             .right__wheretowatch__div {
                 color: #99aabb5a;
