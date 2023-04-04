@@ -49,4 +49,10 @@ export default defineComponent({
 .search_bar:focus {
     border: 2px solid purple;
 }
+
+@media screen and (max-width: 465px) {
+    .search_bar{
+        width: 90%;
+    }
+}
 </style>

@@ -240,4 +240,14 @@ export default defineComponent({
         }
     }
 }
+
+// Add media queries for responsive design
+@media screen and (max-width: 550px) {
+        .filters{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-bottom: 10%;
+        }
+    }
 </style>
