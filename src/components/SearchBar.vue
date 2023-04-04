@@ -51,7 +51,7 @@ export default defineComponent({
 }
 
 @media screen and (max-width: 465px) {
-    .search_bar{
+    .search_bar {
         width: 90%;
     }
 }

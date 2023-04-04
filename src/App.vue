@@ -36,4 +36,11 @@ footer {
         font-weight: 700;
     }
 }
+
+@media screen and (max-width: 465px) {
+    footer {
+        height: 150px;
+        padding: 10% 0 10% 0;
+    }
+}
 </style>
