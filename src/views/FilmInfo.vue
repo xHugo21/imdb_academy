@@ -288,11 +288,11 @@ main {
                 }
             }
         }
-
         .right__ratings {
             display: flex;
             flex-direction: row;
             gap: 10px;
+
             .right__ratings__number {
                 width: 100px;
                 color: black;
@@ -302,6 +302,14 @@ main {
                 border-radius: 15px;
                 padding: 1% 3% 1% 3%;
                 font-weight: 600;
+                cursor: pointer;
+                transition: 1s;
+            }
+
+            .right__ratings__number:hover {
+                -ms-transform: scale(1.1); /* IE 9 */
+                -webkit-transform: scale(1.1); /* Safari 3-8 */
+                transform: scale(1.1); /* Standard syntax */
             }
         }
     }
