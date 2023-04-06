@@ -149,8 +149,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .filter_icon {
     grid-area: filter_icon;
-    justify-self: left;
-    align-self: center;
+    //justify-self: left;
+    //align-self: center;
     height: 35px;
     cursor: pointer;
 }

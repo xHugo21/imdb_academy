@@ -8,9 +8,9 @@
 
         <router-link :to="'/imdb_academy/filminfo/' + film.id"
             ><img
-                :class="['film', 'film__' + hovering]"
+                v-bind:class="['film', 'film__hover__' + hovering]"
                 v-bind:alt="'Poster from ' + film.name"
-                :src="film.image"
+                v-bind:src="film.image"
         /></router-link>
 
         <div v-on:click="saveRemoveFilm()" class="div__hovering__bookmark" v-if="hovering">
@@ -64,6 +64,12 @@ export default defineComponent({
                 this.is_saved = true
             }
         }
+    },
+
+    computed: {
+        isWandSelected(){
+            return this.$store.getters['search/getWandSelected'];
+        }
     }
 })
 </script>
@@ -78,6 +84,8 @@ export default defineComponent({
 .film {
     width: 200px;
     height: 300px;
+    border: 4px solid #99aabb5a;
+    border-radius: 10px;
 }
 
 .film__card:hover {
@@ -86,11 +94,8 @@ export default defineComponent({
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
-.film__false {
-    border: 4px solid #99aabb5a;
-    border-radius: 10px;
-}
-.film__true {
+
+.film__hover__true {
     border: 4px solid purple;
     border-radius: 10px;
 }

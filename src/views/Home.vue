@@ -6,7 +6,9 @@
             ><img class="saved_icon" src="/src/assets/bookmark.svg" alt="bookmark"
         /></router-link>
         <SearchBar v-on:input="setViewMode()" />
+        <img v-on:click="setWandMode" class="wand_icon" src="/src/assets/wand.svg" alt="wand" />
         <Filters></Filters>
+        
     </header>
 
     <main>
@@ -50,7 +52,7 @@ export default defineComponent({
     data() {
         return {
             view_trending: true as boolean,
-            results_count: 0 as number
+            results_count: 0 as number,
         }
     },
 
@@ -70,6 +72,10 @@ export default defineComponent({
             for (let i = 0; i < this.films.length; i++) {
                 this.results_count++
             }
+        },
+
+        setWandMode():void{
+            this.$store.commit('search/setWandSelected', !this.$store.getters['search/getWandSelected'])
         }
     },
 
@@ -98,9 +104,9 @@ header {
     height: 20%;
     display: grid;
     grid-template-areas:
-        'saved_icon search filter_icon'
-        'filters filters filters';
-    grid-template-columns: 1fr 5fr 1fr;
+        'saved_icon search wand_icon filter_icon'
+        'filters filters filters filters';
+    grid-template-columns: 2fr 10fr 2fr 2fr;
 
     .router_link {
         grid-area: saved_icon;
@@ -112,23 +118,29 @@ header {
         }
     }
 
-    /*.right_icons {
-        grid-area: right_icons;
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
+    
 
-        .wand_icon {
-            cursor: pointer;
-            width: 35px;
-        }
+    .wand_icon {
+        grid-area: wand_icon;
+        // Move wand icon to the right
+        margin-left: 7vw;
+        cursor: pointer;
+        width: 35px;
+    }
         
-    }*/
+    
 }
 
 main {
     .title__component {
         margin-left: 10%;
+    }
+}
+
+// Add media queries for responsive design
+@media screen and (max-width: 890px) {
+    .wand_icon {
+        margin-left: 0%;
     }
 }
 </style>

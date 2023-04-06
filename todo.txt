@@ -1,12 +1,11 @@
-- Primary color: #14181c
+- Primary color: #14181c (background)
 - Secondary color: #99aabb5a / #434C54
 - Terciary color: #99aabb
 
 - Pass film as prop through route link instead of searching for the corresponding one
-- Style cross from search bar
-- Style range sliders
+- Style range sliders selected zone
 - Include search for director and actor inside main search bar 
 - Change rest of filminfo when we have the api
-- Add magic wand basic functionality
 - Filters sliderMin and slider Max needed?
 - Animation filters
+- Change color when wand selected
