@@ -3,7 +3,7 @@ import type { State } from 'vue'
 
 declare module '@vue/runtime-core' {
     interface State {
-        query: string,
+        query: string
         wand_selected: boolean
     }
 
@@ -28,10 +28,10 @@ export const search_module: Module<any, any> = {
     },
     actions: {},
     getters: {
-        getQuery(state: State):string {
+        getQuery(state: State): string {
             return state.query
         },
-        getWandSelected(state: State):boolean {
+        getWandSelected(state: State): boolean {
             return state.wand_selected
         }
     }

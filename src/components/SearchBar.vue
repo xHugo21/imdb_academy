@@ -50,7 +50,7 @@ export default defineComponent({
     border: 2px solid purple;
 }
 
-@media screen and (max-width: 465px) {
+@media screen and (max-width: 755px) {
     .search_bar {
         width: 90%;
     }

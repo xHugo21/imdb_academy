@@ -6,9 +6,21 @@
             ><img class="saved_icon" src="/src/assets/bookmark.svg" alt="bookmark"
         /></router-link>
         <SearchBar v-on:input="setViewMode()" />
-        <img v-on:click="setWandMode" class="wand_icon" src="/src/assets/wand.svg" alt="wand" />
+        <img
+            v-if="!wandSelected"
+            v-on:click="setWandMode"
+            class="wand_icon"
+            src="/src/assets/wand.svg"
+            alt="wand"
+        />
+        <img
+            v-else
+            v-on:click="setWandMode"
+            class="wand_icon"
+            src="/src/assets/wand_selected.svg"
+            alt="wand"
+        />
         <Filters></Filters>
-        
     </header>
 
     <main>
@@ -52,7 +64,7 @@ export default defineComponent({
     data() {
         return {
             view_trending: true as boolean,
-            results_count: 0 as number,
+            results_count: 0 as number
         }
     },
 
@@ -74,14 +86,20 @@ export default defineComponent({
             }
         },
 
-        setWandMode():void{
-            this.$store.commit('search/setWandSelected', !this.$store.getters['search/getWandSelected'])
+        setWandMode(): void {
+            this.$store.commit(
+                'search/setWandSelected',
+                !this.$store.getters['search/getWandSelected']
+            )
         }
     },
 
     computed: {
         films(): Array<Film> {
             return this.$store.getters['films/getFilms']
+        },
+        wandSelected(): boolean {
+            return this.$store.getters['search/getWandSelected']
         }
     },
 
@@ -92,7 +110,7 @@ export default defineComponent({
                 //this.loadMoreResults();
             }
         })
-        // Call observer through footer element. Each time the footer is in the viewport, the loadMoreResults() function is called
+        // Call observer through footer element. Each time the footer is in the viewport,  the loadMoreResults() function is called
         //observer.observe(document.querySelector('footer'));
     }
 })
@@ -106,7 +124,7 @@ header {
     grid-template-areas:
         'saved_icon search wand_icon filter_icon'
         'filters filters filters filters';
-    grid-template-columns: 2fr 10fr 2fr 2fr;
+    grid-template-columns: 2fr 10fr 1fr 2fr;
 
     .router_link {
         grid-area: saved_icon;
@@ -118,17 +136,13 @@ header {
         }
     }
 
-    
-
     .wand_icon {
         grid-area: wand_icon;
         // Move wand icon to the right
-        margin-left: 7vw;
+        margin-left: 3vw;
         cursor: pointer;
         width: 35px;
     }
-        
-    
 }
 
 main {

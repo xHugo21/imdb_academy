@@ -2,10 +2,14 @@
 - Secondary color: #99aabb5a / #434C54
 - Terciary color: #99aabb
 
-- Pass film as prop through route link instead of searching for the corresponding one
+BEFORE API
+- Pass film as prop through route link instead of searching for the corresponding one?
 - Style range sliders selected zone
-- Include search for director and actor inside main search bar 
-- Change rest of filminfo when we have the api
 - Filters sliderMin and slider Max needed?
-- Animation filters
-- Change color when wand selected
+- Change cursor when wand selected?
+- Make more components
+
+AFTER API
+- Include search for director and actor inside main search bar 
+- Change filminfo based on available data
+- loadMoreResults when search is done (each api request of 20 results?)

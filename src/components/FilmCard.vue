@@ -3,12 +3,12 @@
 <template>
     <div v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover" class="film__card">
         <div class="div__hovering__name" v-if="hovering">
-            <p>{{ film.name }}</p>
+            <p v-bind:class="['div__hovering__name__p' + '__' + isWandSelected]">{{ film.name }}</p>
         </div>
 
         <router-link :to="'/imdb_academy/filminfo/' + film.id"
             ><img
-                v-bind:class="['film', 'film__hover__' + hovering]"
+                v-bind:class="['film', 'film__hover__' + hovering + '__' + isWandSelected]"
                 v-bind:alt="'Poster from ' + film.name"
                 v-bind:src="film.image"
         /></router-link>
@@ -67,8 +67,8 @@ export default defineComponent({
     },
 
     computed: {
-        isWandSelected(){
-            return this.$store.getters['search/getWandSelected'];
+        isWandSelected() {
+            return this.$store.getters['search/getWandSelected']
         }
     }
 })
@@ -95,8 +95,13 @@ export default defineComponent({
     transform: scale(1.1);
 }
 
-.film__hover__true {
+.film__hover__true__false {
     border: 4px solid purple;
+    border-radius: 10px;
+}
+
+.film__hover__true__true {
+    border: 4px solid yellow;
     border-radius: 10px;
 }
 
@@ -111,12 +116,21 @@ export default defineComponent({
     align-items: center;
     width: 190px;
     height: 45px;
-    p {
+    .div__hovering__name__p__false {
         color: purple;
         font-size: 1.2rem;
         font-weight: 600;
     }
-    p:link {
+    .div__hovering__name__p__false:link {
+        text-decoration: none;
+    }
+
+    .div__hovering__name__p__true {
+        color: yellow;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+    .div__hovering__name__p__true:link {
         text-decoration: none;
     }
 }

@@ -16,76 +16,78 @@
         alt="filter_icon_filled"
     />
 
-    <div class="filters" v-if="show_filters">
-        <div class="filters__div">
-            <label class="filters__div__label" for="year">Release Year</label>
-            <div class="range-slider">
-                <input
-                    v-on:change="updateYearFilter"
-                    id="yearmin"
-                    type="range"
-                    min="1900"
-                    max="2023"
-                    step="1"
-                    v-model="sliderMin"
-                />
-                <input
-                    v-on:change="updateYearFilter"
-                    id="yearmax"
-                    type="range"
-                    min="1900"
-                    max="2023"
-                    step="1"
-                    v-model="sliderMax"
-                />
+    <Transition name="slide-fade">
+        <div class="filters" v-if="show_filters">
+            <div class="filters__div">
+                <label class="filters__div__label" for="year">Release Year</label>
+                <div class="range-slider">
+                    <input
+                        v-on:change="updateYearFilter"
+                        id="yearmin"
+                        type="range"
+                        min="1900"
+                        max="2023"
+                        step="1"
+                        v-model="sliderMin"
+                    />
+                    <input
+                        v-on:change="updateYearFilter"
+                        id="yearmax"
+                        type="range"
+                        min="1900"
+                        max="2023"
+                        step="1"
+                        v-model="sliderMax"
+                    />
+                </div>
+                <output class="filters__div__output" id="valueyear"></output>
             </div>
-            <output class="filters__div__output" id="valueyear"></output>
-        </div>
 
-        <div class="filters__div">
-            <label class="filters__div__label" for="year">Duration</label>
-            <div class="range-slider">
-                <input
-                    v-on:change="updateDurationFilter"
-                    id="duration"
-                    type="range"
-                    min="0"
-                    max="300"
-                    step="1"
-                />
+            <div class="filters__div">
+                <label class="filters__div__label" for="year">Duration</label>
+                <div class="range-slider">
+                    <input
+                        v-on:change="updateDurationFilter"
+                        id="duration"
+                        type="range"
+                        min="0"
+                        max="300"
+                        step="1"
+                    />
+                </div>
+                <output class="filters__div__output" id="valueduration"></output>
             </div>
-            <output class="filters__div__output" id="valueduration"></output>
-        </div>
 
-        <div class="filters__div">
-            <label class="filters__div__label" for="genre">Genre</label>
-            <select class="filters__div__select">
-                <option value="">* Genre *</option>
-                <option value="paris">Thriller</option>
-                <option value="london">Drama</option>
-                <option value="athens">Comedy</option>
-                <option value="madrid">Action</option>
-            </select>
-        </div>
+            <div class="filters__div">
+                <label class="filters__div__label" for="genre">Genre</label>
+                <select class="filters__div__select">
+                    <option value="">* Genre *</option>
+                    <option value="paris">Thriller</option>
+                    <option value="london">Drama</option>
+                    <option value="athens">Comedy</option>
+                    <option value="madrid">Action</option>
+                </select>
+            </div>
 
-        <div class="filters__div">
-            <label class="filters__div__label" for="rating">Rating</label>
-            <select class="filters__div__select">
-                <option value="rating_critics">* Critics Rating *</option>
-                <option value="paris">+ 1</option>
-                <option value="london">+ 2</option>
-                <option value="athens">+ 3</option>
-                <option value="madrid">+ 4</option>
-            </select>
-            <select class="filters__div__select">
-                <option value="rating_public">* Public Rating *</option>
-                <option value="paris">+ 1</option>
-                <option value="london">+ 2</option>
-                <option value="athens">+ 3</option>
-                <option value="madrid">+ 4</option>
-            </select>
+            <div class="filters__div">
+                <label class="filters__div__label" for="rating">Rating</label>
+                <select class="filters__div__select">
+                    <option value="rating_critics">* Critics Rating *</option>
+                    <option value="paris">+ 1</option>
+                    <option value="london">+ 2</option>
+                    <option value="athens">+ 3</option>
+                    <option value="madrid">+ 4</option>
+                </select>
+                <select class="filters__div__select">
+                    <option value="rating_public">* Public Rating *</option>
+                    <option value="paris">+ 1</option>
+                    <option value="london">+ 2</option>
+                    <option value="athens">+ 3</option>
+                    <option value="madrid">+ 4</option>
+                </select>
+            </div>
         </div>
-    </div>
+    </Transition>
 </template>
 
 <script lang="ts">
@@ -157,7 +159,7 @@ export default defineComponent({
 
 .filters {
     grid-area: filters;
-    padding: 5% 0 5% 0;
+    padding: 5% 0 4% 0;
     border-bottom: 3px solid #99aabb5a;
     display: flex;
     flex-direction: row;
@@ -239,6 +241,23 @@ export default defineComponent({
             }
         }
     }
+}
+
+.slide-fade-enter-active {
+    transition: all 0.8s ease;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.8s ease;
+}
+
+.slide-fade-enter-from {
+    transform: translateY(-30px);
+    opacity: 0;
+}
+.slide-fade-leave-to {
+    transform: translateY(-30px);
+    opacity: 0;
 }
 
 // Add media queries for responsive design
