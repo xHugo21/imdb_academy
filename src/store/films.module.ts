@@ -4,7 +4,8 @@ import type { Film } from '@/types'
 
 declare module '@vue/runtime-core' {
     interface State {
-        films: Array<Film>
+        films: Array<Film>,
+        total_results: number,
         saved_films: Array<Film>
     }
 
@@ -118,11 +119,15 @@ export const films_module: Module<any, any> = {
                 image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
             }*/
         ],
+        total_results: 0,
         saved_films: []
     },
     mutations: {
         setFilms(state: State, films: Array<Film>) {
             state.films = films
+        },
+        setTotalResults(state: State, total_results: number) {
+            state.total_results = total_results
         },
         setSavedFilms(state: State, films: Array<Film>) {
             state.saved_films = films
@@ -169,6 +174,7 @@ export const films_module: Module<any, any> = {
                     throw Error(response.statusText)
                 }
                 const data = await response.json()
+                commit('setTotalResults', data.total_results);
                 commit('setFilms', data.results)
             } catch (error) {
                 console.log('NO MORE RESULTS TO DISPLAY')
@@ -178,6 +184,9 @@ export const films_module: Module<any, any> = {
     getters: {
         getFilms(state: State): Array<Film> {
             return state.films
+        },
+        getTotalResults(state: State): number {
+            return state.total_results
         },
         getSavedFilms(state: State): Array<Film> {
             return state.saved_films

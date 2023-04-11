@@ -129,6 +129,7 @@ export default defineComponent({
         font-size: 1.2rem;
         font-weight: 600;
         margin: 2% 2% 2% 2%;
+        text-align: center;
         
     }
     .div__hovering__name__p__false:link {
@@ -139,6 +140,8 @@ export default defineComponent({
         color: yellow;
         font-size: 1.2rem;
         font-weight: 600;
+        margin: 2% 2% 2% 2%;
+        text-align: center;
     }
     .div__hovering__name__p__true:link {
         text-decoration: none;

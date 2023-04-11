@@ -33,7 +33,7 @@
         <div v-else class="searchresults">
             <H1Title
                 class="title__component"
-                :title="'Found ' + results_count + ' search results'"
+                :title="'Found ' + totalResults + ' search results'"
             ></H1Title>
             <FilmsGrid>
                 <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
@@ -64,7 +64,6 @@ export default defineComponent({
     data() {
         return {
             view_trending: true as boolean,
-            results_count: 0 as number
         }
     },
 
@@ -75,16 +74,16 @@ export default defineComponent({
                 this.view_trending = true
             } else {
                 this.view_trending = false
-                this.countResults()
+                //this.countResults()
             }
         },
         // Counts the number of search results
-        countResults(): void {
+        /*countResults(): void {
             this.results_count = 0
             for (let i = 0; i < this.films.length; i++) {
                 this.results_count++
             }
-        },
+        },*/
 
         setWandMode(): void {
             this.$store.commit(
@@ -97,6 +96,9 @@ export default defineComponent({
     computed: {
         films(): Array<Film> {
             return this.$store.getters['films/getFilms']
+        },
+        totalResults(): number {
+            return this.$store.getters['films/getTotalResults']
         },
         wandSelected(): boolean {
             return this.$store.getters['search/getWandSelected']

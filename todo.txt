@@ -9,3 +9,4 @@
 - Include search for director and actor inside main search bar 
 - Change filminfo based on available data
 - loadMoreResults when search is done (each api request of 20 results?)
+- Make bookmark a component
