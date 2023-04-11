@@ -158,6 +158,7 @@ export const films_module: Module<any, any> = {
                     throw Error(response.statusText)
                 }
                 const data = await response.json()
+                console.log(data);
                 commit('setFilms', data.results)
             } catch (error) {
                 console.log('NO MORE RESULTS TO DISPLAY')

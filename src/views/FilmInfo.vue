@@ -17,7 +17,7 @@
     <main>
         <div class="left">
             <div class="left__div">
-                <H1Title class="left__title" :title="getFilm.title + ' - 1972'"></H1Title>
+                <H1Title class="left__title" :title="getFilm.title"></H1Title>
                 <p class="left__text">
                     {{ getFilm.overview }}
                 </p>
@@ -31,9 +31,10 @@
             <div class="left__div">
                 <H1Title class="left__title" title="Tags"></H1Title>
                 <div class="left__tags">
-                    <p class="left__tags__text">Must Watch</p>
-                    <p class="left__tags__text">Thriller</p>
-                    <p class="left__tags__text">Top 5 All Time</p>
+                    <p class="left__tags__text">Release Date: {{ getFilm.release_date }}</p>
+                    <p class="left__tags__text">Original Language: {{ getFilm.original_language }}</p>
+                    <p class="left__tags__text">Popularity: {{ getFilm.popularity }}</p>
+                    <p class="left__tags__text">Genres: {{ getFilm.genre_ids }}</p>
                 </div>
             </div>
         </div>
@@ -90,7 +91,7 @@
             <div class="right__div">
                 <H1Title class="right__title" title="Ratings"></H1Title>
                 <div class="right__ratings">
-                    <p class="right__ratings__number">Critics: 8/10</p>
+                    <p class="right__ratings__number">Critics: {{ getFilm.vote_average }}</p>
                     <p class="right__ratings__number">Public: 4/5</p>
                 </div>
             </div>

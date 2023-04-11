@@ -90,8 +90,31 @@ export default defineComponent({
                 'search/setWandSelected',
                 !this.$store.getters['search/getWandSelected']
             )
-        }
+        },
+
+        /*async loadMoreResults():Promise<void> {
+            var url;
+            // Depending on the view mode, load more characters or episodes and catch errors
+            
+                url = this.$store.getters['characters/getDataCharacters'].info.next;
+
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw Error(response.statusText);
+                    }
+                    const data = await response.json();
+                    this.$store.commit('characters/setDataCharacters', data);
+                    let aux = this.$store.getters['characters/getCharacters'];
+                    aux = aux.concat(data.results);
+                    this.$store.commit('characters/setCharacters', aux);
+                } catch (error) {
+                    console.log('NO MORE RESULTS TO DISPLAY');
+                }
+            
+            }*/
     },
+    
 
     computed: {
         films(): Array<Film> {
