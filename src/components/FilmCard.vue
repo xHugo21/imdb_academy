@@ -122,11 +122,14 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     width: 190px;
-    height: 45px;
+    min-height: 45px;
+
     .div__hovering__name__p__false {
         color: purple;
         font-size: 1.2rem;
         font-weight: 600;
+        margin: 2% 2% 2% 2%;
+        
     }
     .div__hovering__name__p__false:link {
         text-decoration: none;

@@ -1,0 +1,40 @@
+<template>
+    <select class="filters__div__select">
+        <option v-for="option in options" v-bind:value="option">{{ option }}</option>
+    </select>
+</template>
+
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    export default defineComponent({
+        props: {
+            options: {
+                type: Array as () => string[],
+                required: true
+            }
+        }
+    })
+</script>
+
+<style scoped lang="scss">
+
+        .filters__div__select {
+            cursor: pointer;
+            background-color: #99aabb5a;
+            width: 110%;
+            border-radius: 25px;
+            border: none;
+            padding: 1% 5% 1% 5%;
+            outline: 0;
+            border: 2px solid rgba(0, 0, 0, 0);
+            color: rgba(255, 255, 255, 0.717);
+            font-weight: 700;
+            transition: 0.5s;
+
+            option {
+                font-weight: 600;
+                color: #99aabb;
+            }
+        }
+</style>

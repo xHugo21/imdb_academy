@@ -141,6 +141,7 @@ export const films_module: Module<any, any> = {
             films = films.filter((f: { id: number }) => f.id !== film.id)
             commit('setSavedFilms', films)
         },
+        
         async fetchTrending({ commit }) {
             let url =
                 'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
