@@ -2,7 +2,7 @@
 
 <template>
     <div v-if="full_size_poster" v-on:click="toggleFullSizePoster($event)" class="fullSizePoster">
-        <img class="fullSizePoster__image" :src="getFilm.image" alt="poster" />
+        <img class="fullSizePoster__image" :src="'https://image.tmdb.org/t/p/w500' + getFilm.poster_path" alt="poster" />
     </div>
     <header>
         <router-link to="/imdb_academy/">
@@ -12,12 +12,9 @@
     <main>
         <div class="left">
             <div class="left__div">
-                <H1Title class="left__title" :title="getFilm.name + ' - 1972'"></H1Title>
+                <H1Title class="left__title" :title="getFilm.title + ' - 1972'"></H1Title>
                 <p class="left__text">
-                    Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American
-                    Corleone crime family. When organized crime family patriarch, Vito Corleone
-                    barely survives an attempt on his life, his youngest son, Michael steps in to
-                    take care of the would-be killers, launching a campaign of bloody revenge.
+                    {{ getFilm.overview }}
                 </p>
             </div>
             <div class="left__div">
@@ -41,7 +38,7 @@
                 <img
                     class="right__image"
                     v-on:click="toggleFullSizePoster($event)"
-                    :src="getFilm.image"
+                    :src="'https://image.tmdb.org/t/p/w500' + getFilm.poster_path"
                     alt="poster"
                 />
             </div>
@@ -153,9 +150,20 @@ export default defineComponent({
                 }
             }
             return {
+                adult: false,
+                backdrop_path: '',
+                genre_ids: [],
                 id: 0,
-                name: 'Error',
-                image: 'Error'
+                original_language: '',
+                original_title: '',
+                overview: '',
+                popularity: 0,
+                poster_path: '',
+                release_date: '',
+                title: '',
+                video: false,
+                vote_average: 0,
+                vote_count: 0,
             }
         }
     }

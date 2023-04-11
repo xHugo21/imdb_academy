@@ -3,14 +3,14 @@
 <template>
     <div v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover" class="film__card">
         <div class="div__hovering__name" v-if="hovering">
-            <p v-bind:class="['div__hovering__name__p' + '__' + isWandSelected]">{{ film.name }}</p>
+            <p v-bind:class="['div__hovering__name__p' + '__' + isWandSelected]">{{ film.title }}</p>
         </div>
 
         <router-link :to="'/imdb_academy/filminfo/' + film.id"
             ><img
                 v-bind:class="['film', 'film__hover__' + hovering + '__' + isWandSelected]"
-                v-bind:alt="'Poster from ' + film.name"
-                v-bind:src="film.image"
+                v-bind:alt="'Poster from ' + film.title"
+                v-bind:src="'https://image.tmdb.org/t/p/w500' + film.poster_path"
         /></router-link>
 
         <div v-on:click="saveRemoveFilm()" class="div__hovering__bookmark" v-if="hovering">

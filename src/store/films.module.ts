@@ -17,7 +17,7 @@ export const films_module: Module<any, any> = {
     namespaced: true,
     state: {
         films: [
-            {
+            /*{
                 id: 1,
                 name: 'A New Hope',
                 image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
@@ -116,7 +116,7 @@ export const films_module: Module<any, any> = {
                 id: 20,
                 name: 'The Empire Strikes Back',
                 image: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'
-            }
+            }*/
         ],
         saved_films: []
     },
@@ -143,7 +143,7 @@ export const films_module: Module<any, any> = {
         },
         async fetchTrending({ commit }) {
             let url =
-                'https://api.themoviedb.org/3/movie/550?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
+                'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
 
             // Catch errors when fetching url and display them
             try {
@@ -159,8 +159,7 @@ export const films_module: Module<any, any> = {
         },
 
         async fetchSearchBar({ commit }) {
-            let url =
-                'https://api.themoviedb.org/3/movie/550?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
+            let url = 'https://api.themoviedb.org/3/discover/movie?api_key=9f772ff3aa5dfb8e963695d6c67ae338&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate'
 
             // Catch errors when fetching url and display them
             try {
@@ -169,6 +168,7 @@ export const films_module: Module<any, any> = {
                     throw Error(response.statusText)
                 }
                 const data = await response.json()
+                console.log(data);
                 commit('setFilms', data.results)
             } catch (error) {
                 console.log('NO MORE RESULTS TO DISPLAY')

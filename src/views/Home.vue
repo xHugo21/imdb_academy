@@ -104,6 +104,9 @@ export default defineComponent({
     },
 
     mounted() {
+        // Set trending results
+        this.$store.dispatch('films/fetchTrending');
+
         // Add infinite scroll using observer API
         const observer: any = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting && !this.view_trending) {
