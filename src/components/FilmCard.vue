@@ -8,6 +8,7 @@
 
         <router-link :to="'/imdb_academy/filminfo/' + film.id"
             ><img
+                v-on:error="loadDefaultImage($event)"
                 v-bind:class="['film', 'film__hover__' + hovering + '__' + isWandSelected]"
                 v-bind:alt="'Poster from ' + film.title"
                 v-bind:src="'https://image.tmdb.org/t/p/w500' + film.poster_path"
@@ -43,6 +44,7 @@ export default defineComponent({
         }
     },
     methods: {
+        // Toggles the hovering state
         toggleHover(): void {
             this.hovering = !this.hovering
         },
@@ -55,6 +57,11 @@ export default defineComponent({
                 this.$store.dispatch('films/removeFilm', this.film)
             }
             this.is_saved = !this.is_saved
+        },
+
+        // Loads default image if the film doesn't have a poster
+        loadDefaultImage(event: any): void {
+            event.target.src = '/src/assets/default-movie.png'
         }
     },
     mounted() {

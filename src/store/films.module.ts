@@ -158,8 +158,8 @@ export const films_module: Module<any, any> = {
             }
         },
 
-        async fetchSearchBar({ commit }) {
-            let url = 'https://api.themoviedb.org/3/discover/movie?api_key=9f772ff3aa5dfb8e963695d6c67ae338&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate'
+        async fetchSearchBar({ commit, rootGetters }) {
+            let url = "https://api.themoviedb.org/3/search/movie?api_key=9f772ff3aa5dfb8e963695d6c67ae338&query=" + rootGetters['search/getQuery'];
 
             // Catch errors when fetching url and display them
             try {
@@ -168,7 +168,6 @@ export const films_module: Module<any, any> = {
                     throw Error(response.statusText)
                 }
                 const data = await response.json()
-                console.log(data);
                 commit('setFilms', data.results)
             } catch (error) {
                 console.log('NO MORE RESULTS TO DISPLAY')
