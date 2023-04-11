@@ -3,25 +3,23 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
-    export default defineComponent({
-        props: {
-            type: {
-                type: String as () => string,
-                required: true
-            }
+export default defineComponent({
+    props: {
+        type: {
+            type: String as () => string,
+            required: true
         }
-    })
+    }
+})
 </script>
 
 <style scoped lang="scss">
 .filters__div__label {
-            font-weight: 700;
-            color: #99aabb;
-            margin-right: 5px;
-            align-self: center;
-        }
-
-        
+    font-weight: 700;
+    color: #99aabb;
+    margin-right: 5px;
+    align-self: center;
+}
 </style>

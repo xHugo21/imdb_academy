@@ -2,7 +2,12 @@
 
 <template>
     <div v-if="full_size_poster" v-on:click="toggleFullSizePoster($event)" class="fullSizePoster">
-        <img class="fullSizePoster__image" :src="'https://image.tmdb.org/t/p/w500' + getFilm.poster_path" alt="poster" />
+        <img
+            v-on:error="loadDefaultImage($event)"
+            class="fullSizePoster__image"
+            :src="'https://image.tmdb.org/t/p/w500' + getFilm.poster_path"
+            alt="poster"
+        />
     </div>
     <header>
         <router-link to="/imdb_academy/">
@@ -36,6 +41,7 @@
         <div class="right">
             <div class="right__div">
                 <img
+                    v-on:error="loadDefaultImage($event)"
                     class="right__image"
                     v-on:click="toggleFullSizePoster($event)"
                     :src="'https://image.tmdb.org/t/p/w500' + getFilm.poster_path"
@@ -131,6 +137,11 @@ export default defineComponent({
                 this.$store.dispatch('films/removeFilm', this.getFilm)
             }
             this.is_saved = !this.is_saved
+        },
+
+        // Loads default image if the film doesn't have a poster
+        loadDefaultImage(event: any): void {
+            event.target.src = '/src/assets/default-movie.png'
         }
     },
     mounted() {
@@ -163,7 +174,7 @@ export default defineComponent({
                 title: '',
                 video: false,
                 vote_average: 0,
-                vote_count: 0,
+                vote_count: 0
             }
         }
     }

@@ -63,7 +63,7 @@ export default defineComponent({
     },
     data() {
         return {
-            view_trending: true as boolean,
+            view_trending: true as boolean
         }
     },
 
@@ -107,7 +107,7 @@ export default defineComponent({
 
     mounted() {
         // Set trending results
-        this.$store.dispatch('films/fetchTrending');
+        this.$store.dispatch('films/fetchTrending')
 
         // Add infinite scroll using observer API
         const observer: any = new IntersectionObserver((entries) => {

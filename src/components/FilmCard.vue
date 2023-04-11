@@ -3,7 +3,9 @@
 <template>
     <div v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover" class="film__card">
         <div class="div__hovering__name" v-if="hovering">
-            <p v-bind:class="['div__hovering__name__p' + '__' + isWandSelected]">{{ film.title }}</p>
+            <p v-bind:class="['div__hovering__name__p' + '__' + isWandSelected]">
+                {{ film.title }}
+            </p>
         </div>
 
         <router-link :to="'/imdb_academy/filminfo/' + film.id"
@@ -130,7 +132,6 @@ export default defineComponent({
         font-weight: 600;
         margin: 2% 2% 2% 2%;
         text-align: center;
-        
     }
     .div__hovering__name__p__false:link {
         text-decoration: none;

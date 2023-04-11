@@ -18,11 +18,10 @@ export default defineComponent({
             let query = target.value
 
             this.$store.commit('search/setQuery', query)
-            if (query===""){
-                this.$store.dispatch('films/fetchTrending');
-            }
-            else{
-                this.$store.dispatch('films/fetchSearchBar');
+            if (query === '') {
+                this.$store.dispatch('films/fetchTrending')
+            } else {
+                this.$store.dispatch('films/fetchSearchBar')
             }
         }
     }

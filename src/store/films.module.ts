@@ -4,8 +4,8 @@ import type { Film } from '@/types'
 
 declare module '@vue/runtime-core' {
     interface State {
-        films: Array<Film>,
-        total_results: number,
+        films: Array<Film>
+        total_results: number
         saved_films: Array<Film>
     }
 
@@ -146,7 +146,7 @@ export const films_module: Module<any, any> = {
             films = films.filter((f: { id: number }) => f.id !== film.id)
             commit('setSavedFilms', films)
         },
-        
+
         async fetchTrending({ commit }) {
             let url =
                 'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
@@ -165,7 +165,9 @@ export const films_module: Module<any, any> = {
         },
 
         async fetchSearchBar({ commit, rootGetters }) {
-            let url = "https://api.themoviedb.org/3/search/movie?api_key=9f772ff3aa5dfb8e963695d6c67ae338&query=" + rootGetters['search/getQuery'];
+            let url =
+                'https://api.themoviedb.org/3/search/movie?api_key=9f772ff3aa5dfb8e963695d6c67ae338&query=' +
+                rootGetters['search/getQuery']
 
             // Catch errors when fetching url and display them
             try {
@@ -174,7 +176,7 @@ export const films_module: Module<any, any> = {
                     throw Error(response.statusText)
                 }
                 const data = await response.json()
-                commit('setTotalResults', data.total_results);
+                commit('setTotalResults', data.total_results)
                 commit('setFilms', data.results)
             } catch (error) {
                 console.log('NO MORE RESULTS TO DISPLAY')

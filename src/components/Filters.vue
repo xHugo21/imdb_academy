@@ -20,17 +20,41 @@
         <div class="filters" v-if="show_filters">
             <div class="filters__div">
                 <LabelFilter v-bind:type="'Release Year'"></LabelFilter>
-                <RangeFilter v-bind:ids="['yearmin', 'yearmax']" v-bind:output_id="'yearvalue'" v-bind:min="1900" v-bind:max="2023" v-bind:initial_values="[1900, 2023]"></RangeFilter>
+                <RangeFilter
+                    v-bind:ids="['yearmin', 'yearmax']"
+                    v-bind:output_id="'yearvalue'"
+                    v-bind:min="1900"
+                    v-bind:max="2023"
+                    v-bind:initial_values="[1900, 2023]"
+                ></RangeFilter>
             </div>
 
             <div class="filters__div">
-                <LabelFilter v-bind:type="'Duration'"></LabelFilter>
-                <RangeFilter v-bind:ids="['duration']" v-bind:output_id="'durationvalue'" v-bind:min="0" v-bind:max="300" v-bind:initial_values="[300]"></RangeFilter>
+                <LabelFilter v-bind:type="'Max Duration'"></LabelFilter>
+                <RangeFilter
+                    v-bind:ids="['duration']"
+                    v-bind:output_id="'durationvalue'"
+                    v-bind:min="0"
+                    v-bind:max="300"
+                    v-bind:initial_values="[300]"
+                ></RangeFilter>
             </div>
 
             <div class="filters__div">
-                <LabelFilter v-bind:type="'Genre'"></LabelFilter>
-                <SelectFilter v-bind:options="['Drama', 'Comedy', 'Action']"></SelectFilter>
+                <LabelFilter v-bind:type="'Genre Selection'"></LabelFilter>
+                <SelectFilter
+                    v-bind:options="[
+                        'Action',
+                        'Comedy',
+                        'Drama',
+                        'Fantasy',
+                        'Horror',
+                        'Mystery',
+                        'Romance',
+                        'Thriller',
+                        'Western'
+                    ]"
+                ></SelectFilter>
             </div>
 
             <div class="filters__div">
@@ -63,8 +87,6 @@ export default defineComponent({
         toggleFilters(): void {
             this.show_filters = !this.show_filters
         }
-        
-        
     }
 })
 </script>
