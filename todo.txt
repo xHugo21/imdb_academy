@@ -6,8 +6,6 @@
 - Style range sliders selected zone
 - Filters sliderMin and slider Max needed?
 - Change cursor when wand selected?
-- Merge DoubleRangeFilter and RangeFilter into one
-- Make each label of filters a single component?
 - Include search for director and actor inside main search bar 
 - Change filminfo based on available data
 - loadMoreResults when search is done (each api request of 20 results?)

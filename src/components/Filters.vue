@@ -20,12 +20,12 @@
         <div class="filters" v-if="show_filters">
             <div class="filters__div">
                 <LabelFilter v-bind:type="'Release Year'"></LabelFilter>
-                <DoubleRangeFilter v-bind:id1="'yearmin'" v-bind:id2="'yearmax'" v-bind:min="1900" v-bind:max="2023"></DoubleRangeFilter>
+                <RangeFilter v-bind:ids="['yearmin', 'yearmax']" v-bind:output_id="'yearvalue'" v-bind:min="1900" v-bind:max="2023" v-bind:initial_values="[1900, 2023]"></RangeFilter>
             </div>
 
             <div class="filters__div">
                 <LabelFilter v-bind:type="'Duration'"></LabelFilter>
-                <RangeFilter v-bind:id="'duration'" v-bind:min="0" v-bind:max="300"></RangeFilter>
+                <RangeFilter v-bind:ids="['duration']" v-bind:output_id="'durationvalue'" v-bind:min="0" v-bind:max="300" v-bind:initial_values="[300]"></RangeFilter>
             </div>
 
             <div class="filters__div">
@@ -44,14 +44,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import LabelFilter from '@/components/LabelFilter.vue'
-import DoubleRangeFilter from '@/components/DoubleRangeFilter.vue'
 import RangeFilter from '@/components/RangeFilter.vue'
 import SelectFilter from '@/components/SelectFilter.vue'
 
 export default defineComponent({
     components: {
         LabelFilter,
-        DoubleRangeFilter,
         RangeFilter,
         SelectFilter
     },

@@ -1,15 +1,8 @@
 <template>
     <div class="range-slider">
-        <input
-            v-on:change="updateDurationFilter"
-            :id="id"
-            type="range"
-            :min="min"
-            :max="max"
-            step="1"
-        />
+        <input v-for="id in ids" v-on:change="updateRangeFilter" :id="id" type="range" :min="min" :max="max" step="1"/>
     </div>
-    <output class="filters__div__output" :id="'value' + id"></output>
+    <output class="filters__div__output" :id="output_id"></output>
 </template>
 
 <script lang="ts">
@@ -17,7 +10,11 @@
 
     export default defineComponent({
         props: {
-            id: {
+            ids: {
+                type: Array as () => string[],
+                required: true
+            },
+            output_id: {
                 type: String as () => string,
                 required: true
             },
@@ -29,15 +26,45 @@
                 type: Number as () => number,
                 required: true
             },
+            initial_values: {
+                type: Array as () => number[],
+                required: true
+            }
         },
+
+        
     
         methods: {
-            updateDurationFilter() {
-                const slider = document.getElementById(this.id) as HTMLInputElement
-                const output = document.getElementById('value' + this.id) as HTMLInputElement
-                output.innerHTML = slider.value
+            updateRangeFilter(){
+                var inputs = []
+                const output = document.getElementById(this.output_id) as HTMLInputElement
+                output.innerHTML = "";
+
+                // Loop that cycles through each id
+                for (let i = 0; i < this.ids.length; i++) {
+                    // Append the input element to the inputs array
+                    inputs[i] = document.getElementById(this.ids[i]) as HTMLInputElement;
+                    output.innerHTML += inputs[i].value;
+                    if (i != this.ids.length - 1) {
+                        output.innerHTML += " - ";
+                    }
+
+                }
+            },
+            
+        },
+
+        mounted(){
+            // Set the initial values of the inputs
+            for (let i = 0; i < this.ids.length; i++) {
+                const input = document.getElementById(this.ids[i]) as HTMLInputElement;
+                input.value = this.initial_values[i].toString();
             }
+            // Update the output
+            this.updateRangeFilter();
         }
+
+        
     })
 </script>
 
