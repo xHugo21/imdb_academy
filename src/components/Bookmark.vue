@@ -1,6 +1,5 @@
-<!--Component that defines a default H1 title tag with a custom style-->
+<!--Component that defines the bookmark icon and functionality to save films-->
 <template>
-    
     <img  v-on:click="saveRemoveFilm()"
                 v-if="!is_saved"
                 src="../assets/bookmark.svg"
@@ -21,7 +20,7 @@ export default defineComponent({
         },
         
     },
-    
+
     data() {
         return {
             is_saved: false as boolean

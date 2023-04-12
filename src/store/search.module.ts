@@ -8,7 +8,6 @@ declare module '@vue/runtime-core' {
         year_min: number,
         year_max: number,
         duration: number,
-        
         wand_selected: boolean
     }
 
