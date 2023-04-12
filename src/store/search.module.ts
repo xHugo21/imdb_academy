@@ -3,7 +3,8 @@ import type { State } from 'vue'
 
 declare module '@vue/runtime-core' {
     interface State {
-        query: string
+        query: string,
+        url: string,
         wand_selected: boolean
     }
 
@@ -22,14 +23,25 @@ export const search_module: Module<any, any> = {
         setQuery(state: State, query: string) {
             state.query = query
         },
+        setUrl(state: State, url: string) {
+            state.url = url
+        },
         setWandSelected(state: State, wand_selected: boolean) {
             state.wand_selected = wand_selected
         }
     },
-    actions: {},
+    actions: {
+        updateSearchBar({ commit }, query: string) {
+            commit('setQuery', query);
+            commit('setUrl', 'https://api.themoviedb.org/3/search/movie?api_key=9f772ff3aa5dfb8e963695d6c67ae338&query=' + query);
+        }
+    },
     getters: {
         getQuery(state: State): string {
             return state.query
+        },
+        getUrl(state: State): string {
+            return state.url
         },
         getWandSelected(state: State): boolean {
             return state.wand_selected

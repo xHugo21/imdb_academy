@@ -15,9 +15,9 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     methods: {
         search(target: any): void {
-            let query = target.value
+            const query = target.value;
 
-            this.$store.commit('search/setQuery', query)
+            this.$store.dispatch('search/updateSearchBar', query)
             if (query === '') {
                 this.$store.dispatch('films/fetchTrending')
             } else {

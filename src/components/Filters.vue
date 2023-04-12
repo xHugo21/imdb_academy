@@ -43,6 +43,7 @@
             <div class="filters__div">
                 <LabelFilter v-bind:type="'Genre Selection'"></LabelFilter>
                 <SelectFilter
+                    v-bind:id="'Genre'"
                     v-bind:options="[
                         'Action',
                         'Comedy',
@@ -59,7 +60,7 @@
 
             <div class="filters__div">
                 <LabelFilter v-bind:type="'Rating'"></LabelFilter>
-                <SelectFilter v-bind:options="['+1', '+2', '+3', '+4']"></SelectFilter>
+                <SelectFilter v-bind:id="'Rating'" v-bind:options="['+1', '+2', '+3', '+4']"></SelectFilter>
             </div>
         </div>
     </Transition>

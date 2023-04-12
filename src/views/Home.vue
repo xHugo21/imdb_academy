@@ -7,7 +7,7 @@
         /></router-link>
         <SearchBar v-on:input="setViewMode()" />
         <img
-            v-if="!wandSelected"
+            v-if="!isWandSelected"
             v-on:click="setWandMode"
             class="wand_icon"
             src="/src/assets/wand.svg"
@@ -38,6 +38,8 @@
             <FilmsGrid>
                 <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
             </FilmsGrid>
+        </div>
+        <div class="observer_trigger">
         </div>
     </main>
 </template>
@@ -123,7 +125,7 @@ export default defineComponent({
         totalResults(): number {
             return this.$store.getters['films/getTotalResults']
         },
-        wandSelected(): boolean {
+        isWandSelected(): boolean {
             return this.$store.getters['search/getWandSelected']
         }
     },
@@ -134,12 +136,14 @@ export default defineComponent({
 
         // Add infinite scroll using observer API
         const observer: any = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && !this.view_trending) {
-                //this.loadMoreResults();
+            if (!this.view_trending){
+                if (entries[0].isIntersecting && !this.view_trending) {
+                    this.$store.dispatch('films/loadMoreResults')
+                }
             }
         })
         // Call observer through footer element. Each time the footer is in the viewport,  the loadMoreResults() function is called
-        //observer.observe(document.querySelector('footer'));
+        observer.observe(document.getElementsByClassName("observer_trigger")[0]);
     }
 })
 </script>

@@ -55,6 +55,14 @@ export default defineComponent({
                     output.innerHTML += ' - '
                 }
             }
+            this.applyRangeFilter(inputs);
+        },
+
+        applyRangeFilter(inputs:any){
+            // Cycle through input and print its value
+            for (let i = 0; i < inputs.length; i++) {
+                console.log(this.output_id, inputs[i].value);
+            }
         }
     },
 

@@ -8,7 +8,7 @@
             </p>
         </div>
 
-        <router-link :to="'/imdb_academy/filminfo/' + film.id"
+        <router-link :to="'/imdb_academy/filminfo/' + film.id" v-bind:class="{ 'disabled_link' : isWandSelected }"
             ><img
                 v-on:error="loadDefaultImage($event)"
                 v-bind:class="['film', 'film__hover__' + hovering + '__' + isWandSelected]"
@@ -89,6 +89,10 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     transition: transform 0.3s;
+
+    .disabled_link {
+        pointer-events: none;
+    }
 }
 .film {
     width: 200px;

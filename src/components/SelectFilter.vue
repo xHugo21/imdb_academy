@@ -1,5 +1,5 @@
 <template>
-    <select class="filters__div__select">
+    <select v-on:change="applySelectFilter($event)" class="filters__div__select">
         <option v-for="option in options" v-bind:value="option">{{ option }}</option>
     </select>
 </template>
@@ -9,9 +9,20 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
+        id: {
+            type: String as () => string,
+            required: true
+        },
         options: {
             type: Array as () => string[],
             required: true
+        }
+    },
+
+    methods: {
+        applySelectFilter(event:any) {
+            const value = event.target.value;
+            console.log(this.id, value);
         }
     }
 })
