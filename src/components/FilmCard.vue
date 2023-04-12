@@ -16,23 +16,21 @@
                 v-bind:src="'https://image.tmdb.org/t/p/w500' + film.poster_path"
         /></router-link>
 
-        <div v-on:click="saveRemoveFilm()" class="div__hovering__bookmark" v-if="hovering">
-            <img
-                v-if="!is_saved"
-                src="../assets/bookmark.svg"
-                alt="Bookmark Icon"
-                class="bookmark"
-            />
-            <img v-else src="../assets/bookmark_filled.svg" class="bookmark" />
+        <div v-if="hovering" class="div__hovering__bookmark">
+            <Bookmark v-bind:film="film"></Bookmark>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Bookmark from '@/components/Bookmark.vue'
 import type { Film } from '@/types'
 
 export default defineComponent({
+    components: {
+        Bookmark
+    },
     props: {
         film: {
             type: Object as () => Film,
@@ -42,7 +40,6 @@ export default defineComponent({
     data() {
         return {
             hovering: false as boolean,
-            is_saved: false as boolean
         }
     },
     methods: {
@@ -51,30 +48,12 @@ export default defineComponent({
             this.hovering = !this.hovering
         },
 
-        // Saves or removes the film from the saved films
-        saveRemoveFilm(): void {
-            if (!this.is_saved) {
-                this.$store.dispatch('films/saveFilm', this.film)
-            } else {
-                this.$store.dispatch('films/removeFilm', this.film)
-            }
-            this.is_saved = !this.is_saved
-        },
-
         // Loads default image if the film doesn't have a poster
         loadDefaultImage(event: any): void {
             event.target.src = '/src/assets/default-movie.png'
         }
     },
-    mounted() {
-        // Checks if film is saved on load
-        for (let i = 0; i < this.$store.getters['films/getSavedFilms'].length; i++) {
-            if (this.$store.getters['films/getSavedFilms'][i].id === this.film.id) {
-                this.is_saved = true
-            }
-        }
-    },
-
+    
     computed: {
         isWandSelected() {
             return this.$store.getters['search/getWandSelected']
@@ -165,12 +144,6 @@ export default defineComponent({
     align-items: center;
     width: 70px;
     height: 50px;
-    .bookmark {
-        width: 30px;
-        height: 30px;
-        // Align to the center of the div
-        display: flex;
-        justify-content: center;
-    }
 }
+
 </style>

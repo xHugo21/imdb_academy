@@ -51,7 +51,8 @@
             </div>
 
             <div class="right__div">
-                <img
+                <Bookmark v-bind:film="getFilm"></Bookmark>
+                <!--<img
                     v-if="!is_saved"
                     v-on:click="saveRemoveFilm()"
                     class="right__div__bookmark"
@@ -64,7 +65,7 @@
                     class="right__div__bookmark"
                     src="../assets/bookmark_filled.svg"
                     alt="bookmark"
-                />
+                />-->
             </div>
 
             <div class="right__div">
@@ -104,6 +105,7 @@ import { defineComponent } from 'vue'
 
 import SearchBar from '@/components/SearchBar.vue'
 import H1Title from '@/components/H1Title.vue'
+import Bookmark from '@/components/Bookmark.vue'
 
 import type { Film } from '@/types'
 
@@ -116,7 +118,8 @@ export default defineComponent({
     },
     components: {
         SearchBar,
-        H1Title
+        H1Title,
+        Bookmark
     },
     data() {
         return {
