@@ -7,7 +7,7 @@
             type="range"
             :min="min"
             :max="max"
-            step="1"
+            :step="step"
         />
     </div>
     <output class="filters__div__output" :id="output_id"></output>
@@ -37,6 +37,11 @@ export default defineComponent({
         initial_values: {
             type: Array as () => number[],
             required: true
+        },
+        step: {
+            type: Number as () => number,
+            required: false,
+            default: 1
         }
     },
 

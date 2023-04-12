@@ -6,7 +6,6 @@
 - Style range sliders selected zone
 - Change cursor when wand selected?
 - Include search for director and actor inside main search bar 
-- Make bookmark a component
 - Fix filminfo grid when description is short
 - Fix get image null error
 - No more results message when loadmoreresults fails

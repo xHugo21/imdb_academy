@@ -59,8 +59,37 @@
             </div>
 
             <div class="filters__div">
-                <LabelFilter v-bind:type="'Rating'"></LabelFilter>
-                <SelectFilter v-bind:id="'Rating'" v-bind:options="['+1', '+2', '+3', '+4']"></SelectFilter>
+                <LabelFilter v-bind:type="'Country'"></LabelFilter>
+                <SelectFilter
+                    v-bind:id="'Country'"
+                    v-bind:options="[
+                        'USA',
+                        'UK',
+                        'France',
+                        'Germany',
+                        'Italy',
+                        'Spain',
+                        'Japan',
+                        'China',
+                        'India',
+                        'Canada',
+                        'Australia',
+                        'Mexico',
+                        'Russia',
+                    ]"
+                ></SelectFilter>
+            </div>
+
+            <div class="filters__div">
+                <LabelFilter v-bind:type="'Min Rating'"></LabelFilter>
+                <RangeFilter
+                    v-bind:ids="['rating']"
+                    v-bind:output_id="'ratingvalue'"
+                    v-bind:min="0"
+                    v-bind:max="10"
+                    v-bind:initial_values="[0]"
+                    v-bind:step="0.1"
+                ></RangeFilter>
             </div>
         </div>
     </Transition>
