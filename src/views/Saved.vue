@@ -11,6 +11,7 @@
         <FilmsGrid>
             <FilmCard v-for="film in savedFilms" v-bind:film="film" v-bind:key="film.id"></FilmCard>
         </FilmsGrid>
+        <TopButton></TopButton>
     </main>
 </template>
 
@@ -19,13 +20,15 @@ import { defineComponent } from 'vue'
 import H1Title from '@/components/H1Title.vue'
 import FilmsGrid from '@/components/FilmsGrid.vue'
 import FilmCard from '@/components/FilmCard.vue'
+import TopButton from '@/components/TopButton.vue'
 import type { Film } from '@/types'
 
 export default defineComponent({
     components: {
         H1Title,
         FilmsGrid,
-        FilmCard
+        FilmCard,
+        TopButton
     },
     computed: {
         savedFilms(): Array<Film> {

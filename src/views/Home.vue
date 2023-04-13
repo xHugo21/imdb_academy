@@ -36,18 +36,9 @@
             <FilmsGrid>
                 <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
             </FilmsGrid>
-        <!--</div>-->
-        <!--<div v-else class="searchresults">
-            <H1Title
-                class="title__component"
-                :title="'Found ' + totalResults + ' search results'"
-            ></H1Title>
-            <FilmsGrid>
-                <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
-            </FilmsGrid>
-        </div>-->
         <div class="observer_trigger">
         </div>
+        <TopButton></TopButton>
     </main>
 </template>
 
@@ -59,6 +50,7 @@ import FilmsGrid from '@/components/FilmsGrid.vue'
 import FilmCard from '@/components/FilmCard.vue'
 import H1Title from '@/components/H1Title.vue'
 import Filters from '@/components/Filters.vue'
+import TopButton from '@/components/TopButton.vue'
 
 import type { Film } from '@/types'
 
@@ -68,7 +60,8 @@ export default defineComponent({
         FilmsGrid,
         FilmCard,
         H1Title,
-        Filters
+        Filters,
+        TopButton
     },
     data() {
         return {
@@ -101,7 +94,7 @@ export default defineComponent({
                 'search/setWandSelected',
                 !this.$store.getters['search/getWandSelected']
             )
-        },
+        }
     },
     
 

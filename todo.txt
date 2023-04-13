@@ -8,3 +8,4 @@
 - Include search for director and actor inside main search bar 
 - Fix get image null error
 - No more results message when loadmoreresults fails
+- Hide topbutton until user is down on the page
