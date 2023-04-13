@@ -19,7 +19,7 @@ export default defineComponent({
 
             this.$store.dispatch('search/updateSearchBar', query)
             if (query === '') {
-                this.$store.dispatch('films/fetchTrending')
+                this.$store.dispatch('films/fetchTrendingDaily')
             } else {
                 this.$store.dispatch('films/fetchSearchBar')
             }

@@ -5,7 +5,7 @@
         <router-link class="router_link" to="/imdb_academy/saved"
             ><img class="saved_icon" src="/src/assets/bookmark.svg" alt="bookmark"
         /></router-link>
-        <SearchBar v-on:input="setViewMode()" />
+        <SearchBar v-on:input="setViewSearch" />
         <img
             v-if="!isWandSelected"
             v-on:click="setWandMode"
@@ -24,13 +24,20 @@
     </header>
 
     <main>
-        <div v-if="view_trending" class="trending">
-            <H1Title class="title__component" title="Trending"></H1Title>
+        <!--<div v-if="view_trending" class="trending">-->
+            <H1Title v-if="view === 'trendingdaily'" v-on:click="setViewTrending" class="title__component" title="Trending Daily"></H1Title>
+            <H1Title v-else-if="view === 'trendingweekly'" v-on:click="setViewTrending" class="title__component" title="Trending Weekly"></H1Title>
+            <H1Title
+                v-else-if="view === 'searchresults'"
+                class="title__component"
+                :title="'Found ' + totalResults + ' search results'"
+            ></H1Title>
+
             <FilmsGrid>
                 <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
             </FilmsGrid>
-        </div>
-        <div v-else class="searchresults">
+        <!--</div>-->
+        <!--<div v-else class="searchresults">
             <H1Title
                 class="title__component"
                 :title="'Found ' + totalResults + ' search results'"
@@ -38,7 +45,7 @@
             <FilmsGrid>
                 <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
             </FilmsGrid>
-        </div>
+        </div>-->
         <div class="observer_trigger">
         </div>
     </main>
@@ -65,27 +72,29 @@ export default defineComponent({
     },
     data() {
         return {
-            view_trending: true as boolean
+            view: 'trendingdaily' as string
         }
     },
 
     methods: {
         // Changes view mode depending on the query. If query is empty it shows trending films, otherwise it shows search results
-        setViewMode(): void {
+        setViewSearch(): void {
             if (this.$store.getters['search/getQuery'] === '') {
-                this.view_trending = true
+                this.view = 'trendingdaily'
             } else {
-                this.view_trending = false
-                //this.countResults()
+                this.view = 'searchresults'
             }
         },
-        // Counts the number of search results
-        /*countResults(): void {
-            this.results_count = 0
-            for (let i = 0; i < this.films.length; i++) {
-                this.results_count++
+
+        setViewTrending():void {
+            if (this.view === 'trendingdaily') {
+                this.view = 'trendingweekly'
+                this.$store.dispatch('films/fetchTrendingWeekly')
+            } else if (this.view === 'trendingweekly') {
+                this.view = 'trendingdaily'
+                this.$store.dispatch('films/fetchTrendingDaily')
             }
-        },*/
+        },
 
         setWandMode(): void {
             this.$store.commit(
@@ -93,28 +102,6 @@ export default defineComponent({
                 !this.$store.getters['search/getWandSelected']
             )
         },
-
-        /*async loadMoreResults():Promise<void> {
-            var url;
-            // Depending on the view mode, load more characters or episodes and catch errors
-            
-                url = this.$store.getters['characters/getDataCharacters'].info.next;
-
-                try {
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-                    const data = await response.json();
-                    this.$store.commit('characters/setDataCharacters', data);
-                    let aux = this.$store.getters['characters/getCharacters'];
-                    aux = aux.concat(data.results);
-                    this.$store.commit('characters/setCharacters', aux);
-                } catch (error) {
-                    console.log('NO MORE RESULTS TO DISPLAY');
-                }
-            
-            }*/
     },
     
 
@@ -132,14 +119,12 @@ export default defineComponent({
 
     mounted() {
         // Set trending results
-        this.$store.dispatch('films/fetchTrending')
+        this.$store.dispatch('films/fetchTrendingDaily')
 
         // Add infinite scroll using observer API
         const observer: any = new IntersectionObserver((entries) => {
-            if (!this.view_trending){
-                if (entries[0].isIntersecting && !this.view_trending) {
-                    this.$store.dispatch('films/loadMoreResults')
-                }
+            if (entries[0].isIntersecting && this.view === 'searchresults') {
+                this.$store.dispatch('films/loadMoreResults')
             }
         })
         // Call observer through footer element. Each time the footer is in the viewport,  the loadMoreResults() function is called
@@ -180,6 +165,7 @@ header {
 main {
     .title__component {
         margin-left: 10%;
+        cursor: pointer;
     }
 }
 

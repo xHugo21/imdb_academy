@@ -56,9 +56,27 @@ export const films_module: Module<any, any> = {
             commit('setSavedFilms', films)
         },
 
-        async fetchTrending({ commit }) {
+        async fetchTrendingDaily({ commit }) {
             let url =
                 'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
+
+            // Catch errors when fetching url and display them
+            try {
+                const response = await fetch(url)
+                if (!response.ok) {
+                    throw Error(response.statusText)
+                }
+                const data = await response.json()
+                console.log(data);
+                commit('setFilms', data.results)
+            } catch (error) {
+                console.log('NO MORE RESULTS TO DISPLAY')
+            }
+        },
+
+        async fetchTrendingWeekly({ commit }) {
+            let url =
+                'https://api.themoviedb.org/3/trending/movie/week?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
 
             // Catch errors when fetching url and display them
             try {

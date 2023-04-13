@@ -2,7 +2,8 @@
     <div class="range-slider">
         <input
             v-for="id in ids"
-            v-on:change="updateRangeFilter"
+            
+            v-on:mousemove="updateRangeFilter"
             :id="id"
             type="range"
             :min="min"
@@ -46,7 +47,7 @@ export default defineComponent({
     },
 
     methods: {
-        updateRangeFilter() {
+        /*updateRangeFilter() {
             var inputs = []
             const output = document.getElementById(this.output_id) as HTMLInputElement
             output.innerHTML = ''
@@ -60,6 +61,39 @@ export default defineComponent({
                     output.innerHTML += ' - '
                 }
             }
+            this.applyRangeFilter(inputs);
+
+            
+        },*/
+
+        updateRangeFilter(){
+            var inputs = [];
+            const output = document.getElementById(this.output_id) as HTMLInputElement
+            output.innerHTML = ''
+
+            for (let i = 0; i < this.ids.length; i++) {
+                // Append the input element to the inputs array
+                inputs[i] = document.getElementById(this.ids[i]) as HTMLInputElement;
+
+                var val = (parseInt(inputs[i].value) - this.min) / (this.max - this.min);
+                val *= 100; // Convert to percentage
+
+                // Modify css input type range class
+                inputs[i].style.backgroundImage = '-webkit-gradient(linear, left top, right top, ' +
+                    'color-stop(' + val + '%, purple), ' +
+                    'color-stop(' + val + '%, #434c54)' +
+                    ')';
+
+                inputs[i].style.backgroundImage = '-moz-linear-gradient(left center, purple 0%, purple ' + val + '%, #434c54 ' + val + '%, #434c54 100%)';
+
+                output.innerHTML += inputs[i].value
+
+                if (i != this.ids.length - 1) {
+                    output.innerHTML += ' - '
+                }
+                
+            }
+
             this.applyRangeFilter(inputs);
         },
 
@@ -97,10 +131,11 @@ export default defineComponent({
     bottom: 0;
 }
 
-input[type='range'] {
+/*input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
+    
 }
 
 input[type='range']::-webkit-slider-runnable-track {
@@ -109,6 +144,7 @@ input[type='range']::-webkit-slider-runnable-track {
     cursor: pointer;
     background: #434c54;
 }
+
 
 input[type='range']::-webkit-slider-thumb {
     z-index: 2;
@@ -122,6 +158,54 @@ input[type='range']::-webkit-slider-thumb {
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -7px;
+}*/
+
+input[type=range] {
+
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-apperance: none;
+    border-radius: 6px;
+    height: 6px;
+    
+    background-image: -webkit-gradient(linear,
+        left top, 
+        right top, 
+        color-stop(0%, purple),
+        color-stop(50%, #434c54));
+    
+    background-image: -moz-linear-gradient(left center,
+        purple 0%, purple 50%,
+        #434c54 50%, #434c54 100%);
+}
+
+input[type="range"]::-moz-range-track {
+    border: none;
+    background: none;
+    outline: none;
+}
+
+input[type=range]:focus {
+    outline: none;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background-color: purple;
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    z-index: 100;
+}
+
+input[type=range]::-moz-range-thumb {
+    -moz-appearance: none !important;
+    background-color: purple;
+    border: none;
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
 }
 
 .filters__div__output {
