@@ -52,20 +52,17 @@
 
             <div class="right__div">
                 <Bookmark v-bind:film="getFilm"></Bookmark>
-                <!--<img
-                    v-if="!is_saved"
-                    v-on:click="saveRemoveFilm()"
-                    class="right__div__bookmark"
-                    src="../assets/bookmark.svg"
-                    alt="bookmark"
-                />
-                <img
-                    v-else
-                    v-on:click="saveRemoveFilm()"
-                    class="right__div__bookmark"
-                    src="../assets/bookmark_filled.svg"
-                    alt="bookmark"
-                />-->
+            </div>
+
+            <div class="right_div">
+                <H1Title class="right__title" title="Trailer"></H1Title>
+                <div class="right__wheretowatch">
+                    <div class="right__trailer__div">
+                        <a href="https://www.youtube.com/"
+                            ><img src="../assets/youtube.png" alt="youtube"
+                        /></a>
+                    </div>
+                </div>
             </div>
 
             <div class="right__div">
@@ -88,6 +85,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="right__div">
                 <H1Title class="right__title" title="Ratings"></H1Title>
@@ -186,6 +184,22 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+
+/*.zoom-fade-enter-active {
+    transition: opacity 3s ease;
+}
+
+.zoom-fade-leave-active {
+    transition: opacity 3s ease;
+}
+
+.zoom-fade-enter-from {
+    opacity: 0;
+}
+.zoom-fade-leave-to {
+    opacity: 0;
+}*/
+
 .fullSizePoster {
     width: 100%;
     height: 100%;
@@ -301,6 +315,18 @@ header {
             gap: 5%;
             width: 60%;
             margin: 0 auto;
+            margin-bottom: 3%;
+
+            .right__trailer__div {
+                color: #99aabb5a;
+                border-radius: 15px;
+                width: 35%;
+                img {
+                    border-radius: 15px;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
 
             .right__wheretowatch__div {
                 color: #99aabb5a;
