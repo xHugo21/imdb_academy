@@ -11,7 +11,7 @@
         <router-link :to="'/imdb_academy/filminfo/' + film.id" v-bind:class="{ 'disabled_link' : isWandSelected }"
             ><img
                 v-on:error="loadDefaultImage($event)"
-                v-bind:class="['film', 'film__hover__' + hovering + '__' + isWandSelected]"
+                v-bind:class="['film', 'film__hover__' + hovering + '__' + isWandSelected, {'light_mode': getColorMode==='light'}]"
                 v-bind:alt="'Poster from ' + film.title"
                 v-bind:src="'https://image.tmdb.org/t/p/w500' + film.poster_path"
         /></router-link>
@@ -55,8 +55,11 @@ export default defineComponent({
     },
     
     computed: {
-        isWandSelected() {
+        isWandSelected():boolean {
             return this.$store.getters['search/getWandSelected']
+        },
+        getColorMode():string{
+            return this.$store.getters['search/getColorMode']
         }
     }
 })
@@ -78,6 +81,11 @@ export default defineComponent({
     height: 300px;
     border: 4px solid #99aabb5a;
     border-radius: 10px;
+    transition: border .5s ease;
+}
+
+.light_mode{
+    border: 4px solid black;
 }
 
 .film__card:hover {
@@ -145,5 +153,6 @@ export default defineComponent({
     width: 70px;
     height: 50px;
 }
+
 
 </style>

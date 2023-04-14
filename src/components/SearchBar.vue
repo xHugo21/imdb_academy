@@ -2,7 +2,7 @@
 <template>
     <input
         v-on:input="search($event.target)"
-        class="search_bar"
+        v-bind:class="['search_bar', {'light_mode': getColorMode==='light'}]"
         type="search"
         placeholder="Search"
         autofocus
@@ -24,6 +24,12 @@ export default defineComponent({
                 this.$store.dispatch('films/fetchSearchBar')
             }
         }
+    },
+
+    computed: {
+        getColorMode():string{
+            return this.$store.getters['search/getColorMode'];
+        }
     }
 })
 </script>
@@ -44,11 +50,18 @@ export default defineComponent({
     border: 2px solid rgba(0, 0, 0, 0);
     color: rgba(255, 255, 255, 0.717);
     font-weight: 700;
-    transition: 0.5s;
+    transition: all 0.5s ease;
 }
 
 .search_bar::placeholder {
     color: rgba(255, 255, 255, 0.717);
+}
+
+.light_mode {
+    border: 2px solid black;
+}
+.light_mode::placeholder {
+    color: black;
 }
 
 .search_bar:focus {

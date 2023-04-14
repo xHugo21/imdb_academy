@@ -6,6 +6,8 @@
             ><img class="saved_icon" src="/src/assets/bookmark.svg" alt="bookmark"
         /></router-link>
         <SearchBar v-on:input="setViewSearch" />
+        <img v-on:click="changeColorMode" class="color_icon" src="/src/assets/color_icon.svg" />
+
         <img
             v-if="!isWandSelected"
             v-on:click="setWandMode"
@@ -24,6 +26,7 @@
     </header>
 
     <main>
+            
         <!--<div v-if="view_trending" class="trending">-->
             <H1Title v-if="view === 'trendingdaily'" v-on:click="setViewTrending" class="title__component" title="Trending Daily"></H1Title>
             <H1Title v-else-if="view === 'trendingweekly'" v-on:click="setViewTrending" class="title__component" title="Trending Weekly"></H1Title>
@@ -94,6 +97,16 @@ export default defineComponent({
                 'search/setWandSelected',
                 !this.$store.getters['search/getWandSelected']
             )
+        },
+
+        changeColorMode():void {
+            if (this.$store.getters['search/getColorMode'] === 'dark'){
+                document.body.style.backgroundColor = 'white'
+                this.$store.commit('search/setColorMode', 'light')
+            } else {
+                document.body.style.backgroundColor = '#14181c'
+                this.$store.commit('search/setColorMode', 'dark')
+            }
         }
     },
     
@@ -135,9 +148,9 @@ header {
     height: 20%;
     display: grid;
     grid-template-areas:
-        'saved_icon search wand_icon filter_icon'
-        'filters filters filters filters';
-    grid-template-columns: 2fr 10fr 1fr 2fr;
+        'saved_icon search color_icon wand_icon filter_icon'
+        'filters filters filters filters filters';
+    grid-template-columns: 2fr 10fr 1fr 1fr 2fr;
 
     .router_link {
         grid-area: saved_icon;
@@ -149,9 +162,16 @@ header {
         }
     }
 
+    .color_icon {
+        grid-area: color_icon;
+        margin-left: 3vw;
+        margin-top: 5px;
+        cursor: pointer;
+        height: 30px;
+    }
+
     .wand_icon {
         grid-area: wand_icon;
-        // Move wand icon to the right
         margin-left: 3vw;
         cursor: pointer;
         width: 35px;

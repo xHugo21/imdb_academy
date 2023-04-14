@@ -18,23 +18,23 @@
         <div class="left">
             <div class="left__div">
                 <H1Title class="left__title" :title="getFilm.title"></H1Title>
-                <p class="left__text">
+                <p v-bind:class="['left__text', {'light_mode': getColorMode==='light'}]">
                     {{ getFilm.overview }}
                 </p>
             </div>
             <div class="left__div">
                 <H1Title class="left__title" title="Cast"></H1Title>
-                <p class="left__text">Director - Francis Ford Coppola</p>
-                <p class="left__text">Cast - Marlon Brando | Al Pacino</p>
-                <p class="left__text">Producer - Albert S. Ruddy</p>
+                <p v-bind:class="['left__text', {'light_mode': getColorMode==='light'}]">Director - Francis Ford Coppola</p>
+                <p v-bind:class="['left__text', {'light_mode': getColorMode==='light'}]">Cast - Marlon Brando | Al Pacino</p>
+                <p v-bind:class="['left__text', {'light_mode': getColorMode==='light'}]">Producer - Albert S. Ruddy</p>
             </div>
             <div class="left__div">
                 <H1Title class="left__title" title="Tags"></H1Title>
                 <div class="left__tags">
-                    <p class="left__tags__text">Release Date: {{ getFilm.release_date }}</p>
-                    <p class="left__tags__text">Original Language: {{ getFilm.original_language }}</p>
-                    <p class="left__tags__text">Popularity: {{ getFilm.popularity }}</p>
-                    <p class="left__tags__text">Genres: {{ getFilm.genre_ids }}</p>
+                    <p v-bind:class="['left__tags__text']">Release Date: {{ getFilm.release_date }}</p>
+                    <p v-bind:class="['left__tags__text']">Original Language: {{ getFilm.original_language }}</p>
+                    <p v-bind:class="['left__tags__text']">Popularity: {{ getFilm.popularity }}</p>
+                    <p v-bind:class="['left__tags__text']">Genres: {{ getFilm.genre_ids }}</p>
                 </div>
             </div>
         </div>
@@ -179,6 +179,10 @@ export default defineComponent({
                 vote_average: 0,
                 vote_count: 0
             }
+        },
+
+        getColorMode():string{
+            return this.$store.getters['search/getColorMode']
         }
     }
 })
@@ -243,6 +247,8 @@ header {
             color: #99aabb5a;
             text-align: justify;
         }
+
+        
         .left__tags {
             display: flex;
             flex-direction: row;
@@ -267,6 +273,9 @@ header {
             }
         }
     }
+
+      
+    
 
     @media screen and (max-width: 768px) {
         flex-direction: column;
@@ -365,5 +374,9 @@ header {
             }
         }
     }
+}
+
+.light_mode{
+    color: black;
 }
 </style>

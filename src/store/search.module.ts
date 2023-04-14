@@ -3,6 +3,7 @@ import type { State } from 'vue'
 
 declare module '@vue/runtime-core' {
     interface State {
+        color_mode: string,
         url: string,
         query: string,
         year_min: number,
@@ -19,10 +20,14 @@ declare module '@vue/runtime-core' {
 export const search_module: Module<any, any> = {
     namespaced: true,
     state: {
+        color_mode: 'dark',
         query: '',
         wand_selected: false
     },
     mutations: {
+        setColorMode(state: State, color_mode: string) {
+            state.color_mode = color_mode
+        },
         setUrl(state: State, url: string) {
             state.url = url
         },
@@ -44,6 +49,9 @@ export const search_module: Module<any, any> = {
         }
     },
     getters: {
+        getColorMode(state: State): string {
+            return state.color_mode
+        },
         getUrl(state: State): string {
             return state.url
         },

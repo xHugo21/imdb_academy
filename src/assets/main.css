@@ -8,6 +8,7 @@
 
 body {
     background: #14181c;
+    transition: background-color .5s ease;
 }
 
 body::-webkit-scrollbar {
