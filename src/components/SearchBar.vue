@@ -15,7 +15,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     methods: {
         search(target: any): void {
-            const query = target.value;
+            const query:string = target.value;
 
             this.$store.dispatch('search/updateSearchBar', query)
             if (query === '') {

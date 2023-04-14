@@ -1,9 +1,10 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
+/// <reference types="vitest" />
 export default defineConfig({
   base: '/imdb_academy/',
   plugins: [vue()],
@@ -11,5 +12,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  test: {
+    environment: 'jsdom'
+  },
 })

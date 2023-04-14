@@ -107,6 +107,9 @@ export default defineComponent({
         },
         isWandSelected(): boolean {
             return this.$store.getters['search/getWandSelected']
+        },
+        moreResults(): boolean {
+            return this.$store.getters['films/getMoreResults']
         }
     },
 
@@ -115,7 +118,7 @@ export default defineComponent({
         this.$store.dispatch('films/fetchTrendingDaily')
 
         // Add infinite scroll using observer API
-        const observer: any = new IntersectionObserver((entries) => {
+        const observer: IntersectionObserver = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting && this.view === 'searchresults') {
                 this.$store.dispatch('films/loadMoreResults')
             }

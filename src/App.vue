@@ -4,7 +4,8 @@
     <RouterView></RouterView>
     <footer>
         <h1>IMDb Project</h1>
-        <h2>Authors: Juan Manuel Manga and Hugo García Cuesta</h2>
+        <h2>Frontend fellow: Hugo García Cuesta</h2>
+        <h2>Backend fellow: Juan Manuel Manga</h2>
         <h2>All rights reserved</h2>
     </footer>
 </template>

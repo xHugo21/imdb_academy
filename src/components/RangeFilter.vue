@@ -66,16 +66,16 @@ export default defineComponent({
             
         },*/
 
-        updateRangeFilter(){
-            var inputs = [];
-            const output = document.getElementById(this.output_id) as HTMLInputElement
+        updateRangeFilter():void{
+            var inputs:Array<HTMLInputElement> = [];
+            const output:HTMLInputElement = document.getElementById(this.output_id) as HTMLInputElement
             output.innerHTML = ''
 
             for (let i = 0; i < this.ids.length; i++) {
                 // Append the input element to the inputs array
                 inputs[i] = document.getElementById(this.ids[i]) as HTMLInputElement;
 
-                var val = (parseInt(inputs[i].value) - this.min) / (this.max - this.min);
+                var val:number = (parseInt(inputs[i].value) - this.min) / (this.max - this.min);
                 val *= 100; // Convert to percentage
 
                 // Modify css input type range class
@@ -93,11 +93,10 @@ export default defineComponent({
                 }
                 
             }
-
             this.applyRangeFilter(inputs);
         },
 
-        applyRangeFilter(inputs:any){
+        applyRangeFilter(inputs:Array<HTMLInputElement>):void{
             // Cycle through input and print its value
             for (let i = 0; i < inputs.length; i++) {
                 console.log(this.output_id, inputs[i].value);
@@ -108,7 +107,7 @@ export default defineComponent({
     mounted() {
         // Set the initial values of the inputs
         for (let i = 0; i < this.ids.length; i++) {
-            const input = document.getElementById(this.ids[i]) as HTMLInputElement
+            const input:HTMLInputElement = document.getElementById(this.ids[i]) as HTMLInputElement
             input.value = this.initial_values[i].toString()
         }
         // Update the output

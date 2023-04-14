@@ -1,7 +1,7 @@
 <!--View that displays all the info related to the film selected-->
 
 <template>
-    <div v-if="full_size_poster" v-on:click="toggleFullSizePoster($event)" class="fullSizePoster">
+    <div v-if="full_size_poster" v-on:click="toggleFullSizePoster" class="fullSizePoster">
         <img
             v-on:error="loadDefaultImage($event)"
             class="fullSizePoster__image"
@@ -44,7 +44,7 @@
                 <img
                     v-on:error="loadDefaultImage($event)"
                     class="right__image"
-                    v-on:click="toggleFullSizePoster($event)"
+                    v-on:click="toggleFullSizePoster"
                     :src="'https://image.tmdb.org/t/p/w500' + getFilm.poster_path"
                     alt="poster"
                 />
@@ -127,7 +127,7 @@ export default defineComponent({
     },
     methods: {
         // Toggles the full size poster
-        toggleFullSizePoster(event: any): void {
+        toggleFullSizePoster(): void {
             this.full_size_poster = !this.full_size_poster
         },
 
@@ -162,6 +162,7 @@ export default defineComponent({
                     return this.$store.getters['films/getFilms'][i]
                 }
             }
+            // TODO Change
             return {
                 adult: false,
                 backdrop_path: '',

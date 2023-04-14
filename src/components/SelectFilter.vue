@@ -20,8 +20,8 @@ export default defineComponent({
     },
 
     methods: {
-        applySelectFilter(event:any) {
-            const value = event.target.value;
+        applySelectFilter(event:any):void {
+            const value:string = event.target.value;
             console.log(this.id, value);
         }
     }

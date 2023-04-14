@@ -11,6 +11,8 @@
         <FilmsGrid>
             <FilmCard v-for="film in savedFilms" v-bind:film="film" v-bind:key="film.id"></FilmCard>
         </FilmsGrid>
+        <div class="observer_trigger">
+        </div>
         <TopButton></TopButton>
     </main>
 </template>
@@ -36,13 +38,14 @@ export default defineComponent({
         }
     },
     mounted() {
-        const observer: any = new IntersectionObserver((entries) => {
+        // Add infinite scroll using observer API
+        const observer: IntersectionObserver = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
-                //this.loadMoreResults();
+                this.$store.dispatch('films/loadMoreResults')
             }
         })
-        // Call observer through footer element. Each time the footer is in the viewport, the loadMoreResults() function is called
-        //observer.observe(document.querySelector('footer'));
+        // Call observer through footer element. Each time the footer is in the viewport,  the loadMoreResults() function is called
+        observer.observe(document.getElementsByClassName("observer_trigger")[0]);
     }
 })
 </script>

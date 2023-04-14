@@ -8,7 +8,8 @@ declare module '@vue/runtime-core' {
         page: number,
         total_pages: number,
         total_results: number,
-        saved_films: Array<Film>
+        saved_films: Array<Film>,
+        //more_results: boolean
     }
 
     interface ComponentCustomProperties {
@@ -23,7 +24,8 @@ export const films_module: Module<any, any> = {
         page: 0,
         total_pages: 0,
         total_results: 0,
-        saved_films: []
+        saved_films: [],
+        //more_results: true
     },
     mutations: {
         setFilms(state: State, films: Array<Film>) {
@@ -40,7 +42,10 @@ export const films_module: Module<any, any> = {
         },
         setSavedFilms(state: State, films: Array<Film>) {
             state.saved_films = films
-        }
+        },
+        /*setMoreResults(state: State, more_results: boolean) {
+            state.more_results = more_results
+        }*/
     },
     actions: {
         // Saves film into saved_films
@@ -70,7 +75,7 @@ export const films_module: Module<any, any> = {
                 console.log(data);
                 commit('setFilms', data.results)
             } catch (error) {
-                console.log('NO MORE RESULTS TO DISPLAY')
+                commit('setMoreResults', false);
             }
         },
 
@@ -88,7 +93,7 @@ export const films_module: Module<any, any> = {
                 console.log(data);
                 commit('setFilms', data.results)
             } catch (error) {
-                console.log('NO MORE RESULTS TO DISPLAY')
+                commit('setMoreResults', false);
             }
         },
 
@@ -109,7 +114,7 @@ export const films_module: Module<any, any> = {
                 commit('setTotalResults', data.total_results)
                 commit('setFilms', data.results)
             } catch (error) {
-                console.log('NO MORE RESULTS TO DISPLAY')
+                commit('setMoreResults', false);
             }
         },
 
@@ -117,19 +122,24 @@ export const films_module: Module<any, any> = {
             if (state.page < state.total_pages) {
                 let url =
                     rootGetters['search/getUrl'] + '&page=' + (state.page + 1)
-                try {
+                //try {
                     const response = await fetch(url)
-                    if (!response.ok) {
+                    /*if (!response.ok) {
                         throw Error(response.statusText)
-                    }
+                    }*/
                     const data = await response.json()
                     let aux = state.films;
+                    /*console.log(aux);
+                    if (aux === undefined) {
+                        commit('setMoreResults', false);
+                    }*/
                     aux = aux.concat(data.results)
                     commit('setPage', data.page)
                     commit('setFilms', aux)
-                } catch (error) {
-                    console.log('NO MORE RESULTS TO DISPLAY')
-                }
+                //} catch (error) {
+                    
+                    
+                //}
             }
 
 
@@ -150,6 +160,9 @@ export const films_module: Module<any, any> = {
         },
         getSavedFilms(state: State): Array<Film> {
             return state.saved_films
-        }
+        },
+        /*getMoreResults(state: State): boolean {
+            return state.more_results
+        }*/
     }
 }
