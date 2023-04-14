@@ -6,7 +6,8 @@
             ><img class="saved_icon" src="/src/assets/bookmark.svg" alt="bookmark"
         /></router-link>
         <SearchBar v-on:input="setViewSearch" />
-        <img v-on:click="changeColorMode" class="color_icon" src="/src/assets/color_icon.svg" />
+        <img v-if="getColorMode==='dark'" v-on:click="changeColorMode" class="color_icon" src="/src/assets/color_icon_fill.png" />
+        <img v-else v-on:click="changeColorMode" class="color_icon" src="/src/assets/color_icon_empty.png" />
 
         <img
             v-if="!isWandSelected"
@@ -123,6 +124,9 @@ export default defineComponent({
         },
         moreResults(): boolean {
             return this.$store.getters['films/getMoreResults']
+        },
+        getColorMode(): string {
+            return this.$store.getters['search/getColorMode'];
         }
     },
 
@@ -156,7 +160,8 @@ header {
         grid-area: saved_icon;
         display: flex;
         justify-content: flex-end;
-        height: 30px;
+        height: 35px;
+        margin-top: 3px;
         .saved_icon {
             cursor: pointer;
         }
@@ -167,14 +172,16 @@ header {
         margin-left: 3vw;
         margin-top: 5px;
         cursor: pointer;
-        height: 30px;
+        width: 37px;
+        
     }
 
     .wand_icon {
         grid-area: wand_icon;
-        margin-left: 3vw;
+        margin-left: 1.7vw;
+        margin-top: 2px;
         cursor: pointer;
-        width: 35px;
+        width: 38px;
     }
 }
 

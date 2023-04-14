@@ -45,6 +45,7 @@
                 <SelectFilter
                     v-bind:id="'Genre'"
                     v-bind:options="[
+                        'Any',
                         'Action',
                         'Comedy',
                         'Drama',
@@ -63,6 +64,7 @@
                 <SelectFilter
                     v-bind:id="'Country'"
                     v-bind:options="[
+                        'Any',
                         'USA',
                         'UK',
                         'France',
@@ -124,7 +126,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .filter_icon {
     grid-area: filter_icon;
-    height: 35px;
+    height: 40px;
+    margin-top: 2px;
     cursor: pointer;
 }
 

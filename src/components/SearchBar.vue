@@ -21,7 +21,7 @@ export default defineComponent({
             if (query === '') {
                 this.$store.dispatch('films/fetchTrendingDaily')
             } else {
-                this.$store.dispatch('films/fetchSearchBar')
+                this.$store.dispatch('films/fetchFromURL')
             }
         }
     },

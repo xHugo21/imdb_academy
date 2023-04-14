@@ -3,7 +3,7 @@
         <input
             v-for="id in ids"
             
-            v-on:mousemove="updateRangeFilter"
+            v-on:change="updateRangeFilter"
             :id="id"
             type="range"
             :min="min"
@@ -100,6 +100,18 @@ export default defineComponent({
             // Cycle through input and print its value
             for (let i = 0; i < inputs.length; i++) {
                 console.log(this.output_id, inputs[i].value);
+            }
+
+            if (this.ids[0] === 'yearmin'){
+                console.log("holaadfas");
+                this.$store.dispatch('search/updateYear', inputs[1].value);
+                this.$store.dispatch('films/fetchFromURL');
+            }
+            else if (this.ids[0] === 'duration'){
+
+            }
+            else if(this.ids[0] === 'rating'){
+
             }
         }
     },

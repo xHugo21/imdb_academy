@@ -75,7 +75,6 @@ export const films_module: Module<any, any> = {
                 console.log(data);
                 commit('setFilms', data.results)
             } catch (error) {
-                commit('setMoreResults', false);
             }
         },
 
@@ -93,11 +92,10 @@ export const films_module: Module<any, any> = {
                 console.log(data);
                 commit('setFilms', data.results)
             } catch (error) {
-                commit('setMoreResults', false);
             }
         },
 
-        async fetchSearchBar({ commit, rootGetters }) {
+        async fetchFromURL({ commit, rootGetters }) {
             let url =
                 rootGetters['search/getUrl']
 
@@ -114,7 +112,6 @@ export const films_module: Module<any, any> = {
                 commit('setTotalResults', data.total_results)
                 commit('setFilms', data.results)
             } catch (error) {
-                commit('setMoreResults', false);
             }
         },
 
