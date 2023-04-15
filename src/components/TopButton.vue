@@ -1,21 +1,21 @@
 <template>
-    <img v-on:click="goToTop" class="img_top" src="/src/assets/arrow_top.png" alt="return image">
+    <img v-on:click="goToTop" class="img_top" src="/src/assets/arrow_top.png" alt="return image" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
     methods: {
-        goToTop():void{
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        goToTop(): void {
+            document.body.scrollTop = 0 // For Safari
+            document.documentElement.scrollTop = 0 // For Chrome, Firefox, IE and Opera
         }
     }
 })
 </script>
 
 <style scoped lang="scss">
-    .img_top {
+.img_top {
     position: fixed; /* Fixed/sticky position */
     width: 20px;
     height: 20px;
@@ -32,9 +32,7 @@ export default defineComponent({
 }
 
 .img_top:hover {
-    background-color: purple; 
+    background-color: purple;
     transition: background-color 0.5s ease;
 }
 </style>
-
-

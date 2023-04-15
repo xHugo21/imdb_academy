@@ -4,11 +4,6 @@
 
 - Pass film as prop through route link instead of searching for the corresponding one?
 - Style range sliders selected zone
-- Change cursor when wand selected?
-- Include search for director and actor inside main search bar 
-- Hide topbutton until user is down on the page
 - Apply transition to full size poster
-- Add swap button to home page titles?
 - Check responsive when finished
 - Coming back from saved or filminfo view deletes goes back to trending (deletes query)
-- Opening filters calls updateRange

@@ -1,6 +1,6 @@
 <!--Component that defines a default H1 title tag with a custom style-->
 <template>
-    <h1 v-bind:class="{'light_mode': getColorMode==='light'}">{{ title }}</h1>
+    <h1 v-bind:class="{ light_mode: getColorMode === 'light' }">{{ title }}</h1>
 </template>
 
 <script lang="ts">
@@ -11,8 +11,8 @@ export default defineComponent({
     },
 
     computed: {
-        getColorMode():string{
-            return this.$store.getters['search/getColorMode'];
+        getColorMode(): string {
+            return this.$store.getters['search/getColorMode']
         }
     }
 })
@@ -25,7 +25,7 @@ h1 {
     color: #99aabb;
     font-size: 2.5rem;
     font-weight: 700;
-    transition: color .5s ease;
+    transition: color 0.5s ease;
 }
 
 .light_mode {

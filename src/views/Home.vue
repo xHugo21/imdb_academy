@@ -6,8 +6,18 @@
             ><img class="saved_icon" src="/src/assets/bookmark.svg" alt="bookmark"
         /></router-link>
         <SearchBar v-on:input="setViewSearch" />
-        <img v-if="getColorMode==='dark'" v-on:click="changeColorMode" class="color_icon" src="/src/assets/color_icon_fill.png" />
-        <img v-else v-on:click="changeColorMode" class="color_icon" src="/src/assets/color_icon_empty.png" />
+        <img
+            v-if="getColorMode === 'dark'"
+            v-on:click="changeColorMode"
+            class="color_icon"
+            src="/src/assets/color_icon_fill.png"
+        />
+        <img
+            v-else
+            v-on:click="changeColorMode"
+            class="color_icon"
+            src="/src/assets/color_icon_empty.png"
+        />
 
         <img
             v-if="!isWandSelected"
@@ -27,19 +37,28 @@
     </header>
 
     <main>
-            
         <!--<div v-if="view_trending" class="trending">-->
-            <H1Title v-if="view === 'trendingdaily'" v-on:click="setViewTrending" class="title__component" title="Trending Daily"></H1Title>
-            <H1Title v-else-if="view === 'trendingweekly'" v-on:click="setViewTrending" class="title__component" title="Trending Weekly"></H1Title>
-            <H1Title
-                v-else-if="view === 'searchresults'"
-                class="title__component"
-                :title="'Found ' + totalResults + ' search results'"
-            ></H1Title>
+        <H1Title
+            v-if="view === 'trendingdaily'"
+            v-on:click="setViewTrending"
+            class="title__component"
+            title="Trending Daily"
+        ></H1Title>
+        <H1Title
+            v-else-if="view === 'trendingweekly'"
+            v-on:click="setViewTrending"
+            class="title__component"
+            title="Trending Weekly"
+        ></H1Title>
+        <H1Title
+            v-else-if="view === 'searchresults'"
+            class="title__component"
+            :title="'Found ' + totalResults + ' search results'"
+        ></H1Title>
 
-            <FilmsGrid>
-                <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
-            </FilmsGrid>
+        <FilmsGrid>
+            <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
+        </FilmsGrid>
         <div class="observer_trigger">
             <p v-if="!moreResults" class="no_more_results">THERE AREN'T MORE RESULTS TO DISPLAY</p>
         </div>
@@ -84,7 +103,7 @@ export default defineComponent({
             }
         },
 
-        setViewTrending():void {
+        setViewTrending(): void {
             if (this.view === 'trendingdaily') {
                 this.view = 'trendingweekly'
                 this.$store.dispatch('films/fetchFilms', 'trending_weekly')
@@ -101,8 +120,8 @@ export default defineComponent({
             )
         },
 
-        changeColorMode():void {
-            if (this.$store.getters['search/getColorMode'] === 'dark'){
+        changeColorMode(): void {
+            if (this.$store.getters['search/getColorMode'] === 'dark') {
                 document.body.style.backgroundColor = 'white'
                 this.$store.commit('search/setColorMode', 'light')
             } else {
@@ -111,7 +130,6 @@ export default defineComponent({
             }
         }
     },
-    
 
     computed: {
         films(): Array<Film> {
@@ -127,13 +145,13 @@ export default defineComponent({
             return this.$store.getters['films/getMoreResults']
         },
         getColorMode(): string {
-            return this.$store.getters['search/getColorMode'];
+            return this.$store.getters['search/getColorMode']
         }
     },
 
     mounted() {
         // Set trending results
-        this.$store.dispatch('films/fetchFilms', 'trending_daily');
+        this.$store.dispatch('films/fetchFilms', 'trending_daily')
 
         // Add infinite scroll using observer API
         const observer: IntersectionObserver = new IntersectionObserver((entries) => {
@@ -142,7 +160,7 @@ export default defineComponent({
             }
         })
         // Call observer through footer element. Each time the footer is in the viewport,  the loadMoreResults() function is called
-        observer.observe(document.getElementsByClassName("observer_trigger")[0]);
+        observer.observe(document.getElementsByClassName('observer_trigger')[0])
     }
 })
 </script>
@@ -171,10 +189,9 @@ header {
     .color_icon {
         grid-area: color_icon;
         margin-left: 3vw;
-        margin-top: 5px;
+        margin-top: 4px;
         cursor: pointer;
         width: 37px;
-        
     }
 
     .wand_icon {
@@ -192,10 +209,10 @@ main {
         cursor: pointer;
     }
 
-    .observer_trigger{
+    .observer_trigger {
         display: flex;
         justify-content: center;
-        .no_more_results{
+        .no_more_results {
             color: purple;
             font-size: 1.5em;
             text-align: center;
@@ -207,7 +224,6 @@ main {
             padding: 1% 0 1% 0;
         }
     }
-    
 }
 
 // Add media queries for responsive design

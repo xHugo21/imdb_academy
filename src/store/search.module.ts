@@ -3,15 +3,15 @@ import type { State } from 'vue'
 
 declare module '@vue/runtime-core' {
     interface State {
-        color_mode: string,
-        url: string,
-        query: string,
-        year_min: number,
-        year_max: number,
-        duration_max: number,
-        genre_selected: string,
-        country_selected: string,
-        rating_min: number,
+        color_mode: string
+        url: string
+        query: string
+        year_min: number
+        year_max: number
+        duration_max: number
+        genre_selected: string
+        country_selected: string
+        rating_min: number
         wand_selected: boolean
     }
 
@@ -68,35 +68,69 @@ export const search_module: Module<any, any> = {
     },
     actions: {
         updateSearchBar({ commit }, query: string) {
-            commit('setQuery', query);
-            commit('setUrl', 'https://api.themoviedb.org/3/search/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' + query);
+            commit('setQuery', query)
+            commit(
+                'setUrl',
+                'https://api.themoviedb.org/3/search/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
+                    query
+            )
         },
+
+        updateWand({ commit }, genre:Array<number>) {
+            console.log('Called updateWand' + genre);
+            //commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&year=' + genre)
+        },
+
         updateYear({ commit, state }, year: string) {
-            commit('setYearMax', year);
-            if (state.query = ''){
-                commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&year=' + year);
-            }
-            else{
-                commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' + state.query + '&year=' + year);
+            commit('setYearMax', year)
+            if ((state.query = '')) {
+                commit(
+                    'setUrl',
+                    'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&year=' +
+                        year
+                )
+            } else {
+                commit(
+                    'setUrl',
+                    'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
+                        state.query +
+                        '&year=' +
+                        year
+                )
             }
         },
         updateDuration({ commit, state }, duration: number) {
-            commit('setDurationMax', duration);
-            commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' + state.query);
+            commit('setDurationMax', duration)
+            commit(
+                'setUrl',
+                'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
+                    state.query
+            )
         },
         updateGenre({ commit, state }, genre: string) {
-            commit('setGenre', genre);
-            commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' + state.query);
+            commit('setGenre', genre)
+            commit(
+                'setUrl',
+                'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
+                    state.query
+            )
         },
         updateCountry({ commit, state }, country: string) {
-            commit('setCountry', country);
-            commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' + state.query);
+            commit('setCountry', country)
+            commit(
+                'setUrl',
+                'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
+                    state.query
+            )
         },
         updateRating({ commit, state }, rating: number) {
-            commit('setRatingMin', rating);
-            commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' + state.query);
-        },
-
+            commit('setRatingMin', rating)
+            commit(
+                'setUrl',
+                'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
+                    state.query
+            )
+        }
     },
     getters: {
         getColorMode(state: State): string {

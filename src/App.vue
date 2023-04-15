@@ -2,7 +2,7 @@
 
 <template>
     <RouterView></RouterView>
-    <footer v-bind:class="{'light_mode': getColorMode==='light'}">
+    <footer v-bind:class="{ light_mode: getColorMode === 'light' }">
         <h1>IMDb Project</h1>
         <h2>Frontend fellow: Hugo García Cuesta</h2>
         <h2>Backend fellow: Juan Manuel Manga</h2>
@@ -15,8 +15,8 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     computed: {
-        getColorMode():string{
-            return this.$store.getters['search/getColorMode'];
+        getColorMode(): string {
+            return this.$store.getters['search/getColorMode']
         }
     }
 })

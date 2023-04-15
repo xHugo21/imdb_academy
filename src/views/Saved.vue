@@ -11,7 +11,7 @@
         <FilmsGrid>
             <FilmCard v-for="film in savedFilms" v-bind:film="film" v-bind:key="film.id"></FilmCard>
         </FilmsGrid>
-        
+
         <TopButton></TopButton>
     </main>
 </template>

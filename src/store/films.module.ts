@@ -4,10 +4,10 @@ import type { Film } from '@/types'
 
 declare module '@vue/runtime-core' {
     interface State {
-        films: Array<Film>,
-        page: number,
-        total_pages: number,
-        total_results: number,
+        films: Array<Film>
+        page: number
+        total_pages: number
+        total_results: number
         saved_films: Array<Film>
         more_results: boolean
     }
@@ -66,12 +66,13 @@ export const films_module: Module<any, any> = {
             commit('setMoreResults', true)
 
             // Get url depending on type of fetch
-            let url:string = rootGetters['search/getUrl'];
-            if (type === 'trending_daily'){
-                url = 'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338';
-            }
-            else if (type === 'trending_weekly'){
-                url = 'https://api.themoviedb.org/3/trending/movie/week?api_key=9f772ff3aa5dfb8e963695d6c67ae338';
+            let url: string = rootGetters['search/getUrl']
+            if (type === 'trending_daily') {
+                url =
+                    'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
+            } else if (type === 'trending_weekly') {
+                url =
+                    'https://api.themoviedb.org/3/trending/movie/week?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
             }
 
             // Fetch films from url
@@ -79,14 +80,12 @@ export const films_module: Module<any, any> = {
             const data = await response.json()
 
             // Save films and data inside state
-            console.log(type, data);
+            console.log(type, data)
             commit('setPage', data.page)
             commit('setTotalPages', data.total_pages)
             commit('setTotalResults', data.total_results)
             commit('setFilms', data.results)
         },
-
-        
 
         async loadMoreResults({ commit, state, rootGetters }) {
             // Only load more results if we aren't in the last page
@@ -97,19 +96,16 @@ export const films_module: Module<any, any> = {
                 // Fetch films from url
                 const response = await fetch(url)
                 const data = await response.json()
-                
+
                 // Save films and data inside state
                 console.log(data.results)
-                let aux:Array<Film> = state.films;
+                let aux: Array<Film> = state.films
                 aux = aux.concat(data.results)
                 commit('setPage', data.page)
                 commit('setFilms', aux)
-            }
-            else {
+            } else {
                 commit('setMoreResults', false)
             }
-
-
         }
     },
     getters: {

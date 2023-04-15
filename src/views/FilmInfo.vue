@@ -18,23 +18,41 @@
         <div class="left">
             <div class="left__div">
                 <H1Title class="left__title" :title="getFilm.title"></H1Title>
-                <p v-bind:class="['left__text', {'light_mode': getColorMode==='light'}]">
+                <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
                     {{ getFilm.overview }}
                 </p>
             </div>
             <div class="left__div">
                 <H1Title class="left__title" title="Cast"></H1Title>
-                <p v-bind:class="['left__text', {'light_mode': getColorMode==='light'}]">Director - Francis Ford Coppola</p>
-                <p v-bind:class="['left__text', {'light_mode': getColorMode==='light'}]">Cast - Marlon Brando | Al Pacino</p>
-                <p v-bind:class="['left__text', {'light_mode': getColorMode==='light'}]">Producer - Albert S. Ruddy</p>
+                <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
+                    Director - Francis Ford Coppola
+                </p>
+                <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
+                    Cast - Marlon Brando | Al Pacino
+                </p>
+                <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
+                    Producer - Albert S. Ruddy
+                </p>
             </div>
+            
+
+            <div class="left__div">
+                <H1Title class="left__title" title="Ratings"></H1Title>
+                <div class="left__pills">
+                    <InfoPill>Critics:{{ getFilm.vote_average }}</InfoPill>
+                    <InfoPill>Public: 4/5</InfoPill>
+                </div>
+            </div>
+
             <div class="left__div">
                 <H1Title class="left__title" title="Tags"></H1Title>
-                <div class="left__tags">
-                    <p v-bind:class="['left__tags__text']">Release Date: {{ getFilm.release_date }}</p>
-                    <p v-bind:class="['left__tags__text']">Original Language: {{ getFilm.original_language }}</p>
-                    <p v-bind:class="['left__tags__text']">Popularity: {{ getFilm.popularity }}</p>
-                    <p v-bind:class="['left__tags__text']">Genres: {{ getFilm.genre_ids }}</p>
+                <div class="left__pills">
+                    <InfoPill>Content type: {{ getFilm.media_type }}</InfoPill>
+                    <InfoPill>Release Date: {{ getFilm.release_date }}</InfoPill>
+                    <InfoPill>Original Language: {{ getFilm.original_language }}</InfoPill>
+                    <InfoPill>Popularity: {{ getFilm.popularity }}</InfoPill>
+                    <InfoPill>Genres: {{ getFilm.genre_ids }}</InfoPill>
+                    
                 </div>
             </div>
         </div>
@@ -43,7 +61,7 @@
             <div class="right__div">
                 <img
                     v-on:error="loadDefaultImage($event)"
-                    class="right__image"
+                    v-bind:class="['right__image', { light_mode_img: getColorMode === 'light' }]"
                     v-on:click="toggleFullSizePoster"
                     :src="'https://image.tmdb.org/t/p/w500' + getFilm.poster_path"
                     alt="poster"
@@ -85,15 +103,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <div class="right__div">
-                <H1Title class="right__title" title="Ratings"></H1Title>
-                <div class="right__ratings">
-                    <p class="right__ratings__number">Critics: {{ getFilm.vote_average }}</p>
-                    <p class="right__ratings__number">Public: 4/5</p>
-                </div>
-            </div>
         </div>
     </main>
 </template>
@@ -104,6 +113,7 @@ import { defineComponent } from 'vue'
 import SearchBar from '@/components/SearchBar.vue'
 import H1Title from '@/components/H1Title.vue'
 import Bookmark from '@/components/Bookmark.vue'
+import InfoPill from '@/components/InfoPill.vue'
 
 import type { Film } from '@/types'
 
@@ -117,7 +127,8 @@ export default defineComponent({
     components: {
         SearchBar,
         H1Title,
-        Bookmark
+        Bookmark,
+        InfoPill
     },
     data() {
         return {
@@ -166,22 +177,24 @@ export default defineComponent({
             return {
                 adult: false,
                 backdrop_path: '',
-                genre_ids: [],
                 id: 0,
+                title: '',
                 original_language: '',
                 original_title: '',
                 overview: '',
-                popularity: 0,
                 poster_path: '',
+                media_type: '',
+                genre_ids: [],
+                popularity: 0,
                 release_date: '',
-                title: '',
                 video: false,
                 vote_average: 0,
                 vote_count: 0
             }
-        },
+        },     
+        
 
-        getColorMode():string{
+        getColorMode(): string {
             return this.$store.getters['search/getColorMode']
         }
     }
@@ -189,21 +202,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-
-/*.zoom-fade-enter-active {
-    transition: opacity 3s ease;
-}
-
-.zoom-fade-leave-active {
-    transition: opacity 3s ease;
-}
-
-.zoom-fade-enter-from {
-    opacity: 0;
-}
-.zoom-fade-leave-to {
-    opacity: 0;
-}*/
 
 .fullSizePoster {
     width: 100%;
@@ -223,6 +221,9 @@ export default defineComponent({
         object-fit: contain;
     }
 }
+
+
+
 header {
     padding: 2% 0 2% 0;
     display: flex;
@@ -231,8 +232,7 @@ header {
     align-items: center;
 }
 
-
-    main {
+main {
     display: grid;
     grid-template-areas: 'left right';
     grid-template-columns: 7fr 3fr;
@@ -248,36 +248,21 @@ header {
             text-align: justify;
         }
 
-        
-        .left__tags {
+        .light_mode {
+            color: black;
+        }
+
+        .left__pills {
             display: flex;
             flex-direction: row;
-            gap: 10px;
-
-            .left__tags__text {
-                color: black;
-                font-size: 1.2rem;
-                border: 2px solid purple;
-                background-color: purple;
-                border-radius: 15px;
-                padding: 1%;
-                font-weight: 600;
-                cursor: pointer;
-                transition: 1s;
-            }
-
-            .left__tags__text:hover {
-                -ms-transform: scale(1.1); /* IE 9 */
-                -webkit-transform: scale(1.1); /* Safari 3-8 */
-                transform: scale(1.1); /* Standard syntax */
-            }
+            flex-wrap: wrap;
+            gap: 10px;  
         }
+
     }
 
-      
-    
-
     @media screen and (max-width: 768px) {
+        display: flex;
         flex-direction: column;
         .left {
             margin-bottom: 5%;
@@ -288,7 +273,7 @@ header {
         grid-area: 'right';
         display: flex;
         flex-direction: column;
-        align-items: center ;
+        align-items: center;
         .right__div {
             margin-bottom: 5%;
 
@@ -309,6 +294,14 @@ header {
             border: 4px solid #99aabb5a;
             border-radius: 10px;
             transition: transform 0.3s;
+        }
+
+        .right__image:hover{
+            border: 4px solid purple;
+        }
+
+        .light_mode_img {
+            border: 4px solid black;
         }
 
         .right__image:hover {
@@ -349,34 +342,8 @@ header {
                 }
             }
         }
-        .right__ratings {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-
-            .right__ratings__number {
-                width: 100px;
-                color: black;
-                font-size: 1.2rem;
-                border: 2px solid purple;
-                background-color: purple;
-                border-radius: 15px;
-                padding: 1% 3% 1% 3%;
-                font-weight: 600;
-                cursor: pointer;
-                transition: 1s;
-            }
-
-            .right__ratings__number:hover {
-                -ms-transform: scale(1.1); /* IE 9 */
-                -webkit-transform: scale(1.1); /* Safari 3-8 */
-                transform: scale(1.1); /* Standard syntax */
-            }
-        }
+        
     }
 }
 
-.light_mode{
-    color: black;
-}
 </style>

@@ -20,15 +20,13 @@ export default defineComponent({
     },
 
     methods: {
-        applySelectFilter(event:any):void {
-            if (this.id === 'Genre'){
-                this.$store.dispatch('search/updateGenre', event.target.value);
+        applySelectFilter(event: any): void {
+            if (this.id === 'Genre') {
+                this.$store.dispatch('search/updateGenre', event.target.value)
+            } else if (this.id === 'Country') {
+                this.$store.dispatch('search/updateCountry', event.target.value)
             }
-            else if (this.id === 'Country'){
-                this.$store.dispatch('search/updateCountry', event.target.value);
-            }
-            this.$store.dispatch('films/fetchFilms');
-            
+            this.$store.dispatch('films/fetchFilms')
         }
     }
 })

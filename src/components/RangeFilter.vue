@@ -2,7 +2,6 @@
     <div class="range-slider">
         <input
             v-for="id in ids"
-            
             v-on:mousemove="updateRangeFilter"
             v-on:change="applyRangeFilter"
             :id="id"
@@ -54,54 +53,62 @@ export default defineComponent({
     },
 
     methods: {
-        updateRangeFilter():void{
-            const output:HTMLInputElement = document.getElementById(this.output_id) as HTMLInputElement
+        updateRangeFilter(): void {
+            const output: HTMLInputElement = document.getElementById(
+                this.output_id
+            ) as HTMLInputElement
             output.innerHTML = ''
 
             for (let i = 0; i < this.ids.length; i++) {
                 // Append the input element to the inputs array
-                this.inputs[i] = document.getElementById(this.ids[i]) as HTMLInputElement;
+                this.inputs[i] = document.getElementById(this.ids[i]) as HTMLInputElement
 
-                var val:number = (parseInt(this.inputs[i].value) - this.min) / (this.max - this.min);
-                val *= 100; // Convert to percentage
+                var val: number =
+                    (parseInt(this.inputs[i].value) - this.min) / (this.max - this.min)
+                val *= 100 // Convert to percentage
 
                 // Modify css input type range class
-                this.inputs[i].style.backgroundImage = '-webkit-gradient(linear, left top, right top, ' +
-                    'color-stop(' + val + '%, purple), ' +
-                    'color-stop(' + val + '%, #434c54)' +
-                    ')';
+                this.inputs[i].style.backgroundImage =
+                    '-webkit-gradient(linear, left top, right top, ' +
+                    'color-stop(' +
+                    val +
+                    '%, purple), ' +
+                    'color-stop(' +
+                    val +
+                    '%, #434c54)' +
+                    ')'
 
-                this.inputs[i].style.backgroundImage = '-moz-linear-gradient(left center, purple 0%, purple ' + val + '%, #434c54 ' + val + '%, #434c54 100%)';
+                this.inputs[i].style.backgroundImage =
+                    '-moz-linear-gradient(left center, purple 0%, purple ' +
+                    val +
+                    '%, #434c54 ' +
+                    val +
+                    '%, #434c54 100%)'
 
                 output.innerHTML += this.inputs[i].value
 
                 if (i != this.ids.length - 1) {
                     output.innerHTML += ' - '
                 }
-                
             }
-            
         },
 
-        applyRangeFilter():void{
-    
-            if (this.ids[0] === 'yearmin'){
-                this.$store.dispatch('search/updateYear', this.inputs[1].value);
+        applyRangeFilter(): void {
+            if (this.ids[0] === 'yearmin') {
+                this.$store.dispatch('search/updateYear', this.inputs[1].value)
+            } else if (this.ids[0] === 'duration') {
+                this.$store.dispatch('search/updateDuration', this.inputs[0].value)
+            } else if (this.ids[0] === 'rating') {
+                this.$store.dispatch('search/updateRating', this.inputs[0].value)
             }
-            else if (this.ids[0] === 'duration'){
-                this.$store.dispatch('search/updateDuration', this.inputs[0].value);
-            }
-            else if(this.ids[0] === 'rating'){
-                this.$store.dispatch('search/updateRating', this.inputs[0].value);
-            }
-            this.$store.dispatch('films/fetchFilms');
+            this.$store.dispatch('films/fetchFilms')
         }
     },
 
     mounted() {
         // Set the initial values of the inputs
         for (let i = 0; i < this.ids.length; i++) {
-            const input:HTMLInputElement = document.getElementById(this.ids[i]) as HTMLInputElement
+            const input: HTMLInputElement = document.getElementById(this.ids[i]) as HTMLInputElement
             input.value = this.initial_values[i].toString()
         }
         // Update the output
@@ -153,37 +160,42 @@ input[type='range']::-webkit-slider-thumb {
     margin-top: -7px;
 }*/
 
-input[type=range] {
-
+input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
     -moz-apperance: none;
     border-radius: 6px;
     height: 6px;
-    
-    background-image: -webkit-gradient(linear,
-        left top, 
-        right top, 
+
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        right top,
         color-stop(0%, purple),
-        color-stop(50%, #434c54));
-    
-    background-image: -moz-linear-gradient(left center,
-        purple 0%, purple 50%,
-        #434c54 50%, #434c54 100%);
+        color-stop(50%, #434c54)
+    );
+
+    background-image: -moz-linear-gradient(
+        left center,
+        purple 0%,
+        purple 50%,
+        #434c54 50%,
+        #434c54 100%
+    );
 }
 
-input[type="range"]::-moz-range-track {
+input[type='range']::-moz-range-track {
     border: none;
     background: none;
     outline: none;
 }
 
-input[type=range]:focus {
+input[type='range']:focus {
     outline: none;
     border: none;
 }
 
-input[type=range]::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none !important;
     background-color: purple;
     height: 13px;
@@ -192,7 +204,7 @@ input[type=range]::-webkit-slider-thumb {
     z-index: 100;
 }
 
-input[type=range]::-moz-range-thumb {
+input[type='range']::-moz-range-thumb {
     -moz-appearance: none !important;
     background-color: purple;
     border: none;

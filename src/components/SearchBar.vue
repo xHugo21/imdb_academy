@@ -2,7 +2,7 @@
 <template>
     <input
         v-on:input="search($event.target)"
-        v-bind:class="['search_bar', {'light_mode': getColorMode==='light'}]"
+        v-bind:class="['search_bar', { light_mode: getColorMode === 'light' }]"
         type="search"
         placeholder="Search"
         autofocus
@@ -15,7 +15,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     methods: {
         search(target: any): void {
-            const query:string = target.value;
+            const query: string = target.value
 
             this.$store.dispatch('search/updateSearchBar', query)
             if (query === '') {
@@ -27,8 +27,8 @@ export default defineComponent({
     },
 
     computed: {
-        getColorMode():string{
-            return this.$store.getters['search/getColorMode'];
+        getColorMode(): string {
+            return this.$store.getters['search/getColorMode']
         }
     }
 })

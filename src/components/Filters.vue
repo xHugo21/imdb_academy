@@ -77,7 +77,7 @@
                         'Canada',
                         'Australia',
                         'Mexico',
-                        'Russia',
+                        'Russia'
                     ]"
                 ></SelectFilter>
             </div>

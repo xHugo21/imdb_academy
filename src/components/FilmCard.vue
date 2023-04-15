@@ -8,12 +8,30 @@
             </p>
         </div>
 
-        <router-link :to="'/imdb_academy/filminfo/' + film.id" v-bind:class="{ 'disabled_link' : isWandSelected }"
+        <router-link
+            v-if="!isWandSelected"
+            :to="'/imdb_academy/filminfo/' + film.id"
             ><img
-                v-bind:class="['film', 'film__hover__' + hovering + '__' + isWandSelected, {'light_mode': getColorMode==='light'}]"
+                v-bind:class="[
+                    'film',
+                    'film__hover__' + hovering + '__' + isWandSelected,
+                    { light_mode: getColorMode === 'light' }
+                ]"
                 v-bind:alt="'Poster from ' + film.title"
                 v-bind:src="getImageUrl"
         /></router-link>
+
+        <img
+                v-else
+                v-on:click="searchWand"
+                v-bind:class="[
+                    'film',
+                    'film__hover__' + hovering + '__' + isWandSelected,
+                    { light_mode: getColorMode === 'light' }
+                ]"
+                v-bind:alt="'Poster from ' + film.title"
+                v-bind:src="getImageUrl"
+        />
 
         <div v-if="hovering" class="div__hovering__bookmark">
             <Bookmark v-bind:film="film"></Bookmark>
@@ -38,7 +56,7 @@ export default defineComponent({
     },
     data() {
         return {
-            hovering: false as boolean,
+            hovering: false as boolean
         }
     },
     methods: {
@@ -46,16 +64,22 @@ export default defineComponent({
         toggleHover(): void {
             this.hovering = !this.hovering
         },
+
+        // Calls search method if film clicked when wand is selected
+        searchWand(): void{
+            this.$store.dispatch('search/updateWand', this.film.genre_ids);
+            this.$store.dispatch('films/fetchFilms');
+        }
     },
-    
+
     computed: {
-        isWandSelected():boolean {
+        isWandSelected(): boolean {
             return this.$store.getters['search/getWandSelected']
         },
-        getColorMode():string{
+        getColorMode(): string {
             return this.$store.getters['search/getColorMode']
         },
-        getImageUrl():string{
+        getImageUrl(): string {
             if (this.film.poster_path === null || this.film.poster_path === undefined) {
                 return '/src/assets/default-movie.png'
             } else {
@@ -73,19 +97,16 @@ export default defineComponent({
     justify-content: center;
     transition: transform 0.3s;
 
-    .disabled_link {
-        pointer-events: none;
-    }
 }
 .film {
     width: 200px;
     height: 300px;
     border: 4px solid #99aabb5a;
     border-radius: 10px;
-    transition: border .5s ease;
+    transition: border 0.5s ease;
 }
 
-.light_mode{
+.light_mode {
     border: 4px solid black;
 }
 
@@ -154,6 +175,4 @@ export default defineComponent({
     width: 70px;
     height: 50px;
 }
-
-
 </style>
