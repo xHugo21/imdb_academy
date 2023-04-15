@@ -41,6 +41,7 @@
                 <FilmCard v-for="film in films" v-bind:film="film" v-bind:key="film.id"></FilmCard>
             </FilmsGrid>
         <div class="observer_trigger">
+            <p v-if="!moreResults" class="no_more_results">THERE AREN'T MORE RESULTS TO DISPLAY</p>
         </div>
         <TopButton></TopButton>
     </main>
@@ -86,10 +87,10 @@ export default defineComponent({
         setViewTrending():void {
             if (this.view === 'trendingdaily') {
                 this.view = 'trendingweekly'
-                this.$store.dispatch('films/fetchTrendingWeekly')
+                this.$store.dispatch('films/fetchFilms', 'trending_weekly')
             } else if (this.view === 'trendingweekly') {
                 this.view = 'trendingdaily'
-                this.$store.dispatch('films/fetchTrendingDaily')
+                this.$store.dispatch('films/fetchFilms', 'trending_daily')
             }
         },
 
@@ -132,7 +133,7 @@ export default defineComponent({
 
     mounted() {
         // Set trending results
-        this.$store.dispatch('films/fetchTrendingDaily')
+        this.$store.dispatch('films/fetchFilms', 'trending_daily');
 
         // Add infinite scroll using observer API
         const observer: IntersectionObserver = new IntersectionObserver((entries) => {
@@ -190,6 +191,23 @@ main {
         margin-left: 10%;
         cursor: pointer;
     }
+
+    .observer_trigger{
+        display: flex;
+        justify-content: center;
+        .no_more_results{
+            color: purple;
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 3%;
+            font-weight: 700;
+            border: 3px solid purple;
+            border-radius: 15px;
+            width: 35%;
+            padding: 1% 0 1% 0;
+        }
+    }
+    
 }
 
 // Add media queries for responsive design

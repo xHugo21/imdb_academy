@@ -8,8 +8,8 @@ declare module '@vue/runtime-core' {
         page: number,
         total_pages: number,
         total_results: number,
-        saved_films: Array<Film>,
-        //more_results: boolean
+        saved_films: Array<Film>
+        more_results: boolean
     }
 
     interface ComponentCustomProperties {
@@ -25,7 +25,7 @@ export const films_module: Module<any, any> = {
         total_pages: 0,
         total_results: 0,
         saved_films: [],
-        //more_results: true
+        more_results: true
     },
     mutations: {
         setFilms(state: State, films: Array<Film>) {
@@ -43,9 +43,9 @@ export const films_module: Module<any, any> = {
         setSavedFilms(state: State, films: Array<Film>) {
             state.saved_films = films
         },
-        /*setMoreResults(state: State, more_results: boolean) {
+        setMoreResults(state: State, more_results: boolean) {
             state.more_results = more_results
-        }*/
+        }
     },
     actions: {
         // Saves film into saved_films
@@ -61,82 +61,52 @@ export const films_module: Module<any, any> = {
             commit('setSavedFilms', films)
         },
 
-        async fetchTrendingDaily({ commit }) {
-            let url =
-                'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
+        async fetchFilms({ commit, rootGetters }, type: string = '') {
+            // Set more_results to true
+            commit('setMoreResults', true)
 
-            // Catch errors when fetching url and display them
-            try {
-                const response = await fetch(url)
-                if (!response.ok) {
-                    throw Error(response.statusText)
-                }
-                const data = await response.json()
-                console.log(data);
-                commit('setFilms', data.results)
-            } catch (error) {
+            // Get url depending on type of fetch
+            let url:string = rootGetters['search/getUrl'];
+            if (type === 'trending_daily'){
+                url = 'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338';
             }
+            else if (type === 'trending_weekly'){
+                url = 'https://api.themoviedb.org/3/trending/movie/week?api_key=9f772ff3aa5dfb8e963695d6c67ae338';
+            }
+
+            // Fetch films from url
+            const response = await fetch(url)
+            const data = await response.json()
+
+            // Save films and data inside state
+            console.log(data);
+            commit('setPage', data.page)
+            commit('setTotalPages', data.total_pages)
+            commit('setTotalResults', data.total_results)
+            commit('setFilms', data.results)
         },
 
-        async fetchTrendingWeekly({ commit }) {
-            let url =
-                'https://api.themoviedb.org/3/trending/movie/week?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
-
-            // Catch errors when fetching url and display them
-            try {
-                const response = await fetch(url)
-                if (!response.ok) {
-                    throw Error(response.statusText)
-                }
-                const data = await response.json()
-                console.log(data);
-                commit('setFilms', data.results)
-            } catch (error) {
-            }
-        },
-
-        async fetchFromURL({ commit, rootGetters }) {
-            let url =
-                rootGetters['search/getUrl']
-
-            // Catch errors when fetching url and display them
-            try {
-                const response = await fetch(url)
-                if (!response.ok) {
-                    throw Error(response.statusText)
-                }
-                const data = await response.json()
-                console.log(data);
-                commit('setPage', data.page)
-                commit('setTotalPages', data.total_pages)
-                commit('setTotalResults', data.total_results)
-                commit('setFilms', data.results)
-            } catch (error) {
-            }
-        },
+        
 
         async loadMoreResults({ commit, state, rootGetters }) {
+            // Only load more results if we aren't in the last page
             if (state.page < state.total_pages) {
-                let url =
-                    rootGetters['search/getUrl'] + '&page=' + (state.page + 1)
-                //try {
-                    const response = await fetch(url)
-                    /*if (!response.ok) {
-                        throw Error(response.statusText)
-                    }*/
-                    const data = await response.json()
-                    let aux = state.films;
-                    /*console.log(aux);
-                    if (aux === undefined) {
-                        commit('setMoreResults', false);
-                    }*/
-                    aux = aux.concat(data.results)
-                    commit('setPage', data.page)
-                    commit('setFilms', aux)
-                //} catch (error) {
-                    
-                    
-                //}
+                // Set url with page number
+                let url = rootGetters['search/getUrl'] + '&page=' + (state.page + 1)
+
+                // Fetch films from url
+                const response = await fetch(url)
+                const data = await response.json()
+                
+                // Save films and data inside state
+                console.log(data.results)
+                let aux:Array<Film> = state.films;
+                aux = aux.concat(data.results)
+                commit('setPage', data.page)
+                commit('setFilms', aux)
+            }
+            else {
+                commit('setMoreResults', false)
             }
 
 
@@ -158,8 +128,8 @@ export const films_module: Module<any, any> = {
         getSavedFilms(state: State): Array<Film> {
             return state.saved_films
         },
-        /*getMoreResults(state: State): boolean {
+        getMoreResults(state: State): boolean {
             return state.more_results
-        }*/
+        }
     }
 }
