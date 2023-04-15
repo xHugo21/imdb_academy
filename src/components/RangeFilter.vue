@@ -3,7 +3,8 @@
         <input
             v-for="id in ids"
             
-            v-on:change="updateRangeFilter"
+            v-on:mousemove="updateRangeFilter"
+            v-on:change="applyRangeFilter"
             :id="id"
             type="range"
             :min="min"
@@ -46,73 +47,54 @@ export default defineComponent({
         }
     },
 
+    data() {
+        return {
+            inputs: [] as Array<HTMLInputElement>
+        }
+    },
+
     methods: {
-        /*updateRangeFilter() {
-            var inputs = []
-            const output = document.getElementById(this.output_id) as HTMLInputElement
-            output.innerHTML = ''
-
-            // Loop that cycles through each id
-            for (let i = 0; i < this.ids.length; i++) {
-                // Append the input element to the inputs array
-                inputs[i] = document.getElementById(this.ids[i]) as HTMLInputElement
-                output.innerHTML += inputs[i].value
-                if (i != this.ids.length - 1) {
-                    output.innerHTML += ' - '
-                }
-            }
-            this.applyRangeFilter(inputs);
-
-            
-        },*/
-
         updateRangeFilter():void{
-            var inputs:Array<HTMLInputElement> = [];
             const output:HTMLInputElement = document.getElementById(this.output_id) as HTMLInputElement
             output.innerHTML = ''
 
             for (let i = 0; i < this.ids.length; i++) {
                 // Append the input element to the inputs array
-                inputs[i] = document.getElementById(this.ids[i]) as HTMLInputElement;
+                this.inputs[i] = document.getElementById(this.ids[i]) as HTMLInputElement;
 
-                var val:number = (parseInt(inputs[i].value) - this.min) / (this.max - this.min);
+                var val:number = (parseInt(this.inputs[i].value) - this.min) / (this.max - this.min);
                 val *= 100; // Convert to percentage
 
                 // Modify css input type range class
-                inputs[i].style.backgroundImage = '-webkit-gradient(linear, left top, right top, ' +
+                this.inputs[i].style.backgroundImage = '-webkit-gradient(linear, left top, right top, ' +
                     'color-stop(' + val + '%, purple), ' +
                     'color-stop(' + val + '%, #434c54)' +
                     ')';
 
-                inputs[i].style.backgroundImage = '-moz-linear-gradient(left center, purple 0%, purple ' + val + '%, #434c54 ' + val + '%, #434c54 100%)';
+                this.inputs[i].style.backgroundImage = '-moz-linear-gradient(left center, purple 0%, purple ' + val + '%, #434c54 ' + val + '%, #434c54 100%)';
 
-                output.innerHTML += inputs[i].value
+                output.innerHTML += this.inputs[i].value
 
                 if (i != this.ids.length - 1) {
                     output.innerHTML += ' - '
                 }
                 
             }
-            this.applyRangeFilter(inputs);
+            
         },
 
-        applyRangeFilter(inputs:Array<HTMLInputElement>):void{
-            // Cycle through input and print its value
-            for (let i = 0; i < inputs.length; i++) {
-                console.log(this.output_id, inputs[i].value);
-            }
-
+        applyRangeFilter():void{
+    
             if (this.ids[0] === 'yearmin'){
-                console.log("holaadfas");
-                this.$store.dispatch('search/updateYear', inputs[1].value);
-                this.$store.dispatch('films/fetchFromURL');
+                this.$store.dispatch('search/updateYear', this.inputs[1].value);
             }
             else if (this.ids[0] === 'duration'){
-
+                this.$store.dispatch('search/updateDuration', this.inputs[0].value);
             }
             else if(this.ids[0] === 'rating'){
-
+                this.$store.dispatch('search/updateRating', this.inputs[0].value);
             }
+            this.$store.dispatch('films/fetchFilms');
         }
     },
 

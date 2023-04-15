@@ -46,11 +46,6 @@ export default defineComponent({
         toggleHover(): void {
             this.hovering = !this.hovering
         },
-
-        // Loads default image if the film doesn't have a poster
-        loadDefaultImage(event: any): void {
-            event.target.src = '/src/assets/default-movie.png'
-        }
     },
     
     computed: {

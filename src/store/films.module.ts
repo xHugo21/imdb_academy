@@ -61,7 +61,7 @@ export const films_module: Module<any, any> = {
             commit('setSavedFilms', films)
         },
 
-        async fetchFilms({ commit, rootGetters }, type: string = '') {
+        async fetchFilms({ commit, rootGetters }, type: string = 'search') {
             // Set more_results to true
             commit('setMoreResults', true)
 
@@ -79,7 +79,7 @@ export const films_module: Module<any, any> = {
             const data = await response.json()
 
             // Save films and data inside state
-            console.log(data);
+            console.log(type, data);
             commit('setPage', data.page)
             commit('setTotalPages', data.total_pages)
             commit('setTotalResults', data.total_results)

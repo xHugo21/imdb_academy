@@ -21,8 +21,14 @@ export default defineComponent({
 
     methods: {
         applySelectFilter(event:any):void {
-            const value:string = event.target.value;
-            console.log(this.id, value);
+            if (this.id === 'Genre'){
+                this.$store.dispatch('search/updateGenre', event.target.value);
+            }
+            else if (this.id === 'Country'){
+                this.$store.dispatch('search/updateCountry', event.target.value);
+            }
+            this.$store.dispatch('films/fetchFilms');
+            
         }
     }
 })

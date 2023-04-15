@@ -59,6 +59,7 @@ export default defineComponent({
 
 .light_mode {
     border: 2px solid black;
+    color: black;
 }
 .light_mode::placeholder {
     color: black;
