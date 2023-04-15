@@ -10,10 +10,9 @@
 
         <router-link :to="'/imdb_academy/filminfo/' + film.id" v-bind:class="{ 'disabled_link' : isWandSelected }"
             ><img
-                v-on:error="loadDefaultImage($event)"
                 v-bind:class="['film', 'film__hover__' + hovering + '__' + isWandSelected, {'light_mode': getColorMode==='light'}]"
                 v-bind:alt="'Poster from ' + film.title"
-                v-bind:src="'https://image.tmdb.org/t/p/w500' + film.poster_path"
+                v-bind:src="getImageUrl"
         /></router-link>
 
         <div v-if="hovering" class="div__hovering__bookmark">
@@ -60,6 +59,13 @@ export default defineComponent({
         },
         getColorMode():string{
             return this.$store.getters['search/getColorMode']
+        },
+        getImageUrl():string{
+            if (this.film.poster_path === null || this.film.poster_path === undefined) {
+                return '/src/assets/default-movie.png'
+            } else {
+                return 'https://image.tmdb.org/t/p/w500' + this.film.poster_path
+            }
         }
     }
 })
