@@ -6,4 +6,3 @@
 - Style range sliders selected zone
 - Apply transition to full size poster
 - Check responsive when finished
-- Coming back from saved or filminfo view deletes goes back to trending (deletes query)

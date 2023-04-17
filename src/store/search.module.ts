@@ -77,27 +77,12 @@ export const search_module: Module<any, any> = {
         },
 
         updateWand({ commit }, genre:Array<number>) {
-            console.log('Called updateWand' + genre);
-            //commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&year=' + genre)
+            commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=g')
         },
 
         updateYear({ commit, state }, year: string) {
             commit('setYearMax', year)
-            if ((state.query = '')) {
-                commit(
-                    'setUrl',
-                    'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&year=' +
-                        year
-                )
-            } else {
-                commit(
-                    'setUrl',
-                    'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
-                        state.query +
-                        '&year=' +
-                        year
-                )
-            }
+            commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' + 'y')
         },
         updateDuration({ commit, state }, duration: number) {
             commit('setDurationMax', duration)
