@@ -151,7 +151,14 @@ export default defineComponent({
 
     mounted() {
         // Set trending results
-        this.$store.dispatch('films/fetchFilms', 'trending_daily')
+        if (this.$store.getters['search/getQuery'] === ''){
+            this.view = 'trendingdaily'
+            this.$store.dispatch('films/fetchFilms', 'trending_daily')
+        }
+        else {
+            this.view = 'searchresults'
+            this.$store.dispatch('films/fetchFilms')
+        }
 
         // Add infinite scroll using observer API
         const observer: IntersectionObserver = new IntersectionObserver((entries) => {

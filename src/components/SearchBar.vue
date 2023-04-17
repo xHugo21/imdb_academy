@@ -30,6 +30,13 @@ export default defineComponent({
         getColorMode(): string {
             return this.$store.getters['search/getColorMode']
         }
+    },
+
+    mounted() {
+        const search_bar: any = document.querySelector('.search_bar');
+        search_bar.value = this.$store.getters['search/getQuery'];
+
+        
     }
 })
 </script>
