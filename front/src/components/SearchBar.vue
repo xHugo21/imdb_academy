@@ -17,7 +17,8 @@ export default defineComponent({
         search(target: any): void {
             const query: string = target.value
 
-            this.$store.dispatch('search/updateSearchBar', query)
+            this.$store.commit('search/setQuery', query);
+            this.$store.dispatch('search/updateUrl');
             if (query === '') {
                 this.$store.dispatch('films/fetchFilms', 'trending_daily')
             } else {

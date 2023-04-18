@@ -8,6 +8,7 @@ declare module '@vue/runtime-core' {
         query: string
         year_min: number
         year_max: number
+        duration_min: number
         duration_max: number
         genre_selected: string
         country_selected: string
@@ -28,6 +29,7 @@ export const search_module: Module<any, any> = {
         query: '',
         year_min: 1900,
         year_max: 2023,
+        duration_min: 0,
         duration_max: 300,
         genre_selected: '',
         country_selected: '',
@@ -50,6 +52,9 @@ export const search_module: Module<any, any> = {
         setYearMax(state: State, year_max: number) {
             state.year_max = year_max
         },
+        setDurationMin(state: State, duration_min: number) {
+            state.duration_min = duration_min
+        },
         setDurationMax(state: State, duration_max: number) {
             state.duration_max = duration_max
         },
@@ -67,55 +72,9 @@ export const search_module: Module<any, any> = {
         }
     },
     actions: {
-        updateSearchBar({ commit }, query: string) {
-            commit('setQuery', query)
-            commit(
-                'setUrl',
-                'https://api.themoviedb.org/3/search/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
-                    query
-            )
-        },
-
-        updateWand({ commit }, genre:Array<number>) {
-            commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=g')
-        },
-
-        updateYear({ commit, state }, year: string) {
-            commit('setYearMax', year)
-            commit('setUrl', 'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' + 'y')
-        },
-        updateDuration({ commit, state }, duration: number) {
-            commit('setDurationMax', duration)
-            commit(
-                'setUrl',
-                'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
-                    state.query
-            )
-        },
-        updateGenre({ commit, state }, genre: string) {
-            commit('setGenre', genre)
-            commit(
-                'setUrl',
-                'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
-                    state.query
-            )
-        },
-        updateCountry({ commit, state }, country: string) {
-            commit('setCountry', country)
-            commit(
-                'setUrl',
-                'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
-                    state.query
-            )
-        },
-        updateRating({ commit, state }, rating: number) {
-            commit('setRatingMin', rating)
-            commit(
-                'setUrl',
-                'https://api.themoviedb.org/3/discover/multi?api_key=9f772ff3aa5dfb8e963695d6c67ae338&include_adult=false&query=' +
-                    state.query
-            )
-        }
+        updateUrl({ commit }) {
+            commit('setUrl', 'http://localhost:8080/?query=' + this.state.search.query + '&startYear=' + this.state.search.year_min + '&minMinutes=' + this.state.search.duration_min + '&genres=' + this.state.search.genre_selected + '&size=20&page=0')
+        },        
     },
     getters: {
         getColorMode(state: State): string {
@@ -132,6 +91,9 @@ export const search_module: Module<any, any> = {
         },
         getYearMax(state: State): number {
             return state.year_max
+        },
+        getDurationMin(state: State): number {
+            return state.duration_min
         },
         getDurationMax(state: State): number {
             return state.duration_max

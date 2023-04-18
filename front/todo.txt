@@ -6,4 +6,13 @@
 - Style range sliders selected zone
 - Apply transition to full size poster
 - Check responsive when finished
--a
+
+- Trending query
+- Rating query 
+- Year query (min and max year) 
+
+- cors 
+- Movie trailers
+- Filter and show type of content
+- Loadmoreresults
+- Filters only work when query isn't empty

@@ -32,11 +32,11 @@
             <div class="filters__div">
                 <LabelFilter v-bind:type="'Max Duration'"></LabelFilter>
                 <RangeFilter
-                    v-bind:ids="['duration']"
+                    v-bind:ids="['durationmin', 'durationmax']"
                     v-bind:output_id="'durationvalue'"
                     v-bind:min="0"
                     v-bind:max="300"
-                    v-bind:initial_values="[300]"
+                    v-bind:initial_values="[0, 300]"
                 ></RangeFilter>
             </div>
 
@@ -46,20 +46,21 @@
                     v-bind:id="'Genre'"
                     v-bind:options="[
                         'Any',
-                        'Action',
-                        'Comedy',
                         'Drama',
-                        'Fantasy',
-                        'Horror',
-                        'Mystery',
+                        'Comedy',
+                        'Documentary',
+                        'Action',
+                        'Crime',
                         'Romance',
                         'Thriller',
-                        'Western'
+                        'Adventure',
+                        'Biography',
+                        'N/A'
                     ]"
                 ></SelectFilter>
             </div>
 
-            <div class="filters__div">
+            <!--<div class="filters__div">
                 <LabelFilter v-bind:type="'Country'"></LabelFilter>
                 <SelectFilter
                     v-bind:id="'Country'"
@@ -80,7 +81,7 @@
                         'Russia'
                     ]"
                 ></SelectFilter>
-            </div>
+            </div>-->
 
             <div class="filters__div">
                 <LabelFilter v-bind:type="'Min Rating'"></LabelFilter>

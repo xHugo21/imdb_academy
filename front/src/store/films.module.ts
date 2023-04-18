@@ -57,19 +57,18 @@ export const films_module: Module<any, any> = {
         // Removes film from saved_films
         removeFilm({ commit, state }, film: Film) {
             let films = state.saved_films
-            films = films.filter((f: { id: number }) => f.id !== film.id)
+            films = films.filter((f: { id: string }) => f.id !== film.id)
             commit('setSavedFilms', films)
         },
 
-        async fetchFilms({ commit, rootGetters }, type: string = 'search') {
+        /*async fetchFilms({ commit, rootGetters }, type: string = 'search') {
             // Set more_results to true
             commit('setMoreResults', true)
 
             // Get url depending on type of fetch
             let url: string = rootGetters['search/getUrl']
             if (type === 'trending_daily') {
-                url =
-                    'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
+                url = 'https://api.themoviedb.org/3/trending/movie/day?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
             } else if (type === 'trending_weekly') {
                 url =
                     'https://api.themoviedb.org/3/trending/movie/week?api_key=9f772ff3aa5dfb8e963695d6c67ae338'
@@ -106,8 +105,59 @@ export const films_module: Module<any, any> = {
             } else {
                 commit('setMoreResults', false)
             }
-        }
-    },
+        }*/
+
+        async fetchFilms({ commit, dispatch, rootGetters }, type: string = 'search') {
+            // Set more_results to true
+            commit('setMoreResults', true)
+
+            // Get url depending on type of fetch
+            let url: string = rootGetters['search/getUrl']
+            if (type === 'trending_daily') {
+                url = 'http://localhost:8080/?query=spiderman&size=20&page=0'
+            } else if (type === 'trending_weekly') {
+                url =
+                    'http://localhost:8080/?query=spiderman&size=20&page=0'
+            }
+
+            // Fetch films from url
+            const response = await fetch(url)
+            const data = await response.json()
+
+            // Save films and data inside state
+            //console.log(type, data)
+            commit('setPage', 0)
+            commit('setFilms', data.hits)
+
+            // Fetch posters
+            dispatch('fetchAditionalTMDB');
+        },
+    
+
+        async fetchAditionalTMDB({ rootGetters }:any) { 
+            // For film in films
+            for (let film of rootGetters['films/getFilms']) {
+                let url =  "https://api.themoviedb.org/3/find/" + film.id + "?api_key=9f772ff3aa5dfb8e963695d6c67ae338&language=en-US&external_source=imdb_id";
+        
+                await fetch(url).then(response => response.json()).then(async data => {
+                    if (data.movie_results.length) {
+                        data = data.movie_results[0];
+                    } else if (data.tv_results.length) {
+                        data = data.tv_results[0];
+                    }
+        
+                    film.posterPath = data.poster_path;
+                    film.overview = data.overview === undefined ? "There isn't any description available. Sorry for the inconvenience :(" : data.overview;
+        
+                }).catch(ex => {
+                    console.log(ex);
+                });
+                
+            }
+
+        },
+    },   
+
     getters: {
         getFilms(state: State): Array<Film> {
             return state.films

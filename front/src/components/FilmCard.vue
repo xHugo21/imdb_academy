@@ -4,7 +4,7 @@
     <div v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover" class="film__card">
         <div class="div__hovering__name" v-if="hovering">
             <p v-bind:class="['div__hovering__name__p' + '__' + isWandSelected]">
-                {{ film.title }}
+                {{ film.originalTitle }}
             </p>
         </div>
 
@@ -17,7 +17,7 @@
                     'film__hover__' + hovering + '__' + isWandSelected,
                     { light_mode: getColorMode === 'light' }
                 ]"
-                v-bind:alt="'Poster from ' + film.title"
+                v-bind:alt="'Poster from ' + film.primaryTitle"
                 v-bind:src="getImageUrl"
         /></router-link>
 
@@ -29,7 +29,7 @@
                     'film__hover__' + hovering + '__' + isWandSelected,
                     { light_mode: getColorMode === 'light' }
                 ]"
-                v-bind:alt="'Poster from ' + film.title"
+                v-bind:alt="'Poster from ' + film.primaryTitle"
                 v-bind:src="getImageUrl"
         />
 
@@ -67,7 +67,7 @@ export default defineComponent({
 
         // Calls search method if film clicked when wand is selected
         searchWand(): void{
-            this.$store.dispatch('search/updateWand', this.film.genre_ids);
+            this.$store.dispatch('search/updateWand', this.film.genres);
             this.$store.dispatch('films/fetchFilms');
         }
     },
@@ -80,10 +80,10 @@ export default defineComponent({
             return this.$store.getters['search/getColorMode']
         },
         getImageUrl(): string {
-            if (this.film.poster_path === null || this.film.poster_path === undefined) {
+            if (this.film.posterPath === null || this.film.posterPath === undefined) {
                 return '/src/assets/default-movie.png'
             } else {
-                return 'https://image.tmdb.org/t/p/w500' + this.film.poster_path
+                return 'https://image.tmdb.org/t/p/w500' + this.film.posterPath
             }
         }
     }

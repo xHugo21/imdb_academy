@@ -68,7 +68,7 @@ export default defineComponent({
                 val *= 100 // Convert to percentage
 
                 // Modify css input type range class
-                this.inputs[i].style.backgroundImage =
+                /*this.inputs[i].style.backgroundImage =
                     '-webkit-gradient(linear, left top, right top, ' +
                     'color-stop(' +
                     val +
@@ -83,7 +83,7 @@ export default defineComponent({
                     val +
                     '%, #434c54 ' +
                     val +
-                    '%, #434c54 100%)'
+                    '%, #434c54 100%)'*/
 
                 output.innerHTML += this.inputs[i].value
 
@@ -95,12 +95,15 @@ export default defineComponent({
 
         applyRangeFilter(): void {
             if (this.ids[0] === 'yearmin') {
-                this.$store.dispatch('search/updateYear', this.inputs[1].value)
-            } else if (this.ids[0] === 'duration') {
-                this.$store.dispatch('search/updateDuration', this.inputs[0].value)
+                this.$store.commit('search/setYearMin', this.inputs[0].value)
+                this.$store.commit('search/setYearMax', this.inputs[1].value)
+            } else if (this.ids[0] === 'durationmin') {
+                this.$store.commit('search/setDurationMin', this.inputs[0].value)
+                this.$store.commit('search/setDurationMax', this.inputs[1].value)
             } else if (this.ids[0] === 'rating') {
-                this.$store.dispatch('search/updateRating', this.inputs[0].value)
+                this.$store.commit('search/setRatingMin', this.inputs[0].value)
             }
+            this.$store.dispatch('search/updateUrl')
             this.$store.dispatch('films/fetchFilms')
         }
     },
@@ -131,7 +134,7 @@ export default defineComponent({
     bottom: 0;
 }
 
-/*input[type='range'] {
+input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
@@ -150,17 +153,16 @@ input[type='range']::-webkit-slider-thumb {
     z-index: 2;
     position: relative;
     box-shadow: 0px 0px 0px #000;
-    border: 1px solid #54056a;
-    height: 18px;
-    width: 18px;
+    height: 15px;
+    width: 15px;
     border-radius: 50px;
     background: purple;
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -7px;
-}*/
+    margin-top: -5px;
+}
 
-input[type='range'] {
+/*input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
     -moz-apperance: none;
@@ -211,7 +213,7 @@ input[type='range']::-moz-range-thumb {
     height: 13px;
     width: 13px;
     border-radius: 50%;
-}
+}*/
 
 .filters__div__output {
     color: #99aabb;

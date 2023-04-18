@@ -22,10 +22,12 @@ export default defineComponent({
     methods: {
         applySelectFilter(event: any): void {
             if (this.id === 'Genre') {
-                this.$store.dispatch('search/updateGenre', event.target.value)
+                this.$store.commit('search/setGenre', event.target.value);
+                
             } else if (this.id === 'Country') {
-                this.$store.dispatch('search/updateCountry', event.target.value)
+                this.$store.commit('search/setCountry', event.target.value)
             }
+            this.$store.dispatch('search/updateUrl');
             this.$store.dispatch('films/fetchFilms')
         }
     }

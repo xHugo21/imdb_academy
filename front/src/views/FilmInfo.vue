@@ -5,7 +5,7 @@
         <img
             v-on:error="loadDefaultImage($event)"
             class="fullSizePoster__image"
-            :src="'https://image.tmdb.org/t/p/w500' + getFilm.poster_path"
+            :src="'https://image.tmdb.org/t/p/w500' + getFilm.posterPath"
             alt="poster"
         />
     </div>
@@ -17,7 +17,7 @@
     <main>
         <div class="left">
             <div class="left__div">
-                <H1Title class="left__title" :title="getFilm.title"></H1Title>
+                <H1Title class="left__title" :title="getFilm.primaryTitle"></H1Title>
                 <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
                     {{ getFilm.overview }}
                 </p>
@@ -39,19 +39,16 @@
             <div class="left__div">
                 <H1Title class="left__title" title="Ratings"></H1Title>
                 <div class="left__pills">
-                    <InfoPill>Critics:{{ getFilm.vote_average }}</InfoPill>
-                    <InfoPill>Public: 4/5</InfoPill>
+                    <InfoPill>Rating:{{ getFilm.averageRating }}</InfoPill>
+                    <InfoPill>Votes: {{ getFilm.numVotes }}</InfoPill>
                 </div>
             </div>
 
             <div class="left__div">
                 <H1Title class="left__title" title="Tags"></H1Title>
                 <div class="left__pills">
-                    <InfoPill>Content type: {{ getFilm.media_type }}</InfoPill>
-                    <InfoPill>Release Date: {{ getFilm.release_date }}</InfoPill>
-                    <InfoPill>Original Language: {{ getFilm.original_language }}</InfoPill>
-                    <InfoPill>Popularity: {{ getFilm.popularity }}</InfoPill>
-                    <InfoPill>Genres: {{ getFilm.genre_ids }}</InfoPill>
+                    <InfoPill>Release Date: {{ getFilm.startYear }}</InfoPill>
+                    <InfoPill>Genres: {{ getFilm.genres }}</InfoPill>
                     
                 </div>
             </div>
@@ -63,7 +60,7 @@
                     v-on:error="loadDefaultImage($event)"
                     v-bind:class="['right__image', { light_mode_img: getColorMode === 'light' }]"
                     v-on:click="toggleFullSizePoster"
-                    :src="'https://image.tmdb.org/t/p/w500' + getFilm.poster_path"
+                    :src="'https://image.tmdb.org/t/p/w500' + getFilm.posterPath"
                     alt="poster"
                 />
             </div>
@@ -169,29 +166,31 @@ export default defineComponent({
         getFilm(): Film {
             // Loop through all films in the store and return the one that matches the id
             for (let i = 0; i < this.$store.getters['films/getFilms'].length; i++) {
-                if (this.$store.getters['films/getFilms'][i].id === parseInt(this.id)) {
+                if (this.$store.getters['films/getFilms'][i].id === this.id) {
                     return this.$store.getters['films/getFilms'][i]
                 }
             }
-            // TODO Change
             return {
-                adult: false,
-                backdrop_path: '',
-                id: 0,
-                title: '',
-                original_language: '',
-                original_title: '',
+                id: '',
+                tconst: '',
+                titleType: '',
+                primaryTitle: '',
+                originalTitle: '',
+                startYear: 0,
+                endYear: 0,
+                runtimeMinutes: 0,
+                genres: [],
+                averageRating: 0,
+                numVotes: 0,
+                akas: [],
+                directors: [],
+                starring: [],
+                isAdult: false,
                 overview: '',
-                poster_path: '',
-                media_type: '',
-                genre_ids: [],
-                popularity: 0,
-                release_date: '',
-                video: false,
-                vote_average: 0,
-                vote_count: 0
+                posterPath: ''
             }
-        },     
+        },
+
         
 
         getColorMode(): string {
