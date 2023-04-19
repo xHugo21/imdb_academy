@@ -17,23 +17,22 @@
 }*/
 
 export type Film = {
-    id: string,
-    tconst: string,
-    titleType: string,
-    primaryTitle: string,
-    originalTitle: string,
-    startYear: number,
-    endYear: number,
-    runtimeMinutes: number,
-    genres: Array<string>,
-    averageRating: number,
+    id: string
+    tconst: string
+    titleType: string
+    primaryTitle: string
+    originalTitle: string
+    startYear: number
+    endYear: number
+    runtimeMinutes: number
+    genres: Array<string>
+    averageRating: number
     numVotes: number
-    akas: Array<string>,
-    directors: Array<string>,
-    starring: Array<string>,
-    isAdult: boolean,
-    overview?: string,
-    posterPath?: string,
-    trailer?: string,
-
+    akas: Array<string>
+    directors: Array<string>
+    starring: Array<string>
+    isAdult: boolean
+    overview?: string
+    posterPath?: string
+    trailer?: string
 }

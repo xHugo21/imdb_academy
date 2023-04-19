@@ -138,7 +138,6 @@ input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    
 }
 
 input[type='range']::-webkit-slider-runnable-track {
@@ -147,7 +146,6 @@ input[type='range']::-webkit-slider-runnable-track {
     cursor: pointer;
     background: #434c54;
 }
-
 
 input[type='range']::-webkit-slider-thumb {
     z-index: 2;

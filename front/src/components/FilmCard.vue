@@ -8,9 +8,7 @@
             </p>
         </div>
 
-        <router-link
-            v-if="!isWandSelected"
-            :to="'/imdb_academy/filminfo/' + film.id"
+        <router-link v-if="!isWandSelected" :to="'/imdb_academy/filminfo/' + film.id"
             ><img
                 v-bind:class="[
                     'film',
@@ -22,15 +20,15 @@
         /></router-link>
 
         <img
-                v-else
-                v-on:click="searchWand"
-                v-bind:class="[
-                    'film',
-                    'film__hover__' + hovering + '__' + isWandSelected,
-                    { light_mode: getColorMode === 'light' }
-                ]"
-                v-bind:alt="'Poster from ' + film.primaryTitle"
-                v-bind:src="getImageUrl"
+            v-else
+            v-on:click="searchWand"
+            v-bind:class="[
+                'film',
+                'film__hover__' + hovering + '__' + isWandSelected,
+                { light_mode: getColorMode === 'light' }
+            ]"
+            v-bind:alt="'Poster from ' + film.primaryTitle"
+            v-bind:src="getImageUrl"
         />
 
         <div v-if="hovering" class="div__hovering__bookmark">
@@ -66,9 +64,9 @@ export default defineComponent({
         },
 
         // Calls search method if film clicked when wand is selected
-        searchWand(): void{
-            this.$store.dispatch('search/updateWand', this.film.genres);
-            this.$store.dispatch('films/fetchFilms');
+        searchWand(): void {
+            this.$store.dispatch('search/updateWand', this.film.genres)
+            this.$store.dispatch('films/fetchFilms')
         }
     },
 
@@ -96,7 +94,6 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     transition: transform 0.3s;
-
 }
 .film {
     width: 200px;

@@ -128,8 +128,7 @@ export default defineComponent({
                 document.body.style.backgroundColor = '#14181c'
                 this.$store.commit('search/setColorMode', 'dark')
             }
-        },
-
+        }
     },
 
     computed: {
@@ -137,10 +136,9 @@ export default defineComponent({
             return this.$store.getters['films/getFilms']
         },
         totalResults(): string {
-            if (this.$store.getters['films/getTotalResults'] === undefined){
+            if (this.$store.getters['films/getTotalResults'] === undefined) {
                 return '0'
-            }
-            else if (this.$store.getters['films/getTotalResults'] === 20){
+            } else if (this.$store.getters['films/getTotalResults'] === 20) {
                 return '20+'
             }
             return this.$store.getters['films/getTotalResults']
@@ -158,11 +156,10 @@ export default defineComponent({
 
     mounted() {
         // Set trending results
-        if (this.$store.getters['search/getQuery'] === ''){
+        if (this.$store.getters['search/getQuery'] === '') {
             this.view = 'trendingdaily'
             this.$store.dispatch('films/fetchFilms', 'trending_daily')
-        }
-        else {
+        } else {
             this.view = 'searchresults'
             this.$store.dispatch('films/fetchFilms')
         }

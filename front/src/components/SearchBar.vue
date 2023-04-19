@@ -17,8 +17,8 @@ export default defineComponent({
         search(target: any): void {
             const query: string = target.value
 
-            this.$store.commit('search/setQuery', query);
-            this.$store.dispatch('search/updateUrl');
+            this.$store.commit('search/setQuery', query)
+            this.$store.dispatch('search/updateUrl')
             if (query === '') {
                 this.$store.dispatch('films/fetchFilms', 'trending_daily')
             } else {
@@ -34,10 +34,8 @@ export default defineComponent({
     },
 
     mounted() {
-        const search_bar: any = document.querySelector('.search_bar');
-        search_bar.value = this.$store.getters['search/getQuery'];
-
-        
+        const search_bar: any = document.querySelector('.search_bar')
+        search_bar.value = this.$store.getters['search/getQuery']
     }
 })
 </script>

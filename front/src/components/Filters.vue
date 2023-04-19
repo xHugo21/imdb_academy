@@ -64,14 +64,7 @@
                 <LabelFilter v-bind:type="'Media Type'"></LabelFilter>
                 <SelectFilter
                     v-bind:id="'Media Type'"
-                    v-bind:options="[
-                        'Any',
-                        'Movie',
-                        'Short',
-                        'TV Series',
-                        'TV Episode',
-                        'Video'
-                    ]"
+                    v-bind:options="['Any', 'Movie', 'Short', 'TV Series', 'TV Episode', 'Video']"
                 ></SelectFilter>
             </div>
 

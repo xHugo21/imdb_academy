@@ -2,17 +2,22 @@
 - Secondary color: #99aabb5a / #434C54
 - Terciary color: #99aabb
 
-- Pass film as prop through route link instead of searching for the corresponding one?
-- Style range sliders selected zone
-- Apply transition to full size poster
+OPTIONAL
 - Check responsive when finished
+- Range sliders bg color
+- Refactor image url selector and printing
 
+
+API
+- Apply filters when query is empty
 - Trending query
-- Rating query 
-- Year query (min and max year) 
+- Rating query
+- Year query (min and max year)
+- Duration query (min and max duration)
 
+FRONT
 - cors 
-- Movie trailers
 - Filter and show type of content
-- Filters only work when query isn't empty
 - Directors and casting can be fetched from TMDB?
+- Catch 404 error
+- Set filters to previous values when coming back from filminfo

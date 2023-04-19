@@ -22,15 +22,27 @@ export default defineComponent({
     methods: {
         applySelectFilter(event: any): void {
             if (this.id === 'Genre') {
-                this.$store.commit('search/setGenre', event.target.value);
-                
+                this.$store.commit('search/setGenre', event.target.value)
             } else if (this.id === 'Type') {
                 this.$store.commit('search/setMediaType', event.target.value)
             }
-            this.$store.dispatch('search/updateUrl');
+            this.$store.dispatch('search/updateUrl')
             this.$store.dispatch('films/fetchFilms')
         }
     }
+
+    /*mounted() {
+        // Set select value to store value
+        const select: HTMLInputElement = document.getElementByClass(
+            "filters__div__select"
+        ) as HTMLInputElement
+        if (this.id === 'Genre'){
+            select.value = this.$store.getters['search/getGenre']
+        }
+        else if (this.id === 'Type'){
+            select.value = this.$store.getters['search/getMediaType']
+        }
+    }*/
 })
 </script>
 

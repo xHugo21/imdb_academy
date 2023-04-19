@@ -5,7 +5,7 @@
         <img
             v-on:error="loadDefaultImage($event)"
             class="fullSizePoster__image"
-            :src="'https://image.tmdb.org/t/p/w500' + getFilm.posterPath"
+            :src="getImageUrl"
             alt="poster"
         />
     </div>
@@ -17,7 +17,10 @@
     <main>
         <div class="left">
             <div class="left__div">
-                <H1Title class="left__title" :title="getFilm.primaryTitle + ' - ' + getFilm.startYear"></H1Title>
+                <H1Title
+                    class="left__title"
+                    :title="getFilm.primaryTitle + ' - ' + getFilm.startYear"
+                ></H1Title>
                 <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
                     {{ getFilm.overview }}
                 </p>
@@ -44,7 +47,7 @@
                 </div>
 
                 <p v-else v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
-                        No rating available
+                    No rating available
                 </p>
             </div>
 
@@ -54,7 +57,6 @@
                     <InfoPill>Media type: {{ getFilm.titleType }}</InfoPill>
                     <InfoPill>Duration: {{ getFilm.runtimeMinutes }} minutes</InfoPill>
                     <InfoPill>Adult restriction: {{ getAdultRestriction }}</InfoPill>
-
                 </div>
             </div>
         </div>
@@ -62,10 +64,9 @@
         <div class="right">
             <div class="right__div">
                 <img
-                    v-on:error="loadDefaultImage($event)"
                     v-bind:class="['right__image', { light_mode_img: getColorMode === 'light' }]"
                     v-on:click="toggleFullSizePoster"
-                    :src="'https://image.tmdb.org/t/p/w500' + getFilm.posterPath"
+                    :src="getImageUrl"
                     alt="poster"
                 />
             </div>
@@ -77,15 +78,14 @@
             <div class="right_div">
                 <H1Title class="right__title" title="Trailer"></H1Title>
                 <div v-if="getFilm.trailer" class="right__wheretowatch">
-                    <div  class="right__trailer__div">
+                    <div class="right__trailer__div">
                         <a :href="getFilm.trailer"
                             ><img src="../assets/youtube.png" alt="youtube"
                         /></a>
                     </div>
-                    
                 </div>
                 <p v-else v-bind:class="['right__text', { light_mode: getColorMode === 'light' }]">
-                        No trailer available
+                    No trailer available
                 </p>
             </div>
         </div>
@@ -187,17 +187,22 @@ export default defineComponent({
             }
         },
 
-        
-
         getColorMode(): string {
             return this.$store.getters['search/getColorMode']
+        },
+
+        getImageUrl(): string {
+            if (this.getFilm.posterPath === null || this.getFilm.posterPath === undefined) {
+                return '/src/assets/default-movie.png'
+            } else {
+                return 'https://image.tmdb.org/t/p/w500' + this.getFilm.posterPath
+            }
         }
     }
 })
 </script>
 
 <style scoped lang="scss">
-
 .fullSizePoster {
     width: 100%;
     height: 100%;
@@ -216,8 +221,6 @@ export default defineComponent({
         object-fit: contain;
     }
 }
-
-
 
 header {
     padding: 2% 0 2% 0;
@@ -252,9 +255,8 @@ main {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 10px;  
+            gap: 10px;
         }
-
     }
 
     @media screen and (max-width: 768px) {
@@ -292,7 +294,7 @@ main {
             transition: transform 0.3s;
         }
 
-        .right__image:hover{
+        .right__image:hover {
             border: 4px solid purple;
         }
 
@@ -347,8 +349,6 @@ main {
         .light_mode {
             color: black;
         }
-        
     }
 }
-
 </style>

@@ -74,17 +74,28 @@ export const search_module: Module<any, any> = {
     actions: {
         // Updates url with current search parameters previously saved inside search store module
         updateUrl({ commit }) {
-            commit('setUrl', 'http://localhost:8080/?query=' + this.state.search.query + '&startYear=' + this.state.search.year_min + '&minMinutes=' + this.state.search.duration_min + '&genres=' + this.state.search.genre_selected + '&size=20')
+            commit(
+                'setUrl',
+                'http://localhost:8080/?query=' +
+                    this.state.search.query +
+                    '&startYear=' +
+                    this.state.search.year_min +
+                    '&minMinutes=' +
+                    this.state.search.duration_min +
+                    '&genres=' +
+                    this.state.search.genre_selected +
+                    '&size=20'
+            )
         },
 
         // Updates all parameters considered for wand search mode
         updateWandSelection({ commit }, film) {
-            commit('setYearMin', film.startYear)   
-            commit('setYearMax', film.startYear)
-            commit('setDurationMin', film.runtimeMinutes)
-            commit('setDurationMax', film.runtimeMinutes)
-            commit('setGenre', film.genres)       
-        },
+            commit('setYearMin', film.startYear - 10)
+            commit('setYearMax', film.startYear + 10)
+            commit('setDurationMin', film.runtimeMinutes - 30)
+            commit('setDurationMax', film.runtimeMinutes + 30)
+            commit('setGenre', film.genres[0])
+        }
     },
     getters: {
         getColorMode(state: State): string {
