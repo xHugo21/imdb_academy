@@ -17,39 +17,44 @@
     <main>
         <div class="left">
             <div class="left__div">
-                <H1Title class="left__title" :title="getFilm.primaryTitle"></H1Title>
+                <H1Title class="left__title" :title="getFilm.primaryTitle + ' - ' + getFilm.startYear"></H1Title>
                 <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
                     {{ getFilm.overview }}
                 </p>
             </div>
-            <div class="left__div">
+
+            <!--<div class="left__div">
                 <H1Title class="left__title" title="Cast"></H1Title>
                 <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
-                    Director - Francis Ford Coppola
+                    Director - {{ getFilm.directors }}
                 </p>
-                <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
-                    Cast - Marlon Brando | Al Pacino
-                </p>
-                <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
-                    Producer - Albert S. Ruddy
-                </p>
+            </div>-->
+            <div class="left__div">
+                <H1Title class="left__title" title="Genres"></H1Title>
+                <div class="left__pills">
+                    <InfoPill v-for="genre in getFilm.genres">{{ genre }}</InfoPill>
+                </div>
             </div>
-            
 
             <div class="left__div">
-                <H1Title class="left__title" title="Ratings"></H1Title>
-                <div class="left__pills">
-                    <InfoPill>Rating:{{ getFilm.averageRating }}</InfoPill>
+                <H1Title class="left__title" title="Rating"></H1Title>
+                <div v-if="getFilm.averageRating !== 0" class="left__pills">
+                    <InfoPill>Rating: {{ getFilm.averageRating }}</InfoPill>
                     <InfoPill>Votes: {{ getFilm.numVotes }}</InfoPill>
                 </div>
+
+                <p v-else v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
+                        No rating available
+                </p>
             </div>
 
             <div class="left__div">
                 <H1Title class="left__title" title="Tags"></H1Title>
                 <div class="left__pills">
-                    <InfoPill>Release Date: {{ getFilm.startYear }}</InfoPill>
-                    <InfoPill>Genres: {{ getFilm.genres }}</InfoPill>
-                    
+                    <InfoPill>Media type: {{ getFilm.titleType }}</InfoPill>
+                    <InfoPill>Duration: {{ getFilm.runtimeMinutes }} minutes</InfoPill>
+                    <InfoPill>Adult restriction: {{ getAdultRestriction }}</InfoPill>
+
                 </div>
             </div>
         </div>
@@ -71,34 +76,17 @@
 
             <div class="right_div">
                 <H1Title class="right__title" title="Trailer"></H1Title>
-                <div class="right__wheretowatch">
-                    <div class="right__trailer__div">
-                        <a href="https://www.youtube.com/"
+                <div v-if="getFilm.trailer" class="right__wheretowatch">
+                    <div  class="right__trailer__div">
+                        <a :href="getFilm.trailer"
                             ><img src="../assets/youtube.png" alt="youtube"
                         /></a>
                     </div>
+                    
                 </div>
-            </div>
-
-            <div class="right__div">
-                <H1Title class="right__title" title="Where to watch"></H1Title>
-                <div class="right__wheretowatch">
-                    <div class="right__wheretowatch__div">
-                        <a href="https://www.netflix.com/es-en/"
-                            ><img src="../assets/netflix.png" alt="netflix"
-                        /></a>
-                    </div>
-                    <div class="right__wheretowatch__div">
-                        <a href="https://www.primevideo.com/"
-                            ><img src="../assets/primevideo.png" alt="primevideo"
-                        /></a>
-                    </div>
-                    <div class="right__wheretowatch__div">
-                        <a href="https://www.hbomax.com/es/es"
-                            ><img src="../assets/hbo.png" alt="hbo"
-                        /></a>
-                    </div>
-                </div>
+                <p v-else v-bind:class="['right__text', { light_mode: getColorMode === 'light' }]">
+                        No trailer available
+                </p>
             </div>
         </div>
     </main>
@@ -191,6 +179,14 @@ export default defineComponent({
             }
         },
 
+        getAdultRestriction(): string {
+            if (this.getFilm.isAdult) {
+                return 'Yes'
+            } else {
+                return 'No'
+            }
+        },
+
         
 
         getColorMode(): string {
@@ -236,6 +232,7 @@ main {
     grid-template-areas: 'left right';
     grid-template-columns: 7fr 3fr;
     margin: 0 10% 0 10%;
+    padding-bottom: 7%;
     .left {
         grid-area: 'left';
         .left__div {
@@ -340,6 +337,15 @@ main {
                     height: 100%;
                 }
             }
+        }
+
+        .right__text {
+            font-size: 1.5rem;
+            color: #99aabb5a;
+        }
+
+        .light_mode {
+            color: black;
         }
         
     }

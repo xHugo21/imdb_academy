@@ -11,7 +11,7 @@ declare module '@vue/runtime-core' {
         duration_min: number
         duration_max: number
         genre_selected: string
-        country_selected: string
+        media_type: string
         rating_min: number
         wand_selected: boolean
     }
@@ -32,7 +32,7 @@ export const search_module: Module<any, any> = {
         duration_min: 0,
         duration_max: 300,
         genre_selected: '',
-        country_selected: '',
+        media_type: '',
         rating_min: 0,
         wand_selected: false
     },
@@ -61,8 +61,8 @@ export const search_module: Module<any, any> = {
         setGenre(state: State, genre_selected: string) {
             state.genre_selected = genre_selected
         },
-        setCountry(state: State, country_selected: string) {
-            state.country_selected = country_selected
+        setMediaType(state: State, media_type: string) {
+            state.media_type = media_type
         },
         setRatingMin(state: State, rating_min: number) {
             state.rating_min = rating_min
@@ -72,9 +72,19 @@ export const search_module: Module<any, any> = {
         }
     },
     actions: {
+        // Updates url with current search parameters previously saved inside search store module
         updateUrl({ commit }) {
-            commit('setUrl', 'http://localhost:8080/?query=' + this.state.search.query + '&startYear=' + this.state.search.year_min + '&minMinutes=' + this.state.search.duration_min + '&genres=' + this.state.search.genre_selected + '&size=20&page=0')
-        },        
+            commit('setUrl', 'http://localhost:8080/?query=' + this.state.search.query + '&startYear=' + this.state.search.year_min + '&minMinutes=' + this.state.search.duration_min + '&genres=' + this.state.search.genre_selected + '&size=20')
+        },
+
+        // Updates all parameters considered for wand search mode
+        updateWandSelection({ commit }, film) {
+            commit('setYearMin', film.startYear)   
+            commit('setYearMax', film.startYear)
+            commit('setDurationMin', film.runtimeMinutes)
+            commit('setDurationMax', film.runtimeMinutes)
+            commit('setGenre', film.genres)       
+        },
     },
     getters: {
         getColorMode(state: State): string {
@@ -101,8 +111,8 @@ export const search_module: Module<any, any> = {
         getGenre(state: State): string {
             return state.genre_selected
         },
-        getCountry(state: State): string {
-            return state.country_selected
+        getMediaType(state: State): string {
+            return state.media_type
         },
         getRatingMin(state: State): number {
             return state.rating_min

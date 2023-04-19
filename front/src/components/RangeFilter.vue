@@ -63,12 +63,12 @@ export default defineComponent({
                 // Append the input element to the inputs array
                 this.inputs[i] = document.getElementById(this.ids[i]) as HTMLInputElement
 
-                var val: number =
+                /*var val: number =
                     (parseInt(this.inputs[i].value) - this.min) / (this.max - this.min)
                 val *= 100 // Convert to percentage
 
                 // Modify css input type range class
-                /*this.inputs[i].style.backgroundImage =
+                this.inputs[i].style.backgroundImage =
                     '-webkit-gradient(linear, left top, right top, ' +
                     'color-stop(' +
                     val +

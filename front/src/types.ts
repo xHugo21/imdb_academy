@@ -34,5 +34,6 @@ export type Film = {
     isAdult: boolean,
     overview?: string,
     posterPath?: string,
+    trailer?: string,
 
 }

@@ -128,14 +128,21 @@ export default defineComponent({
                 document.body.style.backgroundColor = '#14181c'
                 this.$store.commit('search/setColorMode', 'dark')
             }
-        }
+        },
+
     },
 
     computed: {
         films(): Array<Film> {
             return this.$store.getters['films/getFilms']
         },
-        totalResults(): number {
+        totalResults(): string {
+            if (this.$store.getters['films/getTotalResults'] === undefined){
+                return '0'
+            }
+            else if (this.$store.getters['films/getTotalResults'] === 20){
+                return '20+'
+            }
             return this.$store.getters['films/getTotalResults']
         },
         isWandSelected(): boolean {

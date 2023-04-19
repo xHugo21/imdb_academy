@@ -60,28 +60,20 @@
                 ></SelectFilter>
             </div>
 
-            <!--<div class="filters__div">
-                <LabelFilter v-bind:type="'Country'"></LabelFilter>
+            <div class="filters__div">
+                <LabelFilter v-bind:type="'Media Type'"></LabelFilter>
                 <SelectFilter
-                    v-bind:id="'Country'"
+                    v-bind:id="'Media Type'"
                     v-bind:options="[
                         'Any',
-                        'USA',
-                        'UK',
-                        'France',
-                        'Germany',
-                        'Italy',
-                        'Spain',
-                        'Japan',
-                        'China',
-                        'India',
-                        'Canada',
-                        'Australia',
-                        'Mexico',
-                        'Russia'
+                        'Movie',
+                        'Short',
+                        'TV Series',
+                        'TV Episode',
+                        'Video'
                     ]"
                 ></SelectFilter>
-            </div>-->
+            </div>
 
             <div class="filters__div">
                 <LabelFilter v-bind:type="'Min Rating'"></LabelFilter>

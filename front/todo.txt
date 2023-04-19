@@ -14,5 +14,5 @@
 - cors 
 - Movie trailers
 - Filter and show type of content
-- Loadmoreresults
 - Filters only work when query isn't empty
+- Directors and casting can be fetched from TMDB?

@@ -24,8 +24,8 @@ export default defineComponent({
             if (this.id === 'Genre') {
                 this.$store.commit('search/setGenre', event.target.value);
                 
-            } else if (this.id === 'Country') {
-                this.$store.commit('search/setCountry', event.target.value)
+            } else if (this.id === 'Type') {
+                this.$store.commit('search/setMediaType', event.target.value)
             }
             this.$store.dispatch('search/updateUrl');
             this.$store.dispatch('films/fetchFilms')
