@@ -37,7 +37,7 @@
     </header>
 
     <main>
-        <!--<div v-if="view_trending" class="trending">-->
+       
         <H1Title
             v-if="view === 'top_rated_movies'"
             v-on:click="setViewType"

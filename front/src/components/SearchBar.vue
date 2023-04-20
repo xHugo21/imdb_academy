@@ -20,7 +20,7 @@ export default defineComponent({
             this.$store.commit('search/setQuery', query)
             this.$store.dispatch('search/updateUrl')
             if (query === '') {
-                this.$store.dispatch('films/fetchFilms', 'trending_daily')
+                this.$store.dispatch('films/fetchFilms', 'top_rated_movies')
             } else {
                 this.$store.dispatch('films/fetchFilms')
             }

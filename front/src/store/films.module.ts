@@ -79,7 +79,7 @@ export const films_module: Module<any, any> = {
             const response = await fetch(url)
             const data = await response.json()
 
-
+            console.log(data)
             // Change state only if fetch returns films
             if (data.message === undefined) {
                 // Save page, total results and films inside state

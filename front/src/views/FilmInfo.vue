@@ -26,12 +26,14 @@
                 </p>
             </div>
 
-            <!--<div class="left__div">
+            <div class="left__div">
                 <H1Title class="left__title" title="Cast"></H1Title>
                 <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
                     Director - {{ getFilm.directors }}
+                    Cast - 
                 </p>
-            </div>-->
+            </div>
+
             <div class="left__div">
                 <H1Title class="left__title" title="Genres"></H1Title>
                 <div class="left__pills">
@@ -140,7 +142,9 @@ export default defineComponent({
         // Loads default image if the film doesn't have a poster
         loadDefaultImage(event: any): void {
             event.target.src = '/src/assets/default-movie.png'
-        }
+        },
+
+        
     },
     mounted() {
         // Checks if film is saved on load
@@ -149,7 +153,14 @@ export default defineComponent({
                 this.is_saved = true
             }
         }
-    },
+
+
+        // Cycle though each director
+        for (let i = 0; i < this.getFilm.directors.length; i++) {
+            // Print nconst of each director
+            console.log(this.getFilm.directors[i].nconst)
+        }
+    },  
     computed: {
         getFilm(): Film {
             // Loop through all films in the store and return the one that matches the id
