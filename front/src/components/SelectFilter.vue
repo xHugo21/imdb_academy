@@ -1,5 +1,5 @@
 <template>
-    <select v-on:change="applySelectFilter($event)" class="filters__div__select">
+    <select :id="id" v-on:change="applySelectFilter($event)" class="filters__div__select">
         <option v-for="option in options" v-bind:value="option">{{ option }}</option>
     </select>
 </template>
@@ -21,28 +21,39 @@ export default defineComponent({
 
     methods: {
         applySelectFilter(event: any): void {
+
             if (this.id === 'Genre') {
                 this.$store.commit('search/setGenre', event.target.value)
             } else if (this.id === 'Type') {
-                this.$store.commit('search/setMediaType', event.target.value)
+                if (event.target.value === 'tvSeries') {
+                    this.$store.commit('search/setMediaType', event.target.value)
+                } else {
+                    this.$store.commit('search/setMediaType', event.target.value.toLowerCase())
+                }
             }
             this.$store.dispatch('search/updateUrl')
             this.$store.dispatch('films/fetchFilms')
         }
-    }
+    },
 
-    /*mounted() {
+    mounted() {
         // Set select value to store value
-        const select: HTMLInputElement = document.getElementByClass(
-            "filters__div__select"
-        ) as HTMLInputElement
+        const select: HTMLInputElement = document.getElementById(this.id) as HTMLInputElement
         if (this.id === 'Genre'){
-            select.value = this.$store.getters['search/getGenre']
+            if (this.$store.getters['search/getGenre'] === '') {
+                select.value = 'Any'
+            }
+            else{
+                select.value = this.$store.getters['search/getGenre']
+            }
         }
         else if (this.id === 'Type'){
-            select.value = this.$store.getters['search/getMediaType']
+            if (this.$store.getters['search/getMediaType'] === 'tvseries')
+                select.value = 'tvSeries'
+            else
+                select.value = 'Movie'
         }
-    }*/
+    }
 })
 </script>
 

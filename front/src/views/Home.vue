@@ -39,16 +39,22 @@
     <main>
         <!--<div v-if="view_trending" class="trending">-->
         <H1Title
-            v-if="view === 'trendingdaily'"
-            v-on:click="setViewTrending"
+            v-if="view === 'top_rated_movies'"
+            v-on:click="setViewType"
             class="title__component"
-            title="Trending Daily"
+            title="Top Rated Movies"
         ></H1Title>
         <H1Title
-            v-else-if="view === 'trendingweekly'"
-            v-on:click="setViewTrending"
+            v-else-if="view === 'top_rated_tv'"
+            v-on:click="setViewType"
             class="title__component"
-            title="Trending Weekly"
+            title="Top Rated TV Shows"
+        ></H1Title>
+        <H1Title
+            v-else-if="view === 'magic_wand'"
+            v-on:click="setViewType"
+            class="title__component"
+            title="Magic Wand"
         ></H1Title>
         <H1Title
             v-else-if="view === 'searchresults'"
@@ -89,7 +95,7 @@ export default defineComponent({
     },
     data() {
         return {
-            view: 'trendingdaily' as string
+            view: 'top_rated_movies' as string
         }
     },
 
@@ -97,27 +103,33 @@ export default defineComponent({
         // Changes view mode depending on the query. If query is empty it shows trending films, otherwise it shows search results
         setViewSearch(): void {
             if (this.$store.getters['search/getQuery'] === '') {
-                this.view = 'trendingdaily'
+                this.view = 'top_rated_movies'
             } else {
                 this.view = 'searchresults'
             }
         },
 
-        setViewTrending(): void {
-            if (this.view === 'trendingdaily') {
-                this.view = 'trendingweekly'
-                this.$store.dispatch('films/fetchFilms', 'trending_weekly')
-            } else if (this.view === 'trendingweekly') {
-                this.view = 'trendingdaily'
-                this.$store.dispatch('films/fetchFilms', 'trending_daily')
+        setViewType(): void {
+            if (this.view === 'top_rated_tv') {
+                this.view = 'top_rated_movies'
+                this.$store.dispatch('films/fetchFilms', 'top_rated_movies')
+            } else if (this.view === 'top_rated_movies') {
+                this.view = 'top_rated_tv'
+                this.$store.dispatch('films/fetchFilms', 'top_rated_tv')
             }
         },
 
         setWandMode(): void {
             this.$store.commit(
                 'search/setWandSelected',
-                !this.$store.getters['search/getWandSelected']
+                !this.isWandSelected
             )
+            if (this.isWandSelected){
+                this.view = 'magic_wand'
+            }
+            else{
+                this.view = 'top_rated_movies'
+            }
         },
 
         changeColorMode(): void {
@@ -157,8 +169,8 @@ export default defineComponent({
     mounted() {
         // Set trending results
         if (this.$store.getters['search/getQuery'] === '') {
-            this.view = 'trendingdaily'
-            this.$store.dispatch('films/fetchFilms', 'trending_daily')
+            this.view = 'top_rated_movies'
+            this.$store.dispatch('films/fetchFilms', 'top_rated_movies')
         } else {
             this.view = 'searchresults'
             this.$store.dispatch('films/fetchFilms')

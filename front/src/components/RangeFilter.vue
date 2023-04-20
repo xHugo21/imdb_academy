@@ -112,7 +112,17 @@ export default defineComponent({
         // Set the initial values of the inputs
         for (let i = 0; i < this.ids.length; i++) {
             const input: HTMLInputElement = document.getElementById(this.ids[i]) as HTMLInputElement
-            input.value = this.initial_values[i].toString()
+            if (this.ids[i] === 'yearmin') {
+                input.value = this.$store.getters['search/getYearMin'].toString()
+            } else if (this.ids[i] === 'yearmax') {
+                input.value = this.$store.getters['search/getYearMax'].toString()
+            } else if (this.ids[i] === 'durationmin') {
+                input.value = this.$store.getters['search/getDurationMin'].toString()
+            } else if (this.ids[i] === 'durationmax') {
+                input.value = this.$store.getters['search/getDurationMax'].toString()
+            } else if (this.ids[i] === 'rating') {
+                input.value = this.$store.getters['search/getRatingMin'].toString()
+            }
         }
         // Update the output
         this.updateRangeFilter()

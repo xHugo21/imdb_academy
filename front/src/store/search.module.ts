@@ -32,69 +32,77 @@ export const search_module: Module<any, any> = {
         duration_min: 0,
         duration_max: 300,
         genre_selected: '',
-        media_type: '',
+        media_type: 'movie',
         rating_min: 0,
         wand_selected: false
     },
     mutations: {
-        setColorMode(state: State, color_mode: string) {
+        setColorMode(state: State, color_mode: string):void {
             state.color_mode = color_mode
         },
-        setUrl(state: State, url: string) {
+        setUrl(state: State, url: string):void {
             state.url = url
         },
-        setQuery(state: State, query: string) {
+        setQuery(state: State, query: string):void {
             state.query = query
         },
-        setYearMin(state: State, year_min: number) {
+        setYearMin(state: State, year_min: number):void {
             state.year_min = year_min
         },
-        setYearMax(state: State, year_max: number) {
+        setYearMax(state: State, year_max: number):void {
             state.year_max = year_max
         },
-        setDurationMin(state: State, duration_min: number) {
+        setDurationMin(state: State, duration_min: number):void {
             state.duration_min = duration_min
         },
-        setDurationMax(state: State, duration_max: number) {
+        setDurationMax(state: State, duration_max: number):void {
             state.duration_max = duration_max
         },
-        setGenre(state: State, genre_selected: string) {
+        setGenre(state: State, genre_selected: string):void {
             state.genre_selected = genre_selected
         },
-        setMediaType(state: State, media_type: string) {
+        setMediaType(state: State, media_type: string):void {
             state.media_type = media_type
         },
-        setRatingMin(state: State, rating_min: number) {
+        setRatingMin(state: State, rating_min: number):void {
             state.rating_min = rating_min
         },
-        setWandSelected(state: State, wand_selected: boolean) {
+        setWandSelected(state: State, wand_selected: boolean):void {
             state.wand_selected = wand_selected
         }
     },
     actions: {
         // Updates url with current search parameters previously saved inside search store module
-        updateUrl({ commit }) {
+        updateUrl({ commit, state }):void {
             commit(
                 'setUrl',
                 'http://localhost:8080/?query=' +
-                    this.state.search.query +
+                    state.query +
+                    '&titleType=' +
+                    state.media_type +
                     '&startYear=' +
-                    this.state.search.year_min +
+                    state.year_min +
+                    '&endYear=' +
+                    state.year_max +
                     '&minMinutes=' +
-                    this.state.search.duration_min +
+                    state.duration_min +
+                    '&maxMinutes=' +
+                    state.duration_max +
+                    '&minRating=' +
+                    state.rating_min +
+                    '&maxRating=10' +
                     '&genres=' +
-                    this.state.search.genre_selected +
+                    state.genre_selected +
                     '&size=20'
             )
+
+            console.log(state.url)
         },
 
-        // Updates all parameters considered for wand search mode
-        updateWandSelection({ commit }, film) {
-            commit('setYearMin', film.startYear - 10)
-            commit('setYearMax', film.startYear + 10)
-            commit('setDurationMin', film.runtimeMinutes - 30)
-            commit('setDurationMax', film.runtimeMinutes + 30)
-            commit('setGenre', film.genres[0])
+        // Calls similar endpoint passing tconst parameter to get similar films and deselects wand
+        updateWandSelection({ commit }, tconst:string):void {
+            commit('setUrl', 'http://localhost:8080/similar?tconst=' + tconst + '&size=20')    
+            commit('setWandSelected', false)        
         }
     },
     getters: {

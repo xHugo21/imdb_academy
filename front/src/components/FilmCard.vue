@@ -4,7 +4,7 @@
     <div v-on:mouseenter="toggleHover" v-on:mouseleave="toggleHover" class="film__card">
         <div class="div__hovering__name" v-if="hovering">
             <p v-bind:class="['div__hovering__name__p' + '__' + isWandSelected]">
-                {{ film.originalTitle }}
+                {{ film.primaryTitle }}
             </p>
         </div>
 
@@ -65,7 +65,7 @@ export default defineComponent({
 
         // Calls search method if film clicked when wand is selected
         searchWand(): void {
-            this.$store.dispatch('search/updateWand', this.film.genres)
+            this.$store.dispatch('search/updateWandSelection', this.film.tconst)
             this.$store.dispatch('films/fetchFilms')
         }
     },

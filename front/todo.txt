@@ -6,18 +6,15 @@ OPTIONAL
 - Check responsive when finished
 - Range sliders bg color
 - Refactor image url selector and printing
-
+- Filter by type of content
 
 API
 - Apply filters when query is empty
-- Trending query
-- Rating query
-- Year query (min and max year)
-- Duration query (min and max duration)
 
 FRONT
-- cors 
-- Filter and show type of content
-- Directors and casting can be fetched from TMDB?
+- CORS
 - Catch 404 error
-- Set filters to previous values when coming back from filminfo
+- Get TMDB data for TVSeries
+- Deleting query doesn't go back to top rated movies
+- Load more results in magic wand?
+- Display director and cast names

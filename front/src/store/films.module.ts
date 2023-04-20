@@ -28,56 +28,57 @@ export const films_module: Module<any, any> = {
         more_results: true
     },
     mutations: {
-        setFilms(state: State, films: Array<Film>) {
+        setFilms(state: State, films: Array<Film>):void {
             state.films = films
         },
-        setPage(state: State, page: number) {
+        setPage(state: State, page: number):void {
             state.page = page
         },
-        setTotalPages(state: State, total_pages: number) {
+        setTotalPages(state: State, total_pages: number):void {
             state.total_pages = total_pages
         },
-        setTotalResults(state: State, total_results: number) {
+        setTotalResults(state: State, total_results: number):void {
             state.total_results = total_results
         },
-        setSavedFilms(state: State, films: Array<Film>) {
+        setSavedFilms(state: State, films: Array<Film>):void {
             state.saved_films = films
         },
-        setMoreResults(state: State, more_results: boolean) {
+        setMoreResults(state: State, more_results: boolean):void {
             state.more_results = more_results
         }
     },
     actions: {
         // Saves film into saved_films
-        saveFilm({ commit, state }, film: Film) {
+        saveFilm({ commit, state }, film: Film):void {
             let films = state.saved_films
             films.push(film)
             commit('setSavedFilms', films)
         },
 
         // Removes film from saved_films
-        removeFilm({ commit, state }, film: Film) {
+        removeFilm({ commit, state }, film: Film):void {
             let films = state.saved_films
             films = films.filter((f: { id: string }) => f.id !== film.id)
             commit('setSavedFilms', films)
         },
 
         // Fetches films from backend API
-        async fetchFilms({ commit, dispatch, rootGetters }, type: string = 'search') {
+        async fetchFilms({ commit, dispatch, rootGetters }, type: string = 'search'):Promise<void> {
             // Set more_results to true
             commit('setMoreResults', true)
 
             // Get url depending on type of fetch
             let url: string = rootGetters['search/getUrl'] + '&page=0'
-            if (type === 'trending_daily') {
-                url = 'http://localhost:8080/?query=spiderman&size=20&page=0'
-            } else if (type === 'trending_weekly') {
-                url = 'http://localhost:8080/?query=batman&size=20&page=0'
+            if (type === 'top_rated_movies') {
+                url = 'http://localhost:8080/trending?size=20&page=0&minNumVotes=100000&titleType=movie'
+            } else if (type === 'top_rated_tv') {
+                url = 'http://localhost:8080/trending?size=20&page=0&minNumVotes=200000&titleType=tvSeries'
             }
 
             // Fetch films from url
             const response = await fetch(url)
             const data = await response.json()
+
 
             // Change state only if fetch returns films
             if (data.message === undefined) {
@@ -92,14 +93,18 @@ export const films_module: Module<any, any> = {
         },
 
         // Searches TMDB API for available posters, overviews and trailers
-        async fetchAditionalTMDB({ rootGetters }: any) {
+        async fetchAditionalTMDB({ rootGetters }: any):Promise<void> {
             // Get number of films in state
             const n_films = rootGetters['films/getFilms'].length
             const films = rootGetters['films/getFilms']
+            let i = 0;
 
             // If there are films in the state, fetch each film's poster and overviews from TMDB API
             if (rootGetters['films/getFilms']) {
-                for (let i = n_films - 20; i < n_films; i++) {
+                if (n_films > 20){
+                    i = n_films-20;
+                }
+                for (i; i < n_films; i++) {
                     let url =
                         'https://api.themoviedb.org/3/find/' +
                         films[i].id +
@@ -109,7 +114,14 @@ export const films_module: Module<any, any> = {
                         .then((response) => response.json())
                         .then(async (data) => {
                             // Get movie results
-                            data = data.movie_results[0]
+                            var type;
+                            if (data.movie_results.length) {
+                                data = data.movie_results[0];
+                                type = 'movie'
+                            } else if (data.tv_results.length) {
+                                data = data.tv_results[0];
+                                type = 'tv'
+                            }
 
                             // Update film's poster and overview
 
@@ -118,11 +130,12 @@ export const films_module: Module<any, any> = {
                             if (data.overview) {
                                 films[i].overview = data.overview
                             }
-
+                            
+                            
                             // Get trailer
                             if (data.id !== undefined) {
                                 await fetch(
-                                    'https://api.themoviedb.org/3/movie/' +
+                                    'https://api.themoviedb.org/3/' + type + '/' +
                                         data.id +
                                         '/videos?api_key=9f772ff3aa5dfb8e963695d6c67ae338&language=en-US' +
                                         data.id
@@ -161,7 +174,7 @@ export const films_module: Module<any, any> = {
         },
 
         // Loads more results from backend API
-        async loadMoreResults({ commit, dispatch, state, rootGetters }) {
+        async loadMoreResults({ commit, dispatch, state, rootGetters }):Promise<void> {
             // Set url with desired page number
             let url = rootGetters['search/getUrl'] + '&page=' + (state.page + 1)
 
@@ -169,14 +182,19 @@ export const films_module: Module<any, any> = {
             const response = await fetch(url)
             const data = await response.json()
 
-            // Save page number and films inside state
-            let aux: Array<Film> = state.films
-            aux = aux.concat(data.hits)
-            commit('setPage', state.page + 1)
-            commit('setFilms', aux)
+            if (data.message === undefined){
+                // Save page number and films inside state
+                let aux: Array<Film> = state.films
+                aux = aux.concat(data.hits)
+                commit('setPage', state.page + 1)
+                commit('setFilms', aux)
 
-            // Fetch posters, overviews and trailers from TMDB API
-            await dispatch('fetchAditionalTMDB')
+                // Fetch posters, overviews and trailers from TMDB API
+                await dispatch('fetchAditionalTMDB')
+            }
+            else{
+                commit('setMoreResults', false)
+            }
         }
     },
 
