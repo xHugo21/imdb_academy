@@ -30,7 +30,7 @@ export type Film = {
     numVotes: number
     akas: Array<string>
     directors: Array<Director>
-    starring: Array<string>
+    starring: Array<Actor>
     isAdult: boolean
     overview?: string
     posterPath?: string
@@ -38,5 +38,14 @@ export type Film = {
 }
 
 type Director = {
+    nconst: string
+}
+
+type Actor = {
+    name: ActorName,
+    characters: Array<string>
+}
+
+type ActorName = {
     nconst: string
 }

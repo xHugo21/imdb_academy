@@ -26,12 +26,18 @@
                 </p>
             </div>
 
-            <div class="left__div">
+            <div v-if="directors.length>0" class="left__div">
+                <H1Title class="left__title" title="Directors"></H1Title>
+                <div class="left__pills">
+                    <InfoPill v-for="director in directors">{{ director }}</InfoPill>
+                </div>
+            </div>
+
+            <div v-if="actors.length>0" class="left__div">
                 <H1Title class="left__title" title="Cast"></H1Title>
-                <p v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
-                    Director - {{ getFilm.directors }}
-                    Cast - 
-                </p>
+                <div class="left__pills">
+                    <InfoPill v-for="actor in actors">{{ actor }}</InfoPill>
+                </div>
             </div>
 
             <div class="left__div">
@@ -120,7 +126,10 @@ export default defineComponent({
     data() {
         return {
             full_size_poster: false as boolean,
-            is_saved: false as boolean
+            is_saved: false as boolean,
+            directors: [] as string[],
+            actors: [] as string[],
+            characters: [] as string[]
         }
     },
     methods: {
@@ -146,7 +155,7 @@ export default defineComponent({
 
         
     },
-    mounted() {
+   async mounted() {
         // Checks if film is saved on load
         for (let i = 0; i < this.$store.getters['films/getSavedFilms'].length; i++) {
             if (this.$store.getters['films/getSavedFilms'][i].id === this.getFilm.id) {
@@ -154,11 +163,25 @@ export default defineComponent({
             }
         }
 
-
-        // Cycle though each director
+        
+        // Cycle though each director and call the API to get their names
         for (let i = 0; i < this.getFilm.directors.length; i++) {
-            // Print nconst of each director
-            console.log(this.getFilm.directors[i].nconst)
+            const response = await fetch('http://localhost:8080/name?nconst=' + this.getFilm.directors[i].nconst)
+            const data = await response.json()
+            this.directors.push(data.primaryName)
+        }
+
+        // Cycle though each cast and call the API to get their names
+        for (let i = 0; i < this.getFilm.starring.length; i++) {
+            const response = await fetch('http://localhost:8080/name?nconst=' + this.getFilm.starring[i].name.nconst)
+            const data = await response.json()
+            console.log(data)
+            this.actors.push(data.primaryName)
+            if (this.getFilm.starring[i].characters.length > 0) {
+                this.characters.push(this.getFilm.starring[i].characters[0])
+            } else {
+                this.characters.push('Unknown')
+            }
         }
     },  
     computed: {
