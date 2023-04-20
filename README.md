@@ -12,9 +12,21 @@ Webpage designed by Hugo García to provide a clean and user friendly interface 
 
 ![](/front/src/assets/light_mode.png)
 
+## Filters
+
+![](/front/src/assets/filters.png)
+
+## Magic Wand
+
+![](/front/src/assets/magic_wand.png)
+
 ## Media Info
 
-![](/front/src/assets/media_info.png)
+![](/front/src/assets/film_info.png)
+
+## Saved
+
+![](/front/src/assets/saved.png)
 
 ## Features
 
@@ -23,13 +35,7 @@ Webpage designed by Hugo García to provide a clean and user friendly interface 
 - Filter content by type, year of release, duration, genre and rating
 - Save / Bookmark content
 - Magic wand: Select wand icon and click a content to get similar results
-- See descriptions, reviews, ratings, and trailers about a film
+- See descriptions, reviews, ratings, cast (directors and actors if available) and trailers about the content
 - Infinite scroll
 - Back to top button for improved user experience
 - Dark / Light mode
-
-## GitHub Pages
-
-You can see a preview of the page here: https://xhugo21.github.io/imdb_academy/
-
-**Note that this preview uses an external TMDB API**
