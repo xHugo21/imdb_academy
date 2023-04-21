@@ -5,7 +5,7 @@
         <router-link class="router_link" to="/imdb_academy/saved"
             ><img class="saved_icon" src="/src/assets/bookmark.svg" alt="bookmark"
         /></router-link>
-        <SearchBar v-on:input="setViewSearch" />
+        <SearchBar @keyup.enter="setViewSearch" />
         <img
             v-if="getColorMode === 'dark'"
             v-on:click="changeColorMode"

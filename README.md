@@ -2,7 +2,7 @@
 
 ## Description
 
-Webpage designed by Hugo García to provide a clean and user friendly interface to search, discover and save films and tv series. The content is fetched from an API developed by Juan Manuel Manga. Posters, descriptions and trailers are fetched from TMDB API.
+Webpage designed by Hugo García to provide a clean and user friendly interface to search, discover and save films and tv series. The content is fetched from an [API](https://github.com/juanma6245/search-academy-project) developed by Juan Manuel Manga. Posters, descriptions and trailers are fetched from TMDB API.
 
 ## Homepage
 
@@ -39,3 +39,27 @@ Webpage designed by Hugo García to provide a clean and user friendly interface 
 - Infinite scroll
 - Back to top button for improved user experience
 - Dark / Light mode
+
+## Execution
+
+1. Clone the resository
+
+```
+git clone https://github.com/xHugo21/imdb_academy/tree/with_api
+```
+
+2. Go inside search_academy_project and build the docker container
+
+```
+cd imdb_academy
+cd search_academy_project
+docker compose up --build
+```
+
+3. Go inside front directory and run the local development server
+
+```
+cd ..
+cd front
+npm run dev
+```

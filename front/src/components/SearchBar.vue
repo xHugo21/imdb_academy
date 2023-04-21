@@ -1,7 +1,7 @@
 <!--Component that defines the search bar-->
 <template>
     <input
-        v-on:input="search($event.target)"
+        @keyup.enter="search($event.target)"
         v-bind:class="['search_bar', { light_mode: getColorMode === 'light' }]"
         type="search"
         placeholder="Search"

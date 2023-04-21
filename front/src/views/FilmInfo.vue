@@ -29,10 +29,11 @@
             <div class="left__div">
                 <H1Title class="left__title" title="Cast"></H1Title>
                 <p v-if="directors !== ''" v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
-                    Director/s: {{ directors }}
+                    <p :class="['left__text', 'bold_text', { light_mode: getColorMode === 'light' }]">Director/s:</p> {{ directors }}
                 </p>
+                <br>
                 <p v-if="actors !== ''" v-bind:class="['left__text', { light_mode: getColorMode === 'light' }]">
-                    Starring: {{ actors }}
+                    <p :class="['left__text', 'bold_text', { light_mode: getColorMode === 'light' }]">Starring:</p> {{ actors }}
                 </p>
             </div>
 
@@ -282,6 +283,10 @@ main {
             font-size: 1.5rem;
             color: #99aabb5a;
             text-align: justify;
+        }
+
+        .bold_text {
+            font-weight: bold;
         }
 
         .light_mode {

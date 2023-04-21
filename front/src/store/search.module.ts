@@ -59,7 +59,11 @@ export const search_module: Module<any, any> = {
             state.duration_max = duration_max
         },
         setGenre(state: State, genre_selected: string):void {
+            if (genre_selected === 'Any'){
+                state.genre_selected = '';
+            } else{
             state.genre_selected = genre_selected
+            }
         },
         setMediaType(state: State, media_type: string):void {
             state.media_type = media_type
